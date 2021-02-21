@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
 import Home from './react-components/Home'
+import ReviewForum from './react-components/ReviewForum'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' render={() => (<Home/>)}/>
+          <Route exact path='/ReviewForum' render={() => (<ReviewForum/>)}/>
         </Switch>
       </BrowserRouter>
     </div>
