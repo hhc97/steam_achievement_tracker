@@ -1,0 +1,24 @@
+.search-bar-container {
+	background-color: rgb(166, 230, 235);
+	padding: 30px;
+}
+
+.search-bar-container input[type=text] {
+	padding-left: 1%;
+	height: 50px;
+	width: 60%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	margin: 5px;
+}
+
+.search-bar-container input[type=submit] {
+	height: 50px;
+	width: 15%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	background-color: rgb(224, 103, 174);
+	color: white;
+}
