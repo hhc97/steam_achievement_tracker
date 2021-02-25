@@ -1,0 +1,9 @@
+.homeBodyText{
+    color:white;
+    font-weight: bold;
+    font-size: 200px;
+    font-style: italic;
+    position: absolute;
+    width: 100%;
+    top: 100px;
+}

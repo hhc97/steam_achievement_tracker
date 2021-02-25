@@ -1,6 +1,7 @@
 .search-bar-container {
 	background-color: rgb(166, 230, 235);
 	padding: 30px;
+	min-width: 700px;
 }
 
 .search-bar-container input[type=text] {

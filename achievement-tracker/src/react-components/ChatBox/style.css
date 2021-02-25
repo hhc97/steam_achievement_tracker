@@ -1,0 +1,26 @@
+.chatBox{
+    position: fixed;
+    bottom: 0px;
+    right: 20%;
+    width: 250px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+}
+
+.chatName{
+    margin-left: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.closeChatButton{
+    border: 0px;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 15px;
+}

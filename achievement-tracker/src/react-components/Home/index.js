@@ -1,13 +1,20 @@
 import React from "react";
+import {HeaderContainer} from '../../Containers'
+import HomeBody from '../HomeBody'
+import './style.css'
 
 class Home extends React.Component {
-  render() {
-    return (
-      <div>
-        <h3>Let's start coding</h3>
-      </div>
-      )
-  }
+    render() {
+        return (
+            <div className="home">
+                <HeaderContainer/>
+                <div className="homeBody">
+                    <HomeBody>Welcome</HomeBody>
+                </div>
+            </div>
+        )
+    }
+
 }
 
 export default Home;

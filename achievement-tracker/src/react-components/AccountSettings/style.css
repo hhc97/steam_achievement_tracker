@@ -1,0 +1,108 @@
+#AccountSettingsPage {
+    height: 100%;
+    background: url(https://cdn.hipwallpaper.com/i/71/17/Td1L4S.jpg);
+}
+
+#TitleSection h1 {
+    font-size: xx-large;
+    color:ghostwhite;
+    text-align: center;
+}
+
+#ProfilePicSection {
+    margin-left: 200px;
+    position: static;
+    height: 300px;
+    width: 200px;
+}
+
+#CurrentProfilePic {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    float: left;
+}
+
+#ProfilePicBlock h2 {
+    font-size: x-large;
+    position: relative;
+    text-align: left;
+    margin-left: 200px;
+    color: ghostwhite;
+}
+
+#ProfilePicBlock span {
+    font-size: large;
+    position: relative;
+    text-align: left;
+    float: left;
+    color:ghostwhite;
+}
+
+#editButton {
+    position: relative;
+    margin-left: 100px;
+    float: right;
+}
+
+
+#UserDetailsSection {
+    margin-left: 200px;
+}
+
+#UserDetailsSection h2 {
+    font-size: x-large;
+    position: relative;
+    text-align: left;
+    margin-left: 200px;
+
+    color:ghostwhite;
+}
+
+#UserDetailsSection p {
+    font-size: large;
+    font-weight: bold;
+    text-align: left;
+    color:ghostwhite;
+}
+
+#UserDetailsSection span {
+    font-weight: normal;
+    text-align: left;
+    color:ghostwhite;
+}
+
+#ExternalLinksSection {
+    margin-left: 200px;
+    position: static;
+}
+
+#ExternalLinksSection h2 {
+    font-size: x-large;
+    position: relative;
+    text-align: left;
+    margin-left: 200px;
+    color:ghostwhite;
+}
+
+#ExternalLinksSection p {
+    font-size: large;
+    font-weight: bold;
+    text-align: left;
+    color:ghostwhite;
+}
+
+#ExternalLinksSection span {
+    font-weight: normal;
+    text-align: left;
+    color:ghostwhite;
+}
+
+#editButton {
+    display: inline-block;
+}
+
+.TextInput+Button {
+    width: 400px;
+    max-width: fit-content;
+}

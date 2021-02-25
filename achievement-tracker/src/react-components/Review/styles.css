@@ -1,0 +1,22 @@
+.review {
+  background-color: rgb(209, 206, 206);
+  margin: 30px 100px;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  min-width: 500px;
+}
+
+.review-info-bar {
+  display: inline-block;
+  border-top: 2px solid black;
+  width: 100%;
+}
+
+.review-info-bar span {
+  margin-right: 7%;
+}
+
+.review-info-bar span img {
+  width: 20px;
+}

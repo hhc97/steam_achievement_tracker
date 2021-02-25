@@ -1,0 +1,26 @@
+.friendContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    padding: 18px 20px;
+    border: 1px;
+    cursor: pointer;
+    transition: 0.5s ease;
+
+}
+
+.friendContainer:hover{
+    border: 2px solid #333;
+}
+
+.friendLogo{
+    width: 20px;
+    height:20px;
+    margin-right: 10px;
+}
+
+.friendName{
+    font-size: 30px;
+    font-weight: bold;
+}

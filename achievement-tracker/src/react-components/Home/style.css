@@ -1,0 +1,10 @@
+.home{
+    background: url(https://images.unsplash.com/photo-1544306094-e2dcf9479da3) no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.homeBody{
+    position: relative;
+    top: 100px;
+}

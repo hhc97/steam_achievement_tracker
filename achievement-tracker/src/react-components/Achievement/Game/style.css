@@ -1,0 +1,25 @@
+.gameContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    border-style: ridge;
+
+}
+
+.gameImage{
+    border-radius: 100%;
+    height: 60px;
+    width: auto;
+}
+
+.vertical-row{
+    Float:left;
+    height: 60px;
+    width:5px; /* edit this if you want */
+    background-color: black;
+}
+
+.gameInfo{
+    color:white;
+}

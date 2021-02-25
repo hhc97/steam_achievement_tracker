@@ -1,0 +1,13 @@
+.friendList{
+    justify-content: space-evenly;
+    width: 80%;
+    left:5px;
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 100%;
+    padding-left: 0px;
+}
+
+.friendList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}

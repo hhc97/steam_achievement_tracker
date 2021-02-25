@@ -1,0 +1,46 @@
+.dashboard{
+    background-image: url('./Static/dashboardBackground.jpg');
+    width: 100%;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard::-webkit-scrollbar { 
+    display: none;  
+}
+
+.left{
+    float: left;
+    width: 20%;
+    position: fixed;
+    top: 190px;
+    height: 85vh;
+    left: 5%;
+}
+.middle{
+    display: inline-block;
+    width: 33.33%;
+    position: relative;
+    top: 200px;
+    height: 85vh;
+}
+
+.right{
+    right:5%;
+    width: 20%;
+    position: fixed;
+    top: 190px;
+    height: 85vh;
+}
+
+
+.middle::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.group{
+    display: flex;
+    flex-direction: row;
+}

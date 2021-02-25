@@ -1,0 +1,16 @@
+.groupButton{
+    display: flex;
+    flex-direction: row;
+}
+
+.slash{
+    display: block;
+    height: fit-content;
+    color: white;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 0;
+    margin-right: 0;
+}

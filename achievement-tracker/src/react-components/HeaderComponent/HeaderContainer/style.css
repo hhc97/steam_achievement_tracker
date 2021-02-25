@@ -1,0 +1,6 @@
+.headerContainer{
+    background-color: black;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}

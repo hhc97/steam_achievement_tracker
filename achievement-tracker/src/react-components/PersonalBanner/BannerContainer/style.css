@@ -1,0 +1,14 @@
+.bannerContainer{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-radius: 25px;
+    height: 75%;
+    align-items: center;
+    border-color: blanchedalmond;
+    padding-top: 10px;
+}
+
+
