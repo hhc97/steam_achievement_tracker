@@ -2,6 +2,7 @@ import React from "react";
 
 import SearchBar from "./../SearchBar"
 import Review from "./../Review"
+import ReviewSubmit from "./../ReviewSubmit"
 
 import "./styles.css"
 
@@ -25,7 +26,9 @@ class ReviewForum extends React.Component {
 					author: "Rentt Vivie",
 					reputation: 3
 				}
-			]
+			],
+			reviewSubmitTitle: "",
+			reviewSubmitContent: ""
   }
 
   handleSearchContentChange = event => {
@@ -37,6 +40,24 @@ class ReviewForum extends React.Component {
 
 	handleSearchButton = event => {
 		console.log("Search!")
+	}
+
+	handleSubmitTitleChange = event => {
+		const target = event.target;
+		this.setState({
+			reviewSubmitTitle: target.value
+		})
+	}
+
+	handleSubmitContentChange = event => {
+		const target = event.target;
+		this.setState({
+			reviewSubmitContent: target.value
+		})
+	}
+
+	handleSubmitButtonChange = event => {
+		console.log("Submit")
 	}
 
   render() {
@@ -63,6 +84,13 @@ class ReviewForum extends React.Component {
 						/>
 					))}
 				</div>
+				<ReviewSubmit
+					reviewSubmitTitle={this.state.reviewSubmitTitle}
+					reviewSubmitContent={this.state.reviewSubmitContent}
+					handleTitleChange={this.handleSubmitTitleChange}
+					handleContentChange={this.handleSubmitContentChange}
+					reviewSubmitButton={this.handleSubmitButtonChange}
+				/>
       </div>
     )
   }

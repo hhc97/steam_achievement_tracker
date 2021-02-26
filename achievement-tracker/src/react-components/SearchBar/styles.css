@@ -1,5 +1,5 @@
 .search-bar-container {
-	background-color: rgb(166, 230, 235);
+	background-color: rgb(54, 53, 53);
 	padding: 30px;
 	min-width: 700px;
 }
@@ -20,6 +20,6 @@
 	font-size: 20px;
 	border-radius: 5px;
 	border: 10px;
-	background-color: rgb(224, 103, 174);
+	background-color: silver;
 	color: white;
 }

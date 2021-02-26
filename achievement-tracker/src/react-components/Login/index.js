@@ -45,26 +45,29 @@ class Login extends React.Component {
       return <Redirect to={this.state.redirect} />
     }
     return (
-      <div className='Login'>
-        <input
-          value={this.state.userName}
-          onChange={this.handleInputChange}
-          type='text'
-          name='userName'
-          placeholder='Username or email'
-          autoFocus></input>
+      <div id='LoginPage'>
+        <div id="LoginContainer">
+          <p> Please enter your credentials: </p>
+          <input className="LoginField"
+            value={this.state.userName}
+            onChange={this.handleInputChange}
+            type='text'
+            name='userName'
+            placeholder='Username or email'
+            autoFocus></input>
 
-        <input
-          value={this.state.passWord}
-          onChange={this.handleInputChange}
-          type='password'
-          name='passWord'
-          placeholder='password'></input>
+          <input className="LoginField"
+            value={this.state.passWord}
+            onChange={this.handleInputChange}
+            type='password'
+            name='passWord'
+            placeholder='password'></input>
 
-        <input
-          type='submit'
-          value='Sign in'
-          onClick={this.handleLogin}></input>
+          <input className="LoginButton"
+            type='submit'
+            value='Sign in'
+            onClick={this.handleLogin}></input>
+        </div>
       </div>
     )
   }

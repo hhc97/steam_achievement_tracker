@@ -1,12 +1,19 @@
+body, html {
+    height: 100%;
+    width: 100%;
+}
+
 #AccountSettingsPage {
     height: 100%;
     background: url(https://cdn.hipwallpaper.com/i/71/17/Td1L4S.jpg);
+    background-size: cover;
 }
 
 #TitleSection h1 {
     font-size: xx-large;
     color:ghostwhite;
     text-align: center;
+    margin-top: 0px;
 }
 
 #ProfilePicSection {
@@ -21,6 +28,7 @@
     width: 200px;
     height: 200px;
     float: left;
+    margin-top: 10px;
 }
 
 #ProfilePicBlock h2 {
@@ -31,12 +39,13 @@
     color: ghostwhite;
 }
 
-#ProfilePicBlock span {
+#ProfilePicCaption {
     font-size: large;
     position: relative;
     text-align: left;
     float: left;
     color:ghostwhite;
+    margin-top: 20px;
 }
 
 #editButton {
@@ -44,7 +53,6 @@
     margin-left: 100px;
     float: right;
 }
-
 
 #UserDetailsSection {
     margin-left: 200px;
@@ -96,6 +104,10 @@
     font-weight: normal;
     text-align: left;
     color:ghostwhite;
+}
+
+#ExternalLinksSection p {
+    margin-bottom: 0px;
 }
 
 #editButton {

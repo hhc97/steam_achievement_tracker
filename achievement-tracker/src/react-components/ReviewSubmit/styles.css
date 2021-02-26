@@ -1,0 +1,40 @@
+.review-submit {
+  background-color: grey;
+  padding: 10px;
+}
+
+.review-submit-title-box {
+	padding-left: 1%;
+	height: 50px;
+	width: 60%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	margin: 5px;
+  font-family: "Lucida Console", monospace;
+  position: relative;
+  left: 0px;
+}
+
+.review-submit-content-box {
+  padding-left: 1%;
+  padding-top: 5px;
+  width: 90%;
+  height: 300px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 10px;
+  margin: 5px;
+  font-family: "Lucida Console", monospace;
+
+}
+
+.review-submit-button {
+  height: 50px;
+	width: 15%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	background-color: silver;
+	color: white;
+}
