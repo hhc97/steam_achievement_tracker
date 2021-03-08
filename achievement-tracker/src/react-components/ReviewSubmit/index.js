@@ -9,7 +9,7 @@ class ReviewSubmit extends React.Component {
       reviewSubmitContent,
       handleTitleChange,
       handleContentChange,
-      reviewSubmitButton
+      addReview
     } = this.props;
 
     return (
@@ -34,7 +34,7 @@ class ReviewSubmit extends React.Component {
         <input type="submit"
                className="review-submit-button"
                value="Submit"
-               onClick={reviewSubmitButton}
+               onClick={addReview}
         />
       </div>
     )

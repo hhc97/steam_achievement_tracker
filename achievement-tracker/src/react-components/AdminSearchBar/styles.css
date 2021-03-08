@@ -1,0 +1,25 @@
+.admin-search-bar-container {
+	background-color: rgb(54, 53, 53);
+	padding: 30px;
+	min-width: 500px;
+}
+
+.admin-search-bar-container input[type=text] {
+	padding-left: 1%;
+	height: 50px;
+	width: 70%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	margin: 5px;
+}
+
+.admin-search-bar-container input[type=submit] {
+	height: 50px;
+	width: 20%;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	background-color: silver;
+	color: white;
+}

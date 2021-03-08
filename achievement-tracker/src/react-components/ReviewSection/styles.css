@@ -1,0 +1,21 @@
+.review-section {
+  background-color: rgb(160, 157, 157);
+  padding: 20px;
+  border: 5px solid black;
+  min-width: 700px;
+}
+
+.page-button-bar {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.page-button-bar button {
+  width: 100px;
+  height: 40px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: rgb(85, 82, 82);
+  color: white;
+}

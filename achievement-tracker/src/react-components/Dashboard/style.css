@@ -1,5 +1,6 @@
 .dashboard{
     background-image: url('./Static/dashboardBackground.jpg');
+    /*background-color: #161920;*/
     width: 100%;
     background-size: cover;
     height: 100vh;
@@ -19,6 +20,18 @@
     height: 85vh;
     left: 5%;
 }
+
+.bannerUserID{
+    position: absolute;
+    right:10px;
+    color: white;
+}
+
+.bannerReputation{
+    color:white;
+    font-size: 10px;
+}
+
 .middle{
     display: inline-block;
     width: 33.33%;
@@ -43,4 +56,41 @@
 .group{
     display: flex;
     flex-direction: row;
+}
+
+.addFriendForm{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 6%;
+}
+
+.addFriendInput{
+    outline: none;
+    height: 100%;
+    border: 2px solid grey;
+    border-radius: 25px;
+    padding-left: 10px;
+}
+
+.addFriendButton{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.searchGame{
+    height: 8%;
+}
+
+.searchFriendInput{
+    outline: none;
+    height: 100%;
+    width: 90%;
+    border: 2px solid grey;
+    border-radius: 25px;
+    padding-left:10px;
+    font-size: 25px;
 }

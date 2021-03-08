@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css"
 
-class SearchBar extends React.Component {
+class AdminSearchBar extends React.Component {
   render() {
     const {
       searchContent,
@@ -11,7 +11,7 @@ class SearchBar extends React.Component {
     } = this.props;
 
     return (
-      <div className="search-bar-container">
+      <div className="admin-search-bar-container">
         <input name="searchContent"
                value={searchContent}
                type="text"
@@ -28,4 +28,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default AdminSearchBar;

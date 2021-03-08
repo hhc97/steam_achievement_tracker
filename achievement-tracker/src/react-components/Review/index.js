@@ -7,21 +7,16 @@ import downvoteIcon from "./static/downvote_icon.png"
 class Review extends React.Component {
   render() {
     const {
+      id,
       title,
       content,
-      upvote,
-      downvote,
+      upvotes,
+      downvotes,
       author,
-      reputation
+      reputation,
+      upvoteAction,
+      downvoteAction
     } = this.props;
-
-    const upvoteAction = () => {
-      console.log("Upvote")
-    }
-
-    const downvoteAction = () => {
-      console.log("Downvote")
-    }
 
     return (
       <div className="review">
@@ -30,16 +25,16 @@ class Review extends React.Component {
         <div className="review-info-bar">
           <span>
             <button>
-              <img src={upvoteIcon} onClick={() => upvoteAction()}/>
+              <img src={upvoteIcon} onClick={() => upvoteAction(id)}/>
               &nbsp;
-              {upvote}
+              {upvotes}
             </button>
           </span>
           <span>
             <button>
-              <img src={downvoteIcon} onClick={() => downvoteAction()}/>
+              <img src={downvoteIcon} onClick={() => downvoteAction(id)}/>
               &nbsp;
-              {downvote}
+              {downvotes}
             </button>
           </span>
           <span><strong>Author: </strong>{author}</span>

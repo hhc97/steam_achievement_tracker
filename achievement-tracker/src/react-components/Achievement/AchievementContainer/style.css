@@ -3,7 +3,7 @@
     overflow: hidden;
     overflow-y: scroll;
     padding-left: 0px;
-    height: 65%;
+    height: 55%;
 }
 
 .achievementContainer::-webkit-scrollbar { 

@@ -1,8 +1,7 @@
 .headerNavBar{
     display:flex;
     margin: 0 56px;
-    height: 64px;
-    padding: 18px 0;
+    height: 80px;
     justify-content: space-between;
     align-items: center;
 }

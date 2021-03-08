@@ -1,6 +1,6 @@
 .review {
   background-color: rgb(209, 206, 206);
-  margin: 30px 100px;
+  margin: 30px 30px;
   border-radius: 10px;
   padding: 20px;
   text-align: left;
@@ -19,4 +19,8 @@
 
 .review-info-bar span img {
   width: 20px;
+}
+
+.review-info-bar button {
+  background-color: white;
 }

@@ -13,13 +13,13 @@ body, html {
 }
 
 #LoginContainer {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 350px;
     background: whitesmoke;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 35%;
+    top: 5%;
     position: absolute;
     border-radius: 3%;
     border-color: black;
@@ -28,7 +28,7 @@ body, html {
 .LoginField {
     position: relative;
     width: 200px;
-    height: 40px;
+    height: 35px;
     margin-top: 5px;
     top: 5%;
 }
@@ -43,5 +43,5 @@ body, html {
 .SignUpButton {
     position: relative;
     width: 100px;
-    margin-top: 5px;
+    margin-top: 50px;
 }
