@@ -6,12 +6,12 @@
     padding: 18px 20px;
     border: 1px;
     cursor: pointer;
-    transition: 0.5s ease;
+    transition: 0.1s ease;
 
 }
 
 .friendContainer:hover{
-    border: 2px solid #333;
+    border: 2px solid black;
 }
 
 .friendLogo{
@@ -22,5 +22,5 @@
 
 .friendName{
     font-size: 30px;
-    font-weight: bold;
+    color:white;
 }

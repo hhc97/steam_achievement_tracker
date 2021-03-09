@@ -12,20 +12,24 @@ body, html {
     background-size: cover;
 }
 
-#LoginContainer {
+#SignupContainer {
     width: 500px;
-    height: 350px;
+    max-height: fit-content;
     background: whitesmoke;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 5%;
+    top: 15%;
     position: absolute;
     border-radius: 3%;
     border-color: black;
 }
 
-.LoginField {
+#SignupContainer p{
+    margin-bottom: 0px;
+}
+
+.SignupField {
     position: relative;
     width: 200px;
     height: 35px;
@@ -33,15 +37,9 @@ body, html {
     top: 5%;
 }
 
-.LoginButton {
-    position: relative;
-    width: 100px;
-    margin-top: 5px;
-    top: 5%;
-}
-
 .SignUpButton {
     position: relative;
     width: 100px;
-    margin-top: 50px;
+    margin-top: 5px;
+    display: block;
 }

@@ -2,11 +2,11 @@ import React from 'react'
 import './style.css'
 
 
-class HomeBody extends React.Component{
+class HomeBody extends React.Component {
 
-    render(){
+    render() {
         return (
-            <div className="homeBodyText">{this.props.children}</div>  
+            <div className="homeBodyText">{this.props.children}</div>
         )
     }
 }

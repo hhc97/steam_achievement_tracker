@@ -13,18 +13,18 @@ class AdminSearchBar extends React.Component {
     return (
       <div className="admin-search-bar-container">
         <input name="searchContent"
-               value={searchContent}
-               type="text"
-               placeholder="Search..."
-               onChange={handleChange}
-               label="searchContent"
+          value={searchContent}
+          type="text"
+          placeholder="Search..."
+          onChange={handleChange}
+          label="searchContent"
         />
         <input type="submit"
-               value="Enter"
-               onClick={enterButton}
+          value="Enter"
+          onClick={enterButton}
         />
       </div>
-      )
+    )
   }
 }
 

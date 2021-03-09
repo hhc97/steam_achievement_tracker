@@ -14,19 +14,24 @@ body, html {
 
 #LoginContainer {
     width: 400px;
-    height: 300px;
+    max-height: fit-content;
     background: whitesmoke;
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 35%;
+    top: 15%;
     position: absolute;
     border-radius: 3%;
     border-color: black;
 }
 
+#LoginCredentials{
+    height: fit-content;
+}
+
 .LoginField {
     position: relative;
+    display: block;
     width: 200px;
     height: 40px;
     margin-top: 5px;
@@ -37,11 +42,26 @@ body, html {
     position: relative;
     width: 100px;
     margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
     top: 5%;
+    display: block;
 }
 
-.SignUpButton {
+#SignupRedirect {
     position: relative;
-    width: 100px;
+    margin-top: 10px;
+    height: fit-content;
+}
+
+#SignupRedirect p{
+    margin-bottom: 0px;
+}
+
+#SignupRedirect .LoginButton {
+    display: block;
+    position: relative;
     margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }

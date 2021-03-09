@@ -1,8 +1,10 @@
 import React from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.css';
 
 import UserKeys from '../UserKeys.js'
@@ -86,44 +88,48 @@ class Login extends React.Component {
     return (
       <div id='LoginPage'>
         <div id="LoginContainer">
-          <p>Please enter your credentials:</p>
-          <input className="LoginField"
-            value={this.state.userName}
-            onChange={this.handleInputChange}
-            type='text'
-            name='userName'
-            placeholder='Username or email'
-            autoFocus></input>
+          <div id="LoginCredentials">
+            <p>Please enter your credentials:</p>
 
-          <input className="LoginField"
-            value={this.state.passWord}
-            onChange={this.handleInputChange}
-            type='password'
-            name='passWord'
-            placeholder='password'></input>
+            <input className="LoginField"
+              value={this.state.userName}
+              onChange={this.handleInputChange}
+              type='text'
+              name='userName'
+              placeholder='Username or email'
+              autoFocus></input>
 
-          <input className="LoginButton"
-            type='submit'
-            value='Sign in'
-            onClick={this.handleLogin}></input>
+            <input className="LoginField"
+              value={this.state.passWord}
+              onChange={this.handleInputChange}
+              type='password'
+              name='passWord'
+              placeholder='password'></input>
 
-          <br /><br />
-          <div>Don't have an account?</div>
+            <Button className="LoginButton"
+              variant="secondary"
+              onClick={this.handleLogin}>Log In</Button>
 
-          <input className="SignUpButton"
-            type='submit'
-            value='Sign up'
-            onClick={this.handleSignup}></input>
+          </div>
 
-          <input className="SignUpButton"
-            type='submit'
-            value='game page'
-            onClick={this.gameAchievements}></input>
+          <div id="SignupRedirect">
+            <p>Don't have an account?</p>
 
-          <ReCAPTCHA
-            sitekey="6LckfXMaAAAAAFQXopzO5R-TmD-4VQlwcRIx7YWy"
-            onChange={this.handleCaptchaSolve}
-          />
+            <Button className="LoginButton"
+              variant="secondary"
+              onClick={this.handleSignup}>Sign Up</Button>
+
+            <Button className="LoginButton"
+              variant="info"
+              type='submit'
+              onClick={this.gameAchievements}>Games</Button>
+
+            <ReCAPTCHA
+              sitekey="6LckfXMaAAAAAFQXopzO5R-TmD-4VQlwcRIx7YWy"
+              onChange={this.handleCaptchaSolve}
+            />
+          </div>
+
         </div>
       </div>
     )

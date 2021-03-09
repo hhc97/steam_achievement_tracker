@@ -7,6 +7,10 @@
   min-width: 500px;
 }
 
+.review h2 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
 .review-info-bar {
   display: inline-block;
   border-top: 2px solid black;
@@ -22,5 +26,11 @@
 }
 
 .review-info-bar button {
-  background-color: white;
+  width: 60px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.review-vote-num {
+  font-family:'Courier New', Courier, monospace;
 }

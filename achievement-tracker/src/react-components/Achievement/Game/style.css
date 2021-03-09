@@ -3,7 +3,7 @@
     flex-direction: row;
     margin-bottom: 8px;
     border-style: ridge;
-
+    border-radius: 10px;
 }
 
 .gameImage{
@@ -16,7 +16,7 @@
     Float:left;
     height: 60px;
     width:5px; /* edit this if you want */
-    background-color: black;
+    background-color: grey;
 }
 
 .gameInfo{
@@ -42,10 +42,15 @@
     background-color: grey;
     border: 2px solid black;
     border-radius: 25px;
+    align-items: center;
 }
 
 .filledProgress{
-    background-color: blue;
+    background-color: #3d3d3d;
     height: 100%;
     border-radius: 10px;
+}
+
+.currentProgress{
+    color:white;
 }

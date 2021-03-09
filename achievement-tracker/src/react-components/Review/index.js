@@ -1,8 +1,7 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./styles.css"
-import upvoteIcon from "./static/upvote_icon.png"
-import downvoteIcon from "./static/downvote_icon.png"
 
 class Review extends React.Component {
   render() {
@@ -15,7 +14,8 @@ class Review extends React.Component {
       author,
       reputation,
       upvoteAction,
-      downvoteAction
+      downvoteAction,
+      reportAction
     } = this.props;
 
     return (
@@ -24,21 +24,24 @@ class Review extends React.Component {
         <p>{content}</p>
         <div className="review-info-bar">
           <span>
-            <button>
-              <img src={upvoteIcon} onClick={() => upvoteAction(id)}/>
-              &nbsp;
+            <button type="button"
+              className="btn btn-success"
+              onClick={() => upvoteAction(id)}>
               {upvotes}
             </button>
-          </span>
-          <span>
-            <button>
-              <img src={downvoteIcon} onClick={() => downvoteAction(id)}/>
-              &nbsp;
+            <button type="button"
+              className="btn btn-danger"
+              onClick={() => downvoteAction(id)}>
               {downvotes}
             </button>
           </span>
           <span><strong>Author: </strong>{author}</span>
           <span><strong>Reputation: </strong>{reputation}</span>
+          <button type="button"
+            className="btn btn-secondary"
+            onClick={() => reportAction(id)}>
+            Report
+            </button>
         </div>
       </div>
     )

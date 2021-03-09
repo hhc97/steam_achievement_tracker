@@ -1,2 +1,2 @@
-export {default as Game} from './Game'
-export {default as AchievementContainer} from './AchievementContainer'
+export { default as Game } from './Game'
+export { default as AchievementContainer } from './AchievementContainer'

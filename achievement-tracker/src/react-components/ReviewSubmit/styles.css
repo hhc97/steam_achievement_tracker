@@ -1,6 +1,13 @@
 .review-submit {
-  background-color: grey;
-  padding: 10px;
+  background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
+  padding: 20px;
+  position: relative;
+  top: 80px;
+}
+
+.review-submit h2 {
+  color: white;
+  font-family:'Courier New', Courier, monospace;
 }
 
 .review-submit-title-box {
@@ -10,7 +17,7 @@
 	font-size: 20px;
 	border-radius: 5px;
 	border: 10px;
-	margin: 5px;
+	margin: 20px;
   font-family: "Lucida Console", monospace;
   position: relative;
   left: 0px;
@@ -31,10 +38,12 @@
 
 .review-submit-button {
   height: 50px;
-	width: 15%;
+	width: 200px;
 	font-size: 20px;
 	border-radius: 5px;
 	border: 10px;
-	background-color: silver;
+	background-color: black;
 	color: white;
+  border-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

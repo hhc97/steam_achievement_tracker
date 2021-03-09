@@ -9,13 +9,13 @@ class UserBar extends React.Component {
       reputation,
       deleteUser
     } = this.props;
-    
-    return(
+
+    return (
       <div className="user-bar">
         <h3>Username: {username}</h3>
         <p>Reputation: {reputation}</p>
         <button
-          onClick={() => {deleteUser(username)}}
+          onClick={() => { deleteUser(username) }}
         >
           Delete User
         </button>

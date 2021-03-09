@@ -8,6 +8,7 @@
     background-color: white;
     max-height: calc(100vh - 60px - 24px);
     height: 350px;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .chatTitle{
@@ -18,12 +19,15 @@
     height: 10%;
     align-items: center;
     border-bottom: 1pt solid black;
+    background-color: grey;
+    border-radius: 15px 15px 0px 0px;
 }
 
 .chatName{
     margin-left: 20px;
     font-size: 25px;
     font-weight: bold;
+    color: #3d3d3d;
     font-family: "Lucida Console", "Courier New", monospace;
 }
 
@@ -33,16 +37,18 @@
     background-color: transparent;
     cursor: pointer;
     font-size: 15px;
+    outline: none;
 }
 
 .closeChatButton:hover{
-    border: 1px solid grey
+    background: #3d3d3d;
+    color: white;
 }
 
 
 .chatBody{
     width: 100%;
-    height: 70%;
+    height: 75%;
     border-bottom: 1pt solid black;
     display: flex;
     overflow: auto;
@@ -70,12 +76,11 @@
 
 .my-message{
     padding: 7px 8px 12px 12px;
-    border-radius: 20px;
+    border-radius: 20px 15px 5px 15px;
     border: 1px solid black;
     margin-bottom: 5px;
     word-wrap: break-word;
     background-color: rgb(0, 132, 255);
-    /*height: 100%;*/
     width: fit-content;
     float:right;
     max-width: 60%;
@@ -91,14 +96,14 @@
 .other-message{
     background-color: #D3D3D3;
     border: 1px solid black;
+    border-radius: 15px 20px 15px 5px;
     margin-bottom: 5px;
     padding: 7px 8px 12px 12px;
     float: left;
     width:fit-content;
-    /*height:100%;*/
-    border-radius: 20px;
     word-wrap: break-word;
     max-width: 60%;
+
 }
 
 .person-name{
@@ -109,7 +114,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 20%;
+    height: 15%;
     justify-content: space-between;
     align-items: center;
 }
@@ -119,7 +124,6 @@
     width: 80%;
     border-radius: 50px;
     outline: none;
-    height: 80%;
     font-size: 30px;
     padding-left: 10px;
 }
@@ -130,10 +134,10 @@
     border: 0px;
     background-color: transparent;
     cursor: pointer;
-    height: 80%;
     width:20%;
     text-align: center;
     font-size: 40px;
+    outline: none;
 }
 .sendMessage:hover{
     border: 1px solid grey;

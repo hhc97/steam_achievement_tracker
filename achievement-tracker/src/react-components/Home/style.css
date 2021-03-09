@@ -1,8 +1,19 @@
 .home{
-    background: url(https://images.unsplash.com/photo-1544306094-e2dcf9479da3) no-repeat;
+    /*background: url(https://images.unsplash.com/photo-1544306094-e2dcf9479da3) no-repeat;
     background-size: cover;
+    height: 100vh;*/
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
+
     height: 100vh;
+    animation: animation 100s linear infinite;
+    overflow: hidden;
 }
+
+@keyframes animation {
+    100%{
+     background-position:0px -3000px;
+   }
+ }
 
 .homeBody{
     position: relative;

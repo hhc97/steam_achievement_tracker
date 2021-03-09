@@ -6,7 +6,7 @@ import './style.css'
 class HeaderContainer extends React.Component{
     render() {
         return (
-            <HeadContainer>
+            <HeadContainer bgId = {this.props.bgId}>
                 <HeaderNavBar>
                     <HeaderImage to='/' src={logo}/>
                     <div className="groupButton">

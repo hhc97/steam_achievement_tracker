@@ -1,7 +1,9 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './Signup.css';
 
 const log = console.log
@@ -47,41 +49,41 @@ class Signup extends React.Component {
     }
     return (
       <div id='LoginPage'>
-        <div id="LoginContainer">
+        <div id="SignupContainer">
           <p>Please enter your details:</p>
+
           <input className="LoginField"
             value={this.state.userName}
             onChange={this.handleInputChange}
             type='text'
             name='userName'
-            placeholder='Username or email'
+            placeholder='Create a username'
             autoFocus></input>
 
-          <input className="LoginField"
+          <input className="SignupField"
             value={this.state.passWord}
             onChange={this.handleInputChange}
             type='password'
             name='passWord'
-            placeholder='password'></input>
+            placeholder='Create a password'></input>
 
-          <input className="LoginField"
+          <input className="SignupField"
             value={this.state.passWord2}
             onChange={this.handleInputChange}
             type='password'
             name='passWord2'
-            placeholder='confirm password'></input>
+            placeholder='Confirm password'></input>
 
-          <input className="LoginField"
+          <input className="SignupField"
             value={this.state.steamName}
             onChange={this.handleInputChange}
             type='text'
             name='steamName'
-            placeholder='steam username'></input>
+            placeholder='Enter Steam username'></input>
 
-          <input className="SignUpButton"
-            type='submit'
-            value='Sign up'
-            onClick={this.handleSignup}></input>
+          <Button className="SignUpButton"
+            variant="secondary"
+            onClick={this.handleSignup}>Sign Up</Button>
         </div>
       </div>
     )
