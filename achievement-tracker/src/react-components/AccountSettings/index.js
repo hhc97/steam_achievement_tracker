@@ -7,6 +7,15 @@ import logo from './../../logo.svg'
 import "./style.css"
 
 class AccountSettings extends React.Component {
+
+    handleselectedFile = event => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0,
+        })
+        console.log(event.target.files)
+    }
+
     render() {
         return (
             <div id="AccountSettingsPage">
@@ -24,7 +33,7 @@ class AccountSettings extends React.Component {
                 </div>
 
                 <div id="TitleSection">
-                    <h1> Account Settings for user1 </h1>
+                    <h1> Account Settings for user </h1>
                 </div>
                 <div id="ProfilePicBlock">
                     <h2> Profile Picture </h2>
@@ -32,7 +41,7 @@ class AccountSettings extends React.Component {
                         <img id="CurrentProfilePic" src={sampleProfilePic} />
                         <div id="ProfilePicCaption">
                             <span> Current Picture </span>
-                            <button className="editButton"> </button>
+                            <input type="file" name="" onChange={this.handleselectedFile}/>
                         </div>
                     </div>
                 </div>
