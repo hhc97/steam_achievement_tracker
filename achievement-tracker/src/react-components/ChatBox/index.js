@@ -65,7 +65,7 @@ class ChatBox extends React.Component {
                 </div>
                 <form className='chatMessage' onSubmit={e => this.onSubmit(e)}>
                     <input className='message' onChange={e => this.onChange(e)} placeholder="Enter message" value={this.state.text} />
-                    <button className='sendMessage'>{'>'}</button>
+                    <button className='sendMessage'>Send</button>
                 </form>
             </div>
         )

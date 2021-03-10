@@ -5,7 +5,11 @@ import settingLogo from './../Dashboard/Static/settingLogo.png'
 import { PersonalPic, BannerContainer, BannerLink, Friend, FriendList } from '../PersonalBanner'
 import { AchievementContainer, Game } from '../Achievement'
 import ChatBox from '../ChatBox';
+import ProgressBar from '../Achievement/ProgressBar'
+import { withRouter } from 'react-router-dom'
+import UserKeys from '../UserKeys'
 import './style.css'
+
 
 
 class DashBoard extends React.Component {
@@ -34,10 +38,14 @@ class DashBoard extends React.Component {
             { gameImage: settingLogo, gameName: "NorthGuard", progress: 34 },
             { gameImage: settingLogo, gameName: "Fall Guys", progress: 11 },
             { gameImage: settingLogo, gameName: "Call of Duty", progress: 96 },
-            { gameImage: settingLogo, gameName: "Minion", progress: 2 }
+            { gameImage: settingLogo, gameName: "Minion", progress: 100 }
         ]
         const addFriendUID = ""
         const searchGameName = ""
+
+        const isAdmin = UserKeys.getCurrUserAdminStatus() == 'false' ? false : true
+        const userName = UserKeys.getCurrUser()
+
         this.state = {
             friendList: friendList,
             game: game,
@@ -46,7 +54,9 @@ class DashBoard extends React.Component {
             friendMessages: [],
             addFriendUID: addFriendUID,
             searchGameName: searchGameName,
-            friendListMessages: friendListMessages
+            friendListMessages: friendListMessages,
+            isAdmin: isAdmin,
+            userName: userName
         }
         this.showChatBox = this.showChatBox.bind(this)
         this.unShowChatBox = this.unShowChatBox.bind(this)
@@ -55,6 +65,7 @@ class DashBoard extends React.Component {
         this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
         this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
         this.onSendMessage = this.onSendMessage.bind(this)
+        this.onClickGameRedirectAchivement = this.onClickGameRedirectAchivement.bind(this)
     }
 
 
@@ -116,15 +127,36 @@ class DashBoard extends React.Component {
         this.setState({ searchGameName: "" })
     }
 
+    onClickGameRedirectAchivement(e){
+        const target = e.target
+        let gameName;
+        if(target.className == "gameContainer"){
+            gameName = target.lastChild.lastChild.innerHTML;
+        }else if (target.className == "gameBody" || target.className == "gameImage" || target.className == "vertical-row"){
+            gameName = target.parentNode.lastChild.lastChild.innerHTML;
+        }else if (target.className == "filledProgress"){
+            gameName = target.parentNode.nextSibling.innerHTML;
+        }else{
+            gameName = target.parentNode.lastChild.innerHTML;
+        }
+        this.props.history.push({
+            pathname: '/GameAchievements',
+            state: { gameName: gameName }
+          })
+    }
+
     render() {
         return (
             <>
                 <HeadContainer bgId={"dashboard"}>
                     <HeaderNavBar>
-                        <HeaderImage to='/' src={logo} />
+                        <HeaderImage to='/dashboard' src={logo} />
                         <div className='group'>
-                            <HeaderButton path='/AccountSettings'>Setting</HeaderButton>
-                            <HeaderButton path='/'>LogOut</HeaderButton>
+                            {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)}
+                            <HeaderButton path='/reviewForum'>Forum</HeaderButton>
+                            <HeaderButton path='/Analytics'>Analytics</HeaderButton>
+                            <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
+                            <HeaderButton path='/'>Log Out</HeaderButton>
                         </div>
                     </HeaderNavBar>
                 </HeadContainer>
@@ -132,16 +164,17 @@ class DashBoard extends React.Component {
                     <div className='left'>
                         <BannerContainer>
                             <div className="bannerUserInfo">
-                                <div id="bannerUserName">User Name: Jojo</div>
+                                <div id="bannerUserName">User Name: {this.state.userName}</div>
                                 <div id="bannerUserUID">UID: 7024568</div>
                             </div>
                             <PersonalPic src={logo} />
                             <span className="bannerReputation">Reputation: 3</span>
-                            <BannerLink path="https://discord.com">Discord</BannerLink>
-                            <BannerLink path='https://twitter.com'>Twitter</BannerLink>
-                            <BannerLink path='https://www.facebook.com'>Facebook</BannerLink>
-                            <BannerLink path='https://store.steampowered.com'>Steam</BannerLink>
-                            <BannerLink path='/Analytics'>Analytics</BannerLink>
+                            <div className="bannerLeftLinkGroup">
+                                <BannerLink path="https://discord.com">Discord</BannerLink>
+                                <BannerLink path='https://twitter.com'>Twitter</BannerLink>
+                                <BannerLink path='https://www.facebook.com'>Facebook</BannerLink>
+                                <BannerLink path='https://store.steampowered.com'>Steam</BannerLink>
+                            </div>
                         </BannerContainer>
                     </div>
                     <div className='middle'>
@@ -153,10 +186,16 @@ class DashBoard extends React.Component {
                                 onChange={e => this.onChangeGameSearch(e)}
                             />
                         </form>
-                        <AchievementContainer>
+                        <AchievementContainer bodyId={'shrink'}>
                             {this.state.game.map((item, i) => {
                                 if (item.gameName.toLowerCase().startsWith(this.state.searchGameName.toLowerCase())) {
-                                    return <Game key={i} image={item.gameImage} gameName={item.gameName} completed={item.progress} />
+                                    return( 
+                                        <Game key={i} image={item.gameImage} redirect={this.onClickGameRedirectAchivement}>
+                                            <span className="achivementProgress">{item.progress + '%'}</span>
+                                            <ProgressBar completed={item.progress}/>
+                                            <div className="gameInfo">{item.gameName}</div>
+                                        </Game>
+                                    )
                                 }
                             })}
                         </AchievementContainer>
@@ -194,4 +233,4 @@ class DashBoard extends React.Component {
     }
 }
 
-export default DashBoard;
+export default withRouter (DashBoard);

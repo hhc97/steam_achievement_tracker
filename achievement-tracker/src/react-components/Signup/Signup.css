@@ -13,7 +13,7 @@ body, html {
 }
 
 #SignupContainer {
-    width: 500px;
+    width: 400px;
     max-height: fit-content;
     background: whitesmoke;
     display: flex;
@@ -27,6 +27,7 @@ body, html {
 
 #SignupContainer p{
     margin-bottom: 0px;
+    margin-top: 15px;
 }
 
 .SignupField {
@@ -35,11 +36,14 @@ body, html {
     height: 35px;
     margin-top: 5px;
     top: 5%;
+    margin-bottom: 4px;
 }
 
 .SignUpButton {
     position: relative;
     width: 100px;
-    margin-top: 5px;
+    margin-top: 10px;
     display: block;
+    margin-bottom: 10px;
+    background-color: rgb(30, 150, 150);
 }

@@ -1,1 +1,83 @@
-# team29
+# Steam Achievement Tracker - Team29
+
+## Quick navigation
+- [Launching the website](#starting-the-app)
+- [App walkthrough](#app-walkthrough)
+- [Logging in](#login-and-sign-up-pages)
+- [Viewing the dashboard](#dashboard)
+- [Viewing the forum](#forum)
+- [Account settings](#account-settings)
+- [Administrator page](#admin-page)
+- [Game analytics page](#game-analytics)
+
+## Starting the app
+1. Clone the app: `git clone git@github.com:csc309-winter-2021/team29.git` or  
+`git clone https://github.com/csc309-winter-2021/team29.git`
+
+2. From the root directory(`team29`), simply run `sh start.sh`. This will cd into the directory and run `npm install` and `npm start`.
+
+3. The webpage should open in a browser window. We have tested the webpage in Google Chrome.
+
+
+## App walkthrough
+1. When the app opens at `localhost:3000`, you should see this welcome screen:  
+![](readme_images/welcome_page.PNG)
+
+2. From here, you can click on either [Forum](#forum), [Login](#login-and-sign-up-pages), or [Dashboard](#dashboard) to view the different pages.
+
+
+### Login and Sign up pages
+1. The login page should look like this:  
+![](readme_images/login_page.PNG)
+
+2. Here, you can log in as either an `admin` or `user` (or view parts of the website as a guest without logging in). We have hardcoded the password to be the same as the usernames. So for example, to log in as a user,
+you would enter `user` as the username and `user` as the password. We also have a captcha feature to prevent too many requests to the server in phase 2. The login and sign up buttons will be enabled once the captcha has been solved.
+
+3. You can also access the sign up page from here, by clicking on the `Sign Up` button, and it should look like this:  
+![](readme_images/signup_page.PNG)
+
+4. For phase 1, this signup page is not functional, since we would need support from the backend to check if a username is unique to create an account. Therefore, right now we have implemented a check to make sure each field is filled in
+and that the passwords match. Once those conditions are fulfilled, clicking the `Sign Up` button will display an alert indicating that sign up was successful, but no actual account gets created yet.
+
+
+### Dashboard
+1. This is the dashboard page:  
+![](readme_images/dashboard_page.PNG)
+
+2. Here, you have your user profile on the left with links to various apps that gamers might use. In the middle of the page, you have a progress bar for each game that is on your profile.
+
+3. You can also click on someone in your friends list to chat with them, note that for phase 1 you can only send chat messages, but not receive any since there is no backend:  
+![](readme_images/dashboard_friend_chat.PNG)
+
+4. Clicking the [Settings](#account-settings) button on the top right hand corner will bring you to the account settings page.
+
+5. You may also click on the [Game Analytics](#game-analytics)
+
+
+### Forum
+1. The forum is a place where you can leave reviews for games, it shows the most recent reviews on the games that are on the site:
+![](readme_images/forum_page_top.PNG)
+![](readme_images/forum_page_bottom.PNG)
+
+2. Here you can add a review if you are logged in, and upvote or downvote a review. Added reviews can be viewed by clicking on the `next` button to see the next page.
+
+
+### Account settings
+1. The account settings page looks like this:  
+![](readme_images/settings_page.PNG)
+
+2. From here, you can edit the specifics of your profile, like `... TODO`
+
+
+### Admin page
+1. The admin page looks like this:  
+![](readme_images/admin_page.PNG)
+
+2. From this page, you can do things like delete or edit reviews, and also delete or ban users. You also must be logged in as an admin to access this page.
+
+
+### Game Analytics
+1. The game analytics page looks like this:  
+![](readme_images/game_analytics_page.PNG)
+
+2. From here, you can view useful and interesting statistics about your game play such as `... TODO`

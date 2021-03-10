@@ -126,6 +126,7 @@
     outline: none;
     font-size: 30px;
     padding-left: 10px;
+    height: 90%;
 }
 
 .sendMessage{
@@ -134,13 +135,9 @@
     border: 0px;
     background-color: transparent;
     cursor: pointer;
-    width:20%;
+    width:fit-content;
     text-align: center;
-    font-size: 40px;
+    font-size: 25px;
     outline: none;
 }
-.sendMessage:hover{
-    border: 1px solid grey;
-}
-
 

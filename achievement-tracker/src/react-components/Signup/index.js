@@ -1,7 +1,10 @@
-import React from 'react';
+import React from 'react'
 import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
+
+import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import logo from './../../logo.svg'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Signup.css';
@@ -28,19 +31,19 @@ class Signup extends React.Component {
   }
 
   handleSignup = () => {
-    if (this.state.passWord !== this.state.passWord2) {
-      alert('Passwords do not match')
-      return
-    }
     if (this.state.userName == '' ||
       this.state.passWord == '' ||
       this.state.steamName == '') {
       alert('some input fields are empty')
       return
     }
+    if (this.state.passWord !== this.state.passWord2) {
+      alert('Passwords do not match')
+      return
+    }
     // check username uniqueness in DB
     // check that steam username allows data retrieval
-    log('Fake signup success')
+    alert('Account created (this is not functional yet as we need the backend)')
   }
 
   render() {
@@ -49,10 +52,19 @@ class Signup extends React.Component {
     }
     return (
       <div id='LoginPage'>
+        <HeadContainer bgId={"dashboard"}>
+          <HeaderNavBar>
+            <HeaderImage to='/' src={logo} />
+            <div className='group'>
+              <HeaderButton path='/reviewforum'>Forum</HeaderButton>
+              <HeaderButton path='/login'>Login</HeaderButton>
+            </div>
+          </HeaderNavBar>
+        </HeadContainer>
         <div id="SignupContainer">
           <p>Please enter your details:</p>
 
-          <input className="LoginField"
+          <input className="SignupField"
             value={this.state.userName}
             onChange={this.handleInputChange}
             type='text'

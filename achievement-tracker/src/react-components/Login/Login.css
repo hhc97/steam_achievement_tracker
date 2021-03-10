@@ -29,6 +29,11 @@ body, html {
     height: fit-content;
 }
 
+#LoginCredentials p {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
 .LoginField {
     position: relative;
     display: block;
@@ -50,7 +55,7 @@ body, html {
 
 #SignupRedirect {
     position: relative;
-    margin-top: 10px;
+    margin-top: 15px;
     height: fit-content;
 }
 
@@ -61,7 +66,13 @@ body, html {
 #SignupRedirect .LoginButton {
     display: block;
     position: relative;
-    margin-top: 5px;
+    margin-top: 2px;
     margin-left: auto;
     margin-right: auto;
+    background-color: rgb(30, 150, 150);
+    margin-bottom: 10px;
+}
+
+.loginCaptcha {
+    margin-bottom: 10px;
 }

@@ -1,0 +1,106 @@
+.gameAchivementBody{
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
+    width: 100%;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    overflow: auto;
+    animation: animation 100s linear infinite;
+}
+
+@keyframes animation {
+    100%{
+     background-position:0px -3000px;
+   }
+ }
+
+.gameAchivementBody::-webkit-scrollbar { 
+    display: none;  
+}
+
+.gameAchivementBodyLeft{
+    float: left;
+    width: 25%;
+    position: fixed;
+    top: 120px;
+    height: 100vh;
+    left: 2%;
+}
+
+.bannerUserInfo{
+    display: flex;
+    flex-direction: row;
+    width:90%;
+    color: white;
+    justify-content: space-between;
+}
+
+.bannerLeftLinkGroup{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    margin-top: 5px;
+}
+
+#bannerUserName, #bannerUserUID{
+    width: fit-content;
+}
+
+
+.bannerReputation{
+    color:white;
+    font-size: 10px;
+}
+
+.gameAchivementBodyMiddle{
+    display: inline-block;
+    width: 65%;
+    left: 14%;
+    position: relative;
+    top: 120px;
+    height: 100vh;
+}
+
+
+.gameAchivementBodyMiddle::-webkit-scrollbar { 
+    display: none; 
+}
+
+.group{
+    display: flex;
+    flex-direction: row;
+}
+
+.searchGame{
+    height: 8%;
+}
+
+.searchGameInput{
+    outline: none;
+    height: 100%;
+    width: 90%;
+    border: 2px solid grey;
+    border-radius: 25px;
+    padding-left:10px;
+    font-size: 25px;
+}
+
+.AchievementName{
+    color:white;
+    width: fit-content;
+    height: fit-content;
+    top: 25%;
+    font-size: 20px;
+    position: relative;
+    padding-left: 5px;
+}
+
+.Achieved{
+    color:white;
+    bottom:0;
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    position: relative;
+}

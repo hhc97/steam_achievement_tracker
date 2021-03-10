@@ -4,6 +4,7 @@
     margin-bottom: 8px;
     border-style: ridge;
     border-radius: 10px;
+    
 }
 
 .gameImage{
@@ -19,38 +20,11 @@
     background-color: grey;
 }
 
-.gameInfo{
-    color:white;
-    font-size: 15px;
-    bottom:0px;
-    position: absolute;
-}
+
 
 .gameBody{
     display: flex;
     flex-direction: column;
     width:100%;
     position: relative;
-}
-
-.totalProgress{
-    position: absolute;
-    margin-left: 10px;
-    width:90%;
-    height: 35%;
-    top: 25%;
-    background-color: grey;
-    border: 2px solid black;
-    border-radius: 25px;
-    align-items: center;
-}
-
-.filledProgress{
-    background-color: #3d3d3d;
-    height: 100%;
-    border-radius: 10px;
-}
-
-.currentProgress{
-    color:white;
 }

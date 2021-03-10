@@ -11,9 +11,9 @@ class HeaderContainer extends React.Component{
                     <HeaderImage to='/' src={logo}/>
                     <div className="groupButton">
                         <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
-                        <HeaderButton path='/Login'>SignIn</HeaderButton>
+                        <HeaderButton path='/Login'>Login</HeaderButton>
                         <span className="slash">/</span>
-                        <HeaderButton path='/dashboard'>Dashboard</HeaderButton>
+                        <HeaderButton path='/Signup'>Sign Up</HeaderButton>
                     </div>
                 </HeaderNavBar>
             </HeadContainer>

@@ -10,7 +10,9 @@ body, html {
 }
 
 #TitleSection h1 {
-    font-size: xx-large;
+    font-size: 30pt;
+    font-style: italic;
+    font-weight: bold;
     color:ghostwhite;
     text-align: center;
     margin-top: 0px;

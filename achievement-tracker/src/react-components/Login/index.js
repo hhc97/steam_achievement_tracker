@@ -1,8 +1,11 @@
-import React from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
+import React from 'react'
+import ReCAPTCHA from "react-google-recaptcha"
 import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
+
+import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import logo from './../../logo.svg'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.css';
@@ -40,7 +43,7 @@ class Login extends React.Component {
         alert("username or password cannot be empty")
         return
       }
-      if ((username == 'admin' || username == 'user' || username == 'guest')
+      if ((username == 'admin' || username == 'user')
         && username == password) {
 
         localStorage.setItem(keys.user, username)
@@ -87,6 +90,14 @@ class Login extends React.Component {
     }
     return (
       <div id='LoginPage'>
+        <HeadContainer bgId={"dashboard"}>
+          <HeaderNavBar>
+            <HeaderImage to='/' src={logo} />
+            <div className='group'>
+              <HeaderButton path='/reviewforum'>Forum</HeaderButton>
+            </div>
+          </HeaderNavBar>
+        </HeadContainer>
         <div id="LoginContainer">
           <div id="LoginCredentials">
             <p>Please enter your credentials:</p>
@@ -96,7 +107,7 @@ class Login extends React.Component {
               onChange={this.handleInputChange}
               type='text'
               name='userName'
-              placeholder='Username or email'
+              placeholder='Username'
               autoFocus></input>
 
             <input className="LoginField"
@@ -104,12 +115,12 @@ class Login extends React.Component {
               onChange={this.handleInputChange}
               type='password'
               name='passWord'
-              placeholder='password'></input>
+              placeholder='Password'></input>
 
             <Button className="LoginButton"
-              variant="secondary"
+              variant="primary"
+              disabled={!this.state.captcha_solved}
               onClick={this.handleLogin}>Log In</Button>
-
           </div>
 
           <div id="SignupRedirect">
@@ -119,15 +130,14 @@ class Login extends React.Component {
               variant="secondary"
               onClick={this.handleSignup}>Sign Up</Button>
 
-            <Button className="LoginButton"
-              variant="info"
-              type='submit'
-              onClick={this.gameAchievements}>Games</Button>
-
             <ReCAPTCHA
+              className='loginCaptcha'
               sitekey="6LckfXMaAAAAAFQXopzO5R-TmD-4VQlwcRIx7YWy"
-              onChange={this.handleCaptchaSolve}
-            />
+              onChange={this.handleCaptchaSolve} />
+
+            <Button className='loginCaptcha'
+              variant="warning"
+              onClick={this.handleCaptchaSolve}>Bypass verify (for testing)</Button>
           </div>
 
         </div>

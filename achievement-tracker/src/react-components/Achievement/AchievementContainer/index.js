@@ -4,7 +4,7 @@ import './style.css'
 class AchievementContainer extends React.Component{
     render(){
         return(
-            <ul className='achievementContainer' {...this.props}>{this.props.children}</ul>
+            <ul className='achievementContainer' id={this.props.bodyId}>{this.props.children}</ul>
         )
     }
 }

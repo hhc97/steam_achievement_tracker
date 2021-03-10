@@ -1,13 +1,18 @@
 .dashboard{
-    /*background-image: url('./Static/dashboardBackground.jpg');*/
-    /*background-color: #161920;*/
     background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
     width: 100%;
     background-size: cover;
     height: 100vh;
     position: relative;
     overflow: hidden;
+    animation: animation 100s linear infinite;
 }
+
+@keyframes animation {
+    100%{
+     background-position:0px -3000px;
+   }
+ }
 
 .dashboard::-webkit-scrollbar { 
     display: none;  
@@ -20,6 +25,14 @@
     top: 120px;
     height: 100vh;
     left: 2%;
+}
+
+.bannerLeftLinkGroup{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    margin-top: 5px;
 }
 
 .bannerUserInfo{
@@ -138,4 +151,18 @@
     border-radius: 25px;
     padding-left:10px;
     font-size: 25px;
+}
+
+
+.achivementProgress{
+    color:white;
+    font-size: 15px;
+    top:0px;
+    position: absolute;
+}
+.gameInfo{
+    color:white;
+    font-size: 15px;
+    bottom:0px;
+    position: absolute;
 }
