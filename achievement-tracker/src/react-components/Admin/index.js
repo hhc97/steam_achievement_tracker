@@ -3,9 +3,11 @@ import { uid } from "react-uid";
 
 import AdminSearchBar from "./../AdminSearchBar";
 import UserBar from "./../UserBar";
-import Review from "./../Review";
-
+import ReviewBar from "./../ReviewBar";
+import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import logo from './../../logo.svg'
 import "./styles.css"
+import UserKeys from '../UserKeys.js'
 
 const userData = [
   {
@@ -71,7 +73,7 @@ class Admin extends React.Component {
     console.log("Search!")
 
     const reviewList = this.state.reviews.filter(review => {
-      return review.title.includes(this.state.userSearch)
+      return review.title.includes(this.state.reviewSearch)
     })
 
     this.setState({
@@ -92,20 +94,11 @@ class Admin extends React.Component {
 
   constructor(props) {
     super(props)
-    this.upvoteAction = this.upvoteAction.bind(this)
-    this.downvoteAction = this.downvoteAction.bind(this)
     this.deleteUser = this.deleteUser.bind(this)
+    this.deleteReview = this.deleteReview.bind(this)
   }
 
-  upvoteAction = (id) => {
-    console.log("Invalid upvote")
-  }
-
-  downvoteAction = (id) => {
-    console.log("Invalid downvote")
-  }
-
-  deleteUser = (username) => {
+  deleteUser = username => {
     console.log("Delete User")
 
     const userList = this.state.users.filter(user => user.username !== username)
@@ -115,47 +108,73 @@ class Admin extends React.Component {
     })
   }
 
+  deleteReview = id => {
+    console.log("Delete Review")
+
+    const reviewList = this.state.reviews.filter(review => review.id !== id)
+    this.setState({
+      reviews: reviewList,
+      reviewsOnPage: reviewList
+    })
+  }
+
   render() {
-    return (
-      <div className="admin-dashboard">
-        <div className="admin-dashboard-component">
-          <AdminSearchBar
-            searchContent={this.state.userSearch}
-            handleChange={this.handleUserSearchChange}
-            enterButton={this.searchUser}
-          />
-
-          {this.state.usersOnPage.map(user => (
-            <UserBar
-              key={uid(user)}
-              username={user.username}
-              reputation={user.reputation}
-              deleteUser={this.deleteUser}
-            />
-          ))}
+    // if the user is not an admin then do not display the page
+    if (UserKeys.getCurrUserAdminStatus() == 'false' || !UserKeys.getCurrUserAdminStatus()) {
+      return (
+        <div id='notAuthorized'>Page not found, you must be logged in as an Admin to view this page.
         </div>
+      )
+    }
+    return (
+      <div>
+        <HeadContainer bgId={"dashboard"}>
+          <HeaderNavBar>
+            <HeaderImage to='/' src={logo} />
+            <div className='group'>
+              <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
+              <HeaderButton path='/'>Log Out</HeaderButton>
+            </div>
+          </HeaderNavBar>
+        </HeadContainer>
 
-        <div className="admin-dashboard-component">
-          <AdminSearchBar
-            searchContent={this.state.reviewSearch}
-            handleChange={this.handleReviewSearchChange}
-            enterButton={this.searchReview}
-          />
-
-          {this.state.reviews.map(review => (
-            <Review
-              key={uid(review)}
-              id={review.id}
-              title={review.title}
-              content={review.content}
-              upvotes={review.upvotes}
-              downvotes={review.downvotes}
-              author={review.author}
-              reputation={review.reputation}
-              upvoteAction={this.upvoteAction}
-              downvoteAction={this.downvoteAction}
+        <div className="admin-dashboard">
+          <div className="admin-dashboard-component">
+            <AdminSearchBar
+              searchContent={this.state.userSearch}
+              handleChange={this.handleUserSearchChange}
+              enterButton={this.searchUser}
             />
-          ))}
+
+            {this.state.usersOnPage.map(user => (
+              <UserBar
+                key={uid(user)}
+                username={user.username}
+                reputation={user.reputation}
+                deleteUser={this.deleteUser}
+              />
+            ))}
+          </div>
+
+          <div className="admin-dashboard-component">
+            <AdminSearchBar
+              searchContent={this.state.reviewSearch}
+              handleChange={this.handleReviewSearchChange}
+              enterButton={this.searchReview}
+            />
+
+            {this.state.reviewsOnPage.map(review => (
+              <ReviewBar
+                key={uid(review)}
+                id={review.id}
+                title={review.title}
+                content={review.content}
+                author={review.author}
+                reputation={review.reputation}
+                deleteReview={this.deleteReview}
+              />
+            ))}
+          </div>
         </div>
       </div>
     )

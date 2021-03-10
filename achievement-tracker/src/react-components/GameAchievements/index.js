@@ -7,6 +7,7 @@ import settingLogo from './../Dashboard/Static/settingLogo.png'
 import {PersonalPic, BannerContainer, BannerLink, Friend, FriendList} from '../PersonalBanner'
 import {AchievementContainer, Game} from '../Achievement'
 import './style.css';
+import UserKeys from '../UserKeys';
 
 const log = console.log
 
@@ -110,11 +111,16 @@ class GameAchievements extends React.Component {
         ] 
       const gameObj = game.filter(i => i.gameName == gameName)[0]
       const searchAchievementName = ""
+      const userName = localStorage.getItem(UserKeys.user)
+      const isAdmin = localStorage.getItem(UserKeys.isAdmin) == "false" ? false : true
+
       this.state = {
           game:game, 
           searchAchievementName:searchAchievementName,
           gameName: gameName,
-          gameObj: gameObj
+          gameObj: gameObj,
+          userName: userName,
+          isAdmin: isAdmin
       }
       this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
       this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
@@ -133,9 +139,11 @@ class GameAchievements extends React.Component {
         <>
           <HeadContainer bgId={"dashboard"}>
               <HeaderNavBar>
-                  <HeaderImage to='/' src={logo}/>
+                  <HeaderImage to='/dashboard' src={logo}/>
                   <div className='group'>
-                      <HeaderButton path='/dashBoard'>Dashboard</HeaderButton>
+                      {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)}
+                      <HeaderButton path='/reviewForum'>Forum</HeaderButton>
+                      <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                       <HeaderButton path='/AccountSettings'>Setting</HeaderButton>
                       <HeaderButton path='/'>LogOut</HeaderButton>
                   </div>
@@ -145,7 +153,7 @@ class GameAchievements extends React.Component {
               <div className='gameAchivementBodyLeft'>
                   <BannerContainer>
                       <div className="bannerUserInfo">
-                          <div id="bannerUserName">User Name: Jojo</div>
+                          <div id="bannerUserName">User Name: {this.state.userName}</div>
                           <div id="bannerUserUID">UID: 7024568</div>
                       </div>
                       <PersonalPic src={logo}/>
@@ -155,8 +163,6 @@ class GameAchievements extends React.Component {
                           <BannerLink path='https://twitter.com'>Twitter</BannerLink>
                           <BannerLink path='https://www.facebook.com'>Facebook</BannerLink>
                           <BannerLink path='https://store.steampowered.com'>Steam</BannerLink>
-                          <BannerLink path='/Analytics'>Analytics</BannerLink>
-                          <BannerLink path='/reviewForum'>Forum</BannerLink>
                       </div>
                   </BannerContainer>
               </div>
@@ -173,14 +179,15 @@ class GameAchievements extends React.Component {
                   <AchievementContainer bodyId={"fullLength"}>
                       {this.state.gameObj.achievements.map((item,i) => {
                           if (item.name.toLowerCase().startsWith(this.state.searchAchievementName.toLowerCase())){
-                              let isAchievedBg;
+                              let isAchievedBg = "#525252";
+                              let opac;
                               if (item.achieve == "N"){
-                                isAchievedBg = "#525252"
+                                opac = "0.4"
                               }else{
-                                isAchievedBg = "#7a7a7a"
+                                opac = "1"
                               }
                               return (
-                                <Game key = {i} image={this.state.gameObj.gameImage} isAchievedBg={isAchievedBg}>
+                                <Game key = {i} image={this.state.gameObj.gameImage} isAchievedBg={isAchievedBg} opac = {opac}>
                                     <div className="AchievementName">{item.name}</div>
                                 </Game>
                             )

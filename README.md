@@ -6,6 +6,7 @@
 - [Logging in](#login-and-sign-up-pages)
 - [Viewing the dashboard](#dashboard)
 - [Viewing the forum](#forum)
+- [Game acheivements](#game-achievements)
 - [Account settings](#account-settings)
 - [Administrator page](#admin-page)
 - [Game analytics page](#game-analytics)
@@ -31,7 +32,8 @@
 ![](readme_images/login_page.PNG)
 
 2. Here, you can log in as either an `admin` or `user` (or view parts of the website as a guest without logging in). We have hardcoded the password to be the same as the usernames. So for example, to log in as a user,
-you would enter `user` as the username and `user` as the password. We also have a captcha feature to prevent too many requests to the server in phase 2. The login and sign up buttons will be enabled once the captcha has been solved.
+you would enter `user` as the username and `user` as the password. We also have a captcha feature to prevent too many requests to the server in phase 2. The login button will be enabled once the captcha has been solved.
+If the captcha is not working you can also click the temporary "Bypass verify" button, which we have added there for convenience during testing.
 
 3. You can also access the sign up page from here, by clicking on the `Sign Up` button, and it should look like this:  
 ![](readme_images/signup_page.PNG)
@@ -39,19 +41,22 @@ you would enter `user` as the username and `user` as the password. We also have 
 4. For phase 1, this signup page is not functional, since we would need support from the backend to check if a username is unique to create an account. Therefore, right now we have implemented a check to make sure each field is filled in
 and that the passwords match. Once those conditions are fulfilled, clicking the `Sign Up` button will display an alert indicating that sign up was successful, but no actual account gets created yet.
 
+5. Once the user is sign in the page, the icon on the navbar will be redirect to dashboard only. Before sign in, the icon will be directed to home.
 
 ### Dashboard
 1. This is the dashboard page:  
 ![](readme_images/dashboard_page.PNG)
 
-2. Here, you have your user profile on the left with links to various apps that gamers might use. In the middle of the page, you have a progress bar for each game that is on your profile.
+2. Here, you have your user profile on the left with links to various apps that gamers might use. In the middle of the page, you have a progress bar for each game that is on your profile. When you hover on each game, you can select the game and go to [Game acheivements](#game-achievements) and look at the overview of all achievements inside the game. On top of the game, you can also use the search game bar to search the specific game instead of scrolling through. Note that the search bar is updated automatically once you inserted text.
 
 3. You can also click on someone in your friends list to chat with them, note that for phase 1 you can only send chat messages, but not receive any since there is no backend:  
 ![](readme_images/dashboard_friend_chat.PNG)
 
 4. Clicking the [Settings](#account-settings) button on the top right hand corner will bring you to the account settings page.
 
-5. You may also click on the [Game Analytics](#game-analytics)
+5. You may also click on the [Analytics](#game-analytics) button to view the overall game analytics of your profile.
+
+6. Also note that based on the user type, ex: user, admin, we will show an extra button on the navbar for admin to lead them into admin page.
 
 
 ### Forum
@@ -60,6 +65,17 @@ and that the passwords match. Once those conditions are fulfilled, clicking the 
 ![](readme_images/forum_page_bottom.PNG)
 
 2. Here you can add a review if you are logged in, and upvote or downvote a review. Added reviews can be viewed by clicking on the `next` button to see the next page.
+
+
+### Game achievements
+1. The game achievements page will look like this:  
+![](readme_images/game_achievements_page.PNG)
+
+2. Here, the achievement that are less visible will be the lock achievements, and the one that is visible will be the unlock achievement that the user have.
+
+3. You can also use the search bar to search for specific achievement that the game have.
+
+4. To redirect back to dashboard, simply click on the icon in the navbar.
 
 
 ### Account settings

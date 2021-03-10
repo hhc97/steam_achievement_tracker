@@ -5,7 +5,6 @@ body, html {
 
 #AccountSettingsPage {
     height: 100%;
-    background: url(https://cdn.hipwallpaper.com/i/71/17/Td1L4S.jpg);
     background-size: cover;
 }
 
@@ -112,8 +111,13 @@ body, html {
     margin-bottom: 0px;
 }
 
-#editButton {
+.editButton {
     display: inline-block;
+    background-image: url("./imgs/edit.jpg");
+    background-size: 30px;
+    background-color: ghostwhite;
+    height: 30px;
+    width: 30px;
 }
 
 .TextInput+Button {

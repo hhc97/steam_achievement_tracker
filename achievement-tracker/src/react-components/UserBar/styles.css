@@ -5,4 +5,13 @@
   padding: 20px;
   text-align: left;
   min-width: 500px;
+  overflow: hidden;
+}
+
+.user-bar-info {
+  float: left;
+}
+
+.user-bar button {
+  float: right;
 }

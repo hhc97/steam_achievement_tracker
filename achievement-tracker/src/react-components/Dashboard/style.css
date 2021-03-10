@@ -50,7 +50,7 @@
 
 .bannerReputation{
     color:white;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .middle{
@@ -140,7 +140,8 @@
 }
 
 .searchGame{
-    height: 8%;
+    height: 60px;
+    margin-bottom: 5px;
 }
 
 .searchGameInput{
