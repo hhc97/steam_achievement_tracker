@@ -33,7 +33,7 @@
 
 2. Here, you can log in as either an `admin` or `user` (or view parts of the website as a guest without logging in). We have hardcoded the password to be the same as the usernames. So for example, to log in as a user,
 you would enter `user` as the username and `user` as the password. We also have a captcha feature to prevent too many requests to the server in phase 2. The login button will be enabled once the captcha has been solved.
-If the captcha is not working you can also click the temporary "Bypass verify" button, which we have added there for convenience during testing.
+If the captcha is not working you can also click the temporary "Bypass verify" button, which we have added for convenience during testing (this button was left in on purpose, so it will be easier for you to navigate around our website).
 
 3. You can also access the sign up page from here, by clicking on the `Sign Up` button, and it should look like this:  
 ![](readme_images/signup_page.PNG)
@@ -56,7 +56,7 @@ and that the passwords match. Once those conditions are fulfilled, clicking the 
 
 5. You may also click on the [Analytics](#game-analytics) button to view the overall game analytics of your profile.
 
-6. Also note that based on the user type, ex: user, admin, we will show an extra button on the navbar for admin to lead them into admin page.
+6. Also note that only admins will have an "Admin" button show up in the navbar that leads to the admin page.
 
 
 ### Forum
