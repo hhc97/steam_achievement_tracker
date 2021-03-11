@@ -26,7 +26,7 @@ class AccountSettings extends React.Component {
                             <div className='group'>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
                                 <HeaderButton path='/Analytics'>Analytics</HeaderButton>
-                                <HeaderButton path='/Home'>Log Out</HeaderButton>
+                                <HeaderButton path='/'>Log Out</HeaderButton>
                             </div>
                         </HeaderNavBar>
                     </HeadContainer>
@@ -52,26 +52,26 @@ class AccountSettings extends React.Component {
                 </div>
                 <div id="UserDetailsSection">
                     <h2> User Details </h2>
-                    <div className="TextInput+Button">
-                        <p> Username: <span> user1 </span>  <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> Username: <span> user1 </span></p> <button className="editButton">  </button>
                     </div>
-                    <div className="TextInput+Button">
-                        <p> Password: <span> **** </span> <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> Password: <span> **** </span></p> <button className="editButton">  </button>
                     </div>
                 </div>
                 <div id="ExternalLinksSection">
                     <h2> External Links </h2>
-                    <div className="TextInput+Button">
-                        <p> Steam: <span> PolarisTM </span> <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> Steam: <span> PolarisTM </span></p> <button className="editButton">  </button>
                     </div>
-                    <div className="TextInput+Button">
-                        <p> Ubisoft: <span> Polaris04 </span> <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> Ubisoft: <span> Polaris04 </span> </p> <button className="editButton">  </button>
                     </div>
-                    <div className="TextInput+Button">
-                        <p> PlayStation: <span> Dancin9D0nZ </span> <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> PlayStation: <span> Dancin9D0nZ </span> </p> <button className="editButton">  </button>
                     </div>
-                    <div className="TextInput+Button">
-                        <p> Xbox: <span> N/A </span> <button className="editButton">  </button> </p>
+                    <div className="TextInputButton">
+                        <p> Xbox: <span> N/A </span> </p> <button className="editButton">  </button>
                     </div>
                 </div>
             </div>

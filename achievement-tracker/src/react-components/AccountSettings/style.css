@@ -1,5 +1,4 @@
 body, html {
-    height: 100%;
     width: 100%;
     color: ghostwhite;
 }
@@ -45,6 +44,8 @@ body, html {
 
 #ProfilePicBlock h2 {
     font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
     position: relative;
     text-align: left;
     margin-left: 200px;
@@ -66,6 +67,7 @@ body, html {
 #ProfilePicCaption span{
     display: block;
     text-align: center;
+    font-size: 14pt;
 }
 
 #UploadProfilePic {
@@ -75,6 +77,7 @@ body, html {
     text-align: left;
     float: right;
     padding-top: 20%;
+    font-size: 14pt;
 }
 
 #editButton {
@@ -86,10 +89,13 @@ body, html {
 #UserDetailsSection {
     margin-left: 200px;
     display: block;
+    width: 300px;
 }
 
 #UserDetailsSection h2 {
-    font-size: x-large;
+    font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
     position: relative;
     text-align: left;
     margin-top: 20px;
@@ -113,14 +119,19 @@ body, html {
 #ExternalLinksSection {
     margin-left: 200px;
     position: relative;
+    width: 300px;
 }
 
 #ExternalLinksSection h2 {
-    font-size: x-large;
+    font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline solid ghostwhite;
     position: relative;
     text-align: left;
-    margin-left: 200px;
     color:ghostwhite;
+    margin-left: 0px;
+    width: 100%;
 }
 
 #ExternalLinksSection p {
@@ -137,7 +148,7 @@ body, html {
 }
 
 #ExternalLinksSection p {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .editButton {
@@ -149,7 +160,17 @@ body, html {
     width: 30px;
 }
 
-.TextInput+Button {
-    width: 400px;
-    max-width: fit-content;
+.TextInputButton {
+    width: 300px;
+    height: 35px;
+    text-align: left;
+    display: inline-block;
+}
+
+.TextInputButton p{
+    float: left;
+}
+
+.TextInputButton button{
+    float: right;
 }
