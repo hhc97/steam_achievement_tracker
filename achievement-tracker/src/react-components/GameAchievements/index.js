@@ -3,6 +3,8 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 import {HeaderButton, HeaderImage, HeadContainer, HeaderNavBar} from '../HeaderComponent'
 import logo from './../../logo.svg'
+import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
+
 import settingLogo from './../Dashboard/Static/settingLogo.png'
 import {PersonalPic, BannerContainer, BannerLink, Friend, FriendList} from '../PersonalBanner'
 import {AchievementContainer, Game} from '../Achievement'
@@ -15,6 +17,7 @@ class GameAchievements extends React.Component {
     constructor(props){
       super(props)
       const gameName = this.props.location.state.gameName
+      // game will be pull from database in phase2, now is hardcode
       const game = [
           {gameImage: settingLogo, gameName: "CSGO", 
             achievements:[
@@ -144,7 +147,7 @@ class GameAchievements extends React.Component {
                       {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)}
                       <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                       <HeaderButton path='/Analytics'>Analytics</HeaderButton>
-                      <HeaderButton path='/AccountSettings'>Setting</HeaderButton>
+                      <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
                       <HeaderButton path='/'>LogOut</HeaderButton>
                   </div>
               </HeaderNavBar>
@@ -156,7 +159,7 @@ class GameAchievements extends React.Component {
                           <div id="bannerUserName">User Name: {this.state.userName}</div>
                           <div id="bannerUserUID">UID: 7024568</div>
                       </div>
-                      <PersonalPic src={logo}/>
+                      <PersonalPic src={profilePic}/>
                       <span className="bannerReputation">Reputation: 3</span>
                       <div className="bannerLeftLinkGroup">
                           <BannerLink path="https://discord.com">Discord</BannerLink>

@@ -62,6 +62,7 @@ class AccountSettings extends React.Component {
                                 <span> Current Picture ▲ </span>
                             </div>
                         </div>
+                        {/* Saving the profile picture to your profile is currently non functional as we need the backend to store the image the user uploads */}
                         <div id="UploadProfilePic">
                             <span> Upload a new image: </span>
                             <input type="file" name="" onChange={this.handleselectedFile} />

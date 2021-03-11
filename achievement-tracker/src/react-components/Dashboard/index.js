@@ -16,7 +16,7 @@ import './style.css'
 class DashBoard extends React.Component {
     constructor(props) {
         super(props)
-        //friendList and friendListMessages will be pull from database from phase2
+        //friendList and friendListMessages and game will be pull from database from phase2
         const friendList = ["leo", 'lee', 'lao', 'loo', 'loe', 'lam', 'lsk', 'lkl', 'ldl', 'lbh', 'lsb']
         const friendListMessages = [
             { name: "leo", messages: [{ text: 'asa', person: "leo" }] },

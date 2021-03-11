@@ -8,6 +8,9 @@ import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../Heade
 
 import "./Analytics.css"
 
+// All of the statistics listed on this page, both in the banner and in the below table, are hardcoded sample values.
+// In phase 2, we will use API calls to populate this part of the user's profile with the relevant statistics we pull.
+
 let stats = [
     {
         id: 1,

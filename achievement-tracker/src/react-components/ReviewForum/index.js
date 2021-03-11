@@ -6,6 +6,10 @@ import ReviewSection from "./../ReviewSection"
 import UserKeys from '../UserKeys'
 import "./styles.css"
 
+/*
+** Hardcoded Data
+*/
+
 const reviewData = [
 	{
 		id: 1,
@@ -80,7 +84,11 @@ class ReviewForum extends React.Component {
 			<div>
 					<HeadContainer bgId={"dashboard"}>
 						<HeaderNavBar>
-								<HeaderImage to='/dashboard' src={logo} />
+								{
+									UserKeys.getCurrUser() !== null ?
+									<HeaderImage to='/dashboard' src={logo} /> :
+									<HeaderImage to='/' src={logo} />
+								}
 								<div className='group'>
 										<HeaderButton path='/reviewForum'>Forum</HeaderButton>
 										{

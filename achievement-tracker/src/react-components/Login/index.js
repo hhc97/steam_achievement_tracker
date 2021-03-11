@@ -38,6 +38,7 @@ class Login extends React.Component {
     const username = this.state.userName.toLowerCase()
     const password = this.state.passWord
 
+    // some temporary hardcoded values for phase 1
     if (this.state.captcha_solved) {
       if (username == '' || password == '') {
         alert("username or password cannot be empty")

@@ -9,6 +9,10 @@ import logo from './../../logo.svg'
 import "./styles.css"
 import UserKeys from '../UserKeys.js'
 
+/*
+** Hardcoded Data
+*/
+
 const userData = [
   {
     username: "John Smith",
