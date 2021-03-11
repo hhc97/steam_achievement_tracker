@@ -46,6 +46,7 @@ body, html {
     font-size: 20pt;
     font-weight: 700;
     font-style: italic;
+    text-decoration: underline solid ghostwhite;
     position: relative;
     text-align: left;
     margin-left: 200px;
@@ -68,6 +69,8 @@ body, html {
     display: block;
     text-align: center;
     font-size: 14pt;
+    font-weight: bold;
+    color:ghostwhite;
 }
 
 #UploadProfilePic {
@@ -78,6 +81,13 @@ body, html {
     float: right;
     padding-top: 20%;
     font-size: 14pt;
+}
+
+#UploadProfilePic span{
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: left;
+    color:ghostwhite;
 }
 
 #editButton {
@@ -104,7 +114,7 @@ body, html {
 }
 
 #UserDetailsSection p {
-    font-size: large;
+    font-size: 14pt;
     font-weight: bold;
     text-align: left;
     color:ghostwhite;
@@ -135,7 +145,7 @@ body, html {
 }
 
 #ExternalLinksSection p {
-    font-size: large;
+    font-size: 14pt;
     font-weight: bold;
     text-align: left;
     color:ghostwhite;
