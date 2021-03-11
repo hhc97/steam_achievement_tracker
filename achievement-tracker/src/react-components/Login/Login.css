@@ -76,3 +76,7 @@ body, html {
 .loginCaptcha {
     margin-bottom: 10px;
 }
+
+.loginText {
+    color: black;
+}

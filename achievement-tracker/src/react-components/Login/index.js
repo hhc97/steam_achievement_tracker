@@ -101,7 +101,7 @@ class Login extends React.Component {
         </HeadContainer>
         <div id="LoginContainer">
           <div id="LoginCredentials">
-            <p>Please enter your credentials:</p>
+            <p className='loginText'>Please enter your credentials:</p>
 
             <input className="LoginField"
               value={this.state.userName}
@@ -125,7 +125,7 @@ class Login extends React.Component {
           </div>
 
           <div id="SignupRedirect">
-            <p>Don't have an account?</p>
+            <p className='loginText'>Don't have an account?</p>
 
             <Button className="LoginButton"
               variant="secondary"

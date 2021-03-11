@@ -62,7 +62,7 @@ class Signup extends React.Component {
           </HeaderNavBar>
         </HeadContainer>
         <div id="SignupContainer">
-          <p>Please enter your details:</p>
+          <p className='loginText'>Please enter your details:</p>
 
           <input className="SignupField"
             value={this.state.userName}
