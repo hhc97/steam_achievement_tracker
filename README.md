@@ -82,7 +82,7 @@ and that the passwords match. Once those conditions are fulfilled, clicking the 
 1. The account settings page looks like this:  
 ![](readme_images/settings_page.PNG)
 
-2. From here, you can edit the specifics of your profile, like `... TODO`
+2. From here, you can edit the specifics of your profile, like uploading a new profile picture (though saving it to your profile is currently not functional as we need the backend for that), or changing some of your gaming social media handles using the edit buttons for the relevant fields.
 
 
 ### Admin page
@@ -96,4 +96,4 @@ and that the passwords match. Once those conditions are fulfilled, clicking the 
 1. The game analytics page looks like this:  
 ![](readme_images/game_analytics_page.PNG)
 
-2. From here, you can view useful and interesting statistics about your game play such as `... TODO`
+2. From here, you can view useful and interesting statistics about your game play such as total achievements unlocked, completion percentage, and total playtime in the Lifetime Statistics table at the bottom of the page. You can also sort the table in ascending or descending order by each column using the arrow buttons on each column's header.
