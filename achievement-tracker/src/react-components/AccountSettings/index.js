@@ -70,17 +70,17 @@ class AccountSettings extends React.Component {
                 </div>
                 <div id="UserDetailsSection">
                     <h2> User Details </h2>
-                    <div className="TextInput+Button">
+                    <div className="TextInputButton">
                         <p>Username: <span> user </span></p>
                     </div>
-                    <div className="TextInput+Button">
+                    <div className="TextInputButton">
                         <p> Password: <span> **** </span></p>
                     </div>
                 </div>
                 <div id="ExternalLinksSection">
                     <h2> External Links </h2>
 
-                    <div className="TextInput-Button">
+                    <div className="TextInputButton">
                         <p>Steam: <span>{this.state.steamInput}</span></p>
                         <input className="hide" type="text" id="steamInput"></input>
                         <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("steamInput") }}>
@@ -88,7 +88,7 @@ class AccountSettings extends React.Component {
                         </button>
                     </div>
 
-                    <div className="TextInput+Button">
+                    <div className="TextInputButton">
                         <p>Ubisoft: <span>{this.state.ubisoftInput}</span></p>
                         <input className="hide" type="text" id="ubisoftInput"></input>
                         <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("ubisoftInput") }}>
@@ -96,7 +96,7 @@ class AccountSettings extends React.Component {
                         </button>
                     </div>
 
-                    <div className="TextInput+Button">
+                    <div className="TextInputButton">
                         <p>PlayStation: <span>{this.state.playstationInput}</span></p>
                         <input className="hide" type="text" id="playstationInput"></input>
                         <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("playstationInput") }}>
@@ -104,7 +104,7 @@ class AccountSettings extends React.Component {
                         </button>
                     </div>
 
-                    <div className="TextInput+Button">
+                    <div className="TextInputButton">
                         <p>Xbox: <span>{this.state.xboxInput}</span></p>
                         <input className="hide" type="text" id="xboxInput"></input>
                         <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("xboxInput") }}>

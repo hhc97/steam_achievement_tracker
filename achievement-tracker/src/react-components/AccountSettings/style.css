@@ -171,10 +171,23 @@ body, html {
 }
 
 .TextInputButton {
-    width: 300px;
-    height: 35px;
+    width: 500px;
+    height: 50px;
     text-align: left;
     display: inline-block;
+}
+
+.TextInputButton p{
+    width: 250px;
+    float: left;
+}
+
+.TextInputButton button{
+    float: right;
+}
+
+.TextInputButton input{
+    float: left;
 }
 
 .hide {
