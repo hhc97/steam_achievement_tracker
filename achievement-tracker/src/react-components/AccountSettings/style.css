@@ -121,6 +121,15 @@ body, html {
 }
 
 .TextInput+Button {
-    width: 400px;
-    max-width: fit-content;
+    border-bottom: 3px solid rgb(240, 228, 228);
+    display: inline-block;
+    margin: 50px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
 }
