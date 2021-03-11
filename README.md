@@ -96,4 +96,4 @@ and that the passwords match. Once those conditions are fulfilled, clicking the 
 1. The game analytics page looks like this:  
 ![](readme_images/game_analytics_page.PNG)
 
-2. From here, you can view useful and interesting statistics about your game play such as total achievements unlocked, completion percentage, and total playtime in the Lifetime Statistics table at the bottom of the page. You can also sort the table in ascending or descending order by each column using the arrow buttons on each column's header.
+2. From here, you can view useful and interesting statistics about your game play such as your overall repuation score, total achievements unlocked, completion percentage, and total playtime in the banner at the top of the page. You can also view a breakdown of your statistics by each individual game the Lifetime Statistics table at the bottom of the page. You can also sort the table in ascending or descending order by each column using the arrow buttons on each column's header.
