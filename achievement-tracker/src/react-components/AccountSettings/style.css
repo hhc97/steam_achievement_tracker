@@ -177,10 +177,10 @@ body, html {
     display: inline-block;
 }
 
-.TextInputButton p{
-    float: left;
+.hide {
+    display: none;
 }
 
-.TextInputButton button{
-    float: right;
+.show {
+    display: block;
 }
