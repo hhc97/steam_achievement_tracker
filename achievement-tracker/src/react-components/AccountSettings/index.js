@@ -17,13 +17,21 @@ class AccountSettings extends React.Component {
 
     editAction = input => {
         if (document.getElementById(input).className === "hide") {
-            document.getElementById(input).className="show";
+            document.getElementById(input).className = "show";
         } else {
-            document.getElementById(input).className="hide"
+            document.getElementById(input).className = "hide"
             this.setState({
                 [input]: document.getElementById(input).value
             })
         }
+    }
+
+    handleselectedFile = event => {
+        this.setState({
+            selectedFile: event.target.files[0],
+            loaded: 0,
+        })
+        console.log(event.target.files)
     }
 
     render() {
@@ -36,29 +44,34 @@ class AccountSettings extends React.Component {
                             <div className='group'>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
                                 <HeaderButton path='/Analytics'>Analytics</HeaderButton>
-                                <HeaderButton path='/Home'>Log Out</HeaderButton>
+                                <HeaderButton path='/'>Log Out</HeaderButton>
                             </div>
                         </HeaderNavBar>
                     </HeadContainer>
                 </div>
 
                 <div id="TitleSection">
-                    <h1> Account Settings for user1 </h1>
+                    <h1> Account Settings for user </h1>
                 </div>
                 <div id="ProfilePicBlock">
                     <h2> Profile Picture </h2>
                     <div id="ProfilePicSection">
-                        <img id="CurrentProfilePic" src={sampleProfilePic} />
-                        <div id="ProfilePicCaption">
-                            <span> Current Picture </span>
-                            <button className="editButton"> </button>
+                        <div id="ProfilePicDisplay">
+                            <img id="CurrentProfilePic" src={sampleProfilePic} />
+                            <div id="ProfilePicCaption">
+                                <span> Current Picture ▲ </span>
+                            </div>
+                        </div>
+                        <div id="UploadProfilePic">
+                            <span> Upload a new image: </span>
+                            <input type="file" name="" onChange={this.handleselectedFile} />
                         </div>
                     </div>
                 </div>
                 <div id="UserDetailsSection">
                     <h2> User Details </h2>
                     <div className="TextInput+Button">
-                        <p>Username: <span> user1 </span></p> 
+                        <p>Username: <span> user </span></p>
                     </div>
                     <div className="TextInput+Button">
                         <p> Password: <span> **** </span></p>
@@ -70,7 +83,7 @@ class AccountSettings extends React.Component {
                     <div className="TextInput-Button">
                         <p>Steam: <span>{this.state.steamInput}</span></p>
                         <input className="hide" type="text" id="steamInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => {this.editAction("steamInput")}}>
+                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("steamInput") }}>
                             Edit
                         </button>
                     </div>
@@ -78,7 +91,7 @@ class AccountSettings extends React.Component {
                     <div className="TextInput+Button">
                         <p>Ubisoft: <span>{this.state.ubisoftInput}</span></p>
                         <input className="hide" type="text" id="ubisoftInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => {this.editAction("ubisoftInput")}}>
+                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("ubisoftInput") }}>
                             Edit
                         </button>
                     </div>
@@ -86,7 +99,7 @@ class AccountSettings extends React.Component {
                     <div className="TextInput+Button">
                         <p>PlayStation: <span>{this.state.playstationInput}</span></p>
                         <input className="hide" type="text" id="playstationInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => {this.editAction("playstationInput")}}>
+                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("playstationInput") }}>
                             Edit
                         </button>
                     </div>
@@ -94,7 +107,7 @@ class AccountSettings extends React.Component {
                     <div className="TextInput+Button">
                         <p>Xbox: <span>{this.state.xboxInput}</span></p>
                         <input className="hide" type="text" id="xboxInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => {this.editAction("xboxInput")}}>
+                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("xboxInput") }}>
                             Edit
                         </button>
                     </div>

@@ -1,6 +1,6 @@
 body, html {
-    height: 100%;
     width: 100%;
+    color: ghostwhite;
 }
 
 #AccountSettingsPage {
@@ -21,6 +21,11 @@ body, html {
     margin-left: 200px;
     position: static;
     height: 300px;
+    width: 500px;
+}
+
+#ProfilePicDisplay {
+    float: left;
     width: 200px;
 }
 
@@ -30,10 +35,18 @@ body, html {
     height: 200px;
     float: left;
     margin-top: 10px;
+    display: block;
+}
+
+#ProfilePicBlock {
+    margin-top: 5%;
 }
 
 #ProfilePicBlock h2 {
-    font-size: x-large;
+    font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline solid ghostwhite;
     position: relative;
     text-align: left;
     margin-left: 200px;
@@ -47,6 +60,34 @@ body, html {
     float: left;
     color:ghostwhite;
     margin-top: 20px;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+
+#ProfilePicCaption span{
+    display: block;
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    color:ghostwhite;
+}
+
+#UploadProfilePic {
+    position: relative;
+    width: 210px;
+    height: 80px;
+    text-align: left;
+    float: right;
+    padding-top: 20%;
+    font-size: 14pt;
+}
+
+#UploadProfilePic span{
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: left;
+    color:ghostwhite;
 }
 
 #editButton {
@@ -57,19 +98,23 @@ body, html {
 
 #UserDetailsSection {
     margin-left: 200px;
+    display: block;
+    width: 300px;
 }
 
 #UserDetailsSection h2 {
-    font-size: x-large;
+    font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
     position: relative;
     text-align: left;
-    margin-left: 200px;
-
+    margin-top: 20px;
+    text-decoration: underline ghostwhite;
     color:ghostwhite;
 }
 
 #UserDetailsSection p {
-    font-size: large;
+    font-size: 14pt;
     font-weight: bold;
     text-align: left;
     color:ghostwhite;
@@ -83,19 +128,24 @@ body, html {
 
 #ExternalLinksSection {
     margin-left: 200px;
-    position: static;
+    position: relative;
+    width: 300px;
 }
 
 #ExternalLinksSection h2 {
-    font-size: x-large;
+    font-size: 20pt;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline solid ghostwhite;
     position: relative;
     text-align: left;
-    margin-left: 200px;
     color:ghostwhite;
+    margin-left: 0px;
+    width: 100%;
 }
 
 #ExternalLinksSection p {
-    font-size: large;
+    font-size: 14pt;
     font-weight: bold;
     text-align: left;
     color:ghostwhite;
@@ -108,7 +158,7 @@ body, html {
 }
 
 #ExternalLinksSection p {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 .editButton {
@@ -120,16 +170,17 @@ body, html {
     width: 30px;
 }
 
-.TextInput+Button {
-    border-bottom: 3px solid rgb(240, 228, 228);
+.TextInputButton {
+    width: 300px;
+    height: 35px;
+    text-align: left;
     display: inline-block;
-    margin: 50px;
 }
 
-.hide {
-    display: none;
+.TextInputButton p{
+    float: left;
 }
 
-.show {
-    display: block;
+.TextInputButton button{
+    float: right;
 }

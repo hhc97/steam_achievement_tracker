@@ -88,7 +88,7 @@ class Analytics extends React.Component {
                             <div className='group'>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
                                 <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                                <HeaderButton path='/Home'>Log Out</HeaderButton>
+                                <HeaderButton path='/'>Log Out</HeaderButton>
                             </div>
                         </HeaderNavBar>
                     </HeadContainer>
