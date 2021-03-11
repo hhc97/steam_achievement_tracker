@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     width: 100%;
+    color: ghostwhite;
 }
 
 #AccountSettingsPage {
@@ -21,6 +22,11 @@ body, html {
     margin-left: 200px;
     position: static;
     height: 300px;
+    width: 500px;
+}
+
+#ProfilePicDisplay {
+    float: left;
     width: 200px;
 }
 
@@ -30,10 +36,15 @@ body, html {
     height: 200px;
     float: left;
     margin-top: 10px;
+    display: block;
+}
+
+#ProfilePicBlock {
+    margin-top: 5%;
 }
 
 #ProfilePicBlock h2 {
-    font-size: x-large;
+    font-size: 20pt;
     position: relative;
     text-align: left;
     margin-left: 200px;
@@ -47,6 +58,23 @@ body, html {
     float: left;
     color:ghostwhite;
     margin-top: 20px;
+    margin-bottom: 40px;
+    display: block;
+    width: 100%;
+}
+
+#ProfilePicCaption span{
+    display: block;
+    text-align: center;
+}
+
+#UploadProfilePic {
+    position: relative;
+    width: 210px;
+    height: 80px;
+    text-align: left;
+    float: right;
+    padding-top: 20%;
 }
 
 #editButton {
@@ -57,14 +85,15 @@ body, html {
 
 #UserDetailsSection {
     margin-left: 200px;
+    display: block;
 }
 
 #UserDetailsSection h2 {
     font-size: x-large;
     position: relative;
     text-align: left;
-    margin-left: 200px;
-
+    margin-top: 20px;
+    text-decoration: underline ghostwhite;
     color:ghostwhite;
 }
 
@@ -83,7 +112,7 @@ body, html {
 
 #ExternalLinksSection {
     margin-left: 200px;
-    position: static;
+    position: relative;
 }
 
 #ExternalLinksSection h2 {

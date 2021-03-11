@@ -38,9 +38,14 @@ class AccountSettings extends React.Component {
                 <div id="ProfilePicBlock">
                     <h2> Profile Picture </h2>
                     <div id="ProfilePicSection">
-                        <img id="CurrentProfilePic" src={sampleProfilePic} />
-                        <div id="ProfilePicCaption">
-                            <span> Current Picture </span>
+                        <div id="ProfilePicDisplay">
+                            <img id="CurrentProfilePic" src={sampleProfilePic} />
+                            <div id="ProfilePicCaption">
+                                <span> Current Picture ▲ </span>
+                            </div>
+                        </div>
+                        <div id="UploadProfilePic">
+                            <span> Upload a new image: </span>
                             <input type="file" name="" onChange={this.handleselectedFile}/>
                         </div>
                     </div>
