@@ -1,4 +1,6 @@
 cd achievement-tracker
 npm install
-npm start
-
+npm run build
+cd ..
+npm install
+node server.js
