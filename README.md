@@ -1,5 +1,7 @@
 # Steam Achievement Tracker - Team29
 
+Deployed at [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/)
+
 ## Quick navigation
 - [Launching the website](#starting-the-app)
 - [App walkthrough](#app-walkthrough)
