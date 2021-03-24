@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // parsing URL-encoded form 
 const session = require("express-session");
 const MongoStore = require('connect-mongo') // to store session information on the database in production
 
-const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { mongoChecker, isMongoError } = require("./helpers/mongo_helper");
 
 
 // Middleware for authentication of resources
