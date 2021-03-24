@@ -1,0 +1,32 @@
+{
+  "name": "team29",
+  "version": "1.0.0",
+  "description": "## Quick navigation - [Launching the website](#starting-the-app) - [App walkthrough](#app-walkthrough) - [Logging in](#login-and-sign-up-pages) - [Viewing the dashboard](#dashboard) - [Viewing the forum](#forum) - [Game acheivements](#game-achievements) - [Account settings](#account-settings) - [Administrator page](#admin-page) - [Game analytics page](#game-analytics)",
+  "main": "server.js",
+  "scripts": {
+    "setup": "npm install && cd client && npm install && cd ..",
+    "build-run": "cd client && npm run build && cd .. && node server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csc309-winter-2021/team29.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csc309-winter-2021/team29/issues"
+  },
+  "homepage": "https://github.com/csc309-winter-2021/team29#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^4.4.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.12.2",
+    "validator": "^13.5.2"
+  }
+}
