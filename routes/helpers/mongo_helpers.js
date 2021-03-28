@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     // checks for first error returned by promise rejection if Mongo database suddently disconnects
-    isMongoError: function(error) { 
+    isMongoError: function (error) {
         return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
     }
 }

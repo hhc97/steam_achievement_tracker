@@ -33,38 +33,48 @@ class Login extends React.Component {
   }
 
   handleLogin = () => {
+    const requestOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: this.state.userName,
+        password: this.state.passWord
+      })
+    };
+    fetch('/users/login', requestOptions)
 
-    const keys = UserKeys
-    const username = this.state.userName.toLowerCase()
-    const password = this.state.passWord
+    // const keys = UserKeys
+    // const username = this.state.userName.toLowerCase()
+    // const password = this.state.passWord
 
-    // some temporary hardcoded values for phase 1
-    if (this.state.captcha_solved) {
-      if (username == '' || password == '') {
-        alert("username or password cannot be empty")
-        return
-      }
-      if ((username == 'admin' || username == 'user')
-        && username == password) {
+    // // some temporary hardcoded values for phase 1
+    // if (this.state.captcha_solved) {
+    //   if (username == '' || password == '') {
+    //     alert("username or password cannot be empty")
+    //     return
+    //   }
+    //   if ((username == 'admin' || username == 'user')
+    //     && username == password) {
 
-        localStorage.setItem(keys.user, username)
-        if (username == 'admin') {
-          localStorage.setItem(keys.isAdmin, true)
-        } else {
-          localStorage.setItem(keys.isAdmin, false)
-        }
+    //     localStorage.setItem(keys.user, username)
+    //     if (username == 'admin') {
+    //       localStorage.setItem(keys.isAdmin, true)
+    //     } else {
+    //       localStorage.setItem(keys.isAdmin, false)
+    //     }
 
-        this.setState({
-          redirect: '/Dashboard'
-        })
-        return
-      }
-      localStorage.setItem(keys.user, null)
-      alert('invalid login')
-    }
-    else {
-      alert('please verify captcha before logging in')
-    }
+    //     this.setState({
+    //       redirect: '/Dashboard'
+    //     })
+    //     return
+    //   }
+    //   localStorage.setItem(keys.user, null)
+    //   alert('invalid login')
+    // }
+    // else {
+    //   alert('please verify captcha before logging in')
+    // }
   }
 
   handleSignup = () => {

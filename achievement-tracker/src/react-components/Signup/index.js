@@ -41,9 +41,22 @@ class Signup extends React.Component {
       alert('Passwords do not match')
       return
     }
-    // check username uniqueness in DB
-    // check that steam username allows data retrieval
-    alert('Account created (this is not functional yet as we need the backend)')
+    const requestOptions = {
+      method: 'POST',
+      redirect: 'follow',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: this.state.userName,
+        password: this.state.passWord,
+        steamName: this.state.steamName
+      })
+    };
+
+    fetch('/users', requestOptions)
+    // need to check response before a redirect too
+    this.setState({
+      redirect: '/Login'
+    })
   }
 
   render() {
