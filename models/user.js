@@ -31,7 +31,7 @@ const UserSchema = new mongoose.Schema({
         minlength: 1,
         trim: true,
         unique: true,
-
+        immutable: true
     },
     password: {
         type: String,
@@ -41,10 +41,17 @@ const UserSchema = new mongoose.Schema({
     steamName: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        immutable: true
         // validate against steam api?
     },
-    friendList: [FriendSchema]
+    friendList: [FriendSchema],
+    signUpTime: {
+        type: Date,
+        required: true,
+        immutable: true,
+        default: Date.now()
+    }
 })
 
 // check if we need to hash the password upon saving
