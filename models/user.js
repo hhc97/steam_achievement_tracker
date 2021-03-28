@@ -51,6 +51,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         immutable: true,
         default: Date.now()
+    },
+    reputation: {
+        type: Number,
+        required: true,
+        default: 1
     }
 })
 
