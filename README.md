@@ -17,7 +17,7 @@ Deployed at [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokua
 1. Clone the app: `git clone git@github.com:csc309-winter-2021/team29.git` or  
 `git clone https://github.com/csc309-winter-2021/team29.git`
 
-2. From the root directory(`team29`), simply run `sh start.sh`. This will cd into the directory and run `npm install` and `npm start`.
+2. From the root directory(`team29`), simply run `bash start.sh`. This will cd into the directory and run `npm install` and `npm start`.
 
 3. The webpage should open in a browser window. We have tested the webpage in Google Chrome.
 
