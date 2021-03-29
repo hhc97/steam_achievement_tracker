@@ -13,24 +13,47 @@ import GameAchievements from './react-components/GameAchievements'
 import AccountSettings from './react-components/AccountSettings'
 import Analytics from './react-components/Analytics'
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' render={() => (<Home />)} />
-          <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
-          <Route exact path='/Admin' render={() => (<Admin />)} />
-          <Route exact path='/Login' render={() => (<Login />)} />
-          <Route exact path='/Signup' render={() => (<Signup />)} />
-          <Route exact path='/Dashboard' render={() => (<DashBoard />)} />
-          <Route exact path='/GameAchievements' render={(props) => (<GameAchievements {...props} />)} />
-          <Route exact path='/Analytics' render={() => (<Analytics />)} />
-          <Route exact path='/AccountSettings' render={() => (<AccountSettings />)} />
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
+import { checkSession } from './actions/reactAuth'
+
+class App extends React.Component {
+  componentDidMount() {
+    checkSession(this); // sees if a user is logged in
+  }
+
+  // global state passed down which indicates the current logged in user
+  state = {
+    currentUser: null
+  }
+
+  render() {
+    const { currentUser } = this.state;
+
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact path={["/Login", "/Dashboard"]}
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Login {...props} app={this} /> : <DashBoard {...props} app={this} />}
+                </div>
+              )}
+            />
+            <Route exact path='/' render={() => (<Home />)} />
+            <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
+            <Route exact path='/Admin' render={() => (<Admin />)} />
+            <Route exact path='/Signup' render={() => (<Signup />)} />
+            {/* <Route exact path='/Dashboard' render={() => (<DashBoard />)} /> */}
+            <Route exact path='/GameAchievements' render={(props) => (<GameAchievements {...props} />)} />
+            <Route exact path='/Analytics' render={() => (<Analytics />)} />
+            <Route exact path='/AccountSettings' render={() => (<AccountSettings />)} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    )
+  }
+
 }
 
 export default App;

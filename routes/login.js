@@ -36,7 +36,6 @@ router.post('/users', mongoChecker, async (req, res) => {
     }
 })
 
-//////////////
 
 /*** Login and Logout routes ***/
 // A route to login and create a session
@@ -49,26 +48,42 @@ router.post('/users/login', mongoChecker, async (req, res) => {
         // by their username and password.
         const user = await User.findByUsernamePassword(username, password);
         if (!user) {
-            log('login fail')
-            res.redirect('/login');
+            res.send({
+                currentUID: '',
+                currentUser: ''
+            })
         } else {
             // Add the user's id and email to the session.
             // We can check later if the session exists to ensure we are logged in.
             req.session.user = user._id;
             req.session.username = user.username
-            log('login ok')
-            res.redirect('/dashboard');
+            res.send({
+                currentUID: req.session.user,
+                currentUser: req.session.username
+            })
         }
     } catch (error) {
         // redirect to login if can't login for any reason
         if (isMongoError(error)) {
             res.status(500).redirect('/login');
         } else {
-            log(error)
-            res.status(400).redirect('/login');
+            // if it is not a mongo error, then the user was not found
+            res.status(404).send()
         }
     }
 
+})
+
+// route for checking the current session
+router.get('/users/current', (req, res) => {
+    if (req.session.user) {
+        res.json({
+            currentUID: req.session.user,
+            currentUser: req.session.username
+        })
+    } else {
+        res.status(401).send()
+    }
 })
 
 // A route to logout a user
