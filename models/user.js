@@ -5,23 +5,11 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 
-// a schema to store messages
-const MessageSchema = new mongoose.Schema({
-    from: String,
-    to: String,
-    content: String
-},
-    {
-        timestamps: true
-    }
-)
-
 // schema for storing a friend, and the messages with that friend
 const FriendSchema = new mongoose.Schema({
     name: String,
-    messages: [MessageSchema]
+    chatRoomId: String
 })
-
 
 // the schema for a user
 const UserSchema = new mongoose.Schema({
@@ -36,14 +24,12 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 6
+        minlength: 4
     },
     steamName: {
         type: String,
         required: true,
-        unique: true,
         immutable: true
-        // validate against steam api?
     },
     friendList: [FriendSchema],
     signUpTime: {

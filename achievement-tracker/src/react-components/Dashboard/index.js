@@ -9,27 +9,17 @@ import ChatBox from '../ChatBox';
 import ProgressBar from '../Achievement/ProgressBar'
 import { withRouter } from 'react-router-dom'
 import UserKeys from '../UserKeys'
+import {logout} from '../../actions/reactAuth'
+import {getFriend, addFriends} from '../../actions/friend'
 import './style.css'
+import { getReputation } from "../../actions/reputation";
 
 
 
 class DashBoard extends React.Component {
     constructor(props) {
         super(props)
-        //friendList and friendListMessages and game will be pull from database from phase2
-        const friendList = ["leo", 'lee', 'lao', 'loo', 'loe', 'lam', 'lsk', 'lkl', 'ldl', 'lbh', 'lsb']
-        const friendListMessages = [
-            { name: "leo", messages: [{ text: 'asa', person: "leo" }] },
-            { name: "lee", messages: [{ text: 'hi', person: "lee" }] },
-            { name: "lao", messages: [] },
-            { name: "loo", messages: [] },
-            { name: "loe", messages: [{ text: 'ppp', person: "loe" }] },
-            { name: "lam", messages: [] },
-            { name: "lsk", messages: [] },
-            { name: "lkl", messages: [{ text: 'yo', person: "lkl" }] },
-            { name: "ldl", messages: [] },
-            { name: "lbh", messages: [] },
-            { name: "lsb", messages: [] }]
+        const friendList = []
         const game = [
             { gameImage: settingLogo, gameName: "CSGO", progress: 0 },
             { gameImage: settingLogo, gameName: "Minecraft", progress: 62 },
@@ -41,23 +31,22 @@ class DashBoard extends React.Component {
             { gameImage: settingLogo, gameName: "Call of Duty", progress: 96 },
             { gameImage: settingLogo, gameName: "Minion", progress: 100 }
         ]
-        const addFriendUID = ""
+        const addFriendName = ""
         const searchGameName = ""
 
-        const isAdmin = UserKeys.getCurrUserAdminStatus() == 'false' ? false : true
-        const userName = UserKeys.getCurrUser()
+        // const isAdmin = UserKeys.getCurrUserAdminStatus() == 'false' ? false : true
+        const userName = this.props.app.state.currentUser
 
         this.state = {
             friendList: friendList,
             game: game,
             showChat: false,
             chatName: "",
-            friendMessages: [],
-            addFriendUID: addFriendUID,
+            addFriendName: addFriendName,
             searchGameName: searchGameName,
-            friendListMessages: friendListMessages,
-            isAdmin: isAdmin,
-            userName: userName
+            // isAdmin: isAdmin,
+            userName: userName,
+            reputation: 0
         }
         this.showChatBox = this.showChatBox.bind(this)
         this.unShowChatBox = this.unShowChatBox.bind(this)
@@ -65,10 +54,13 @@ class DashBoard extends React.Component {
         this.onSubmitFriendRequest = this.onSubmitFriendRequest.bind(this)
         this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
         this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
-        this.onSendMessage = this.onSendMessage.bind(this)
         this.onClickGameRedirectAchivement = this.onClickGameRedirectAchivement.bind(this)
     }
 
+    componentDidMount(){
+        getFriend(this)
+        getReputation(this)
+    }
 
     showChatBox(e) {
         e.preventDefault();
@@ -81,13 +73,6 @@ class DashBoard extends React.Component {
         } else {
             friendName = e.target.children[1].innerHTML
         }
-        const chatMessage = this.state.friendListMessages.filter(i => {
-            if (i.name === friendName) {
-                return i
-            }
-        })[0].messages
-
-        this.setState({ friendMessages: chatMessage })
         this.setState({ chatName: friendName })
         this.setState({ showChat: true })
     }
@@ -96,27 +81,19 @@ class DashBoard extends React.Component {
         this.setState({ showChat: false })
     }
 
-    //for sending message in Chat
-    onSendMessage = (message) => {
-        const messages = this.state.friendMessages
-        messages.push({
-            text: message,
-            //Me will be the current user
-            person: "Me"
-        })
-        this.setState({ friendMessages: messages })
-    }
-
-
-
     onChangeFriendUID(e) {
-        this.setState({ addFriendUID: e.target.value })
+        this.setState({ addFriendName: e.target.value })
     }
 
-    onSubmitFriendRequest(e) {
+    async onSubmitFriendRequest(e) {
         e.preventDefault()
-        this.setState({ addFriendUID: "" })
-        alert("Friend UID does not exist")
+        try{
+            await addFriends(this)
+            this.setState({ addFriendName: "" })
+        }catch(error){
+            console.log(error)
+        }
+        
     }
 
     onChangeGameSearch(e) {
@@ -142,7 +119,7 @@ class DashBoard extends React.Component {
         }
         this.props.history.push({
             pathname: '/GameAchievements',
-            state: { gameName: gameName }
+            state: { gameName: gameName, userName: this.state.userName, reputation: this.state.reputation }
           })
     }
 
@@ -153,11 +130,11 @@ class DashBoard extends React.Component {
                     <HeaderNavBar>
                         <HeaderImage to='/dashboard' src={logo} />
                         <div className='group'>
-                            {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)}
+                            {/* {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)} */}
                             <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                             <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                             <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                            <HeaderButton path='/'>Log Out</HeaderButton>
+                            <HeaderButton path='/' logoutFunc = {() => {logout(this.props.app)}}>Log Out</HeaderButton>
                         </div>
                     </HeaderNavBar>
                 </HeadContainer>
@@ -166,10 +143,9 @@ class DashBoard extends React.Component {
                         <BannerContainer>
                             <div className="bannerUserInfo">
                                 <div id="bannerUserName">User Name: {this.state.userName}</div>
-                                <div id="bannerUserUID">UID: 7024568</div>
                             </div>
                             <PersonalPic src={profilePic} />
-                            <span className="bannerReputation">Reputation: 3</span>
+                            <span className="bannerReputation">Reputation: {this.state.reputation}</span>
                             <div className="bannerLeftLinkGroup">
                                 <BannerLink path="https://discord.com">Discord</BannerLink>
                                 <BannerLink path='https://twitter.com'>Twitter</BannerLink>
@@ -208,8 +184,8 @@ class DashBoard extends React.Component {
                                 <form className="addFriendForm" onSubmit={e => this.onSubmitFriendRequest(e)}>
                                     <input
                                         className="addFriendInput"
-                                        placeholder="Add Friend UID"
-                                        value={this.state.addFriendUID}
+                                        placeholder="Add Friend Name"
+                                        value={this.state.addFriendName}
                                         onChange={e => this.onChangeFriendUID(e)}
                                     />
                                     <button className="addFriendButton">Add</button>
@@ -224,9 +200,8 @@ class DashBoard extends React.Component {
                     </div>
                     {this.state.showChat &&
                         (<ChatBox
-                            name={this.state.chatName}
-                            messages={this.state.friendMessages}
-                            onSendMessage={this.onSendMessage}
+                            userName = {this.state.userName}
+                            friendName = {this.state.chatName}
                             showChatOption={this.unShowChatBox} />)}
                 </div>
             </>

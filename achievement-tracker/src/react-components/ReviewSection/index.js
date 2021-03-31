@@ -244,11 +244,13 @@ class ReviewSection extends React.Component {
 			content: this.state.reviewSubmitContent,
 			upvotes: 0,
 			downvotes: 0,
-			author: "Unknown",
-			reputation: 0
+			author: UserKeys.getCurrUser(),
+			reputation: 1
 		}
 		reviewList.push(newReview)
 		this.setState({
+      reviewSubmitTitle: "",
+      reviewSubmitContent: "",
 			reviews: reviewList,
       reviewsInSection: reviewList,
       reviewsOnPage: reviewList.slice(
@@ -258,6 +260,18 @@ class ReviewSection extends React.Component {
 		})
 	}
 
+  refreshForum = () => {
+    const reviewList = this.state.reviews
+    this.setState({
+      reviewsInSection: reviewList,
+      reviewsOnPage: reviewList.slice(
+        0,
+        reviewNumLimit
+      ),
+      searchContent: ""
+    })
+  }
+
   render() {
 
     return (
@@ -266,6 +280,7 @@ class ReviewSection extends React.Component {
           searchContent={this.state.searchContent}
 					handleChange={this.handleSearchContentChange}
 					enterButton={this.searchReview}
+          refreshButton={this.refreshForum}
 				/>
 
         <div className="review-section">

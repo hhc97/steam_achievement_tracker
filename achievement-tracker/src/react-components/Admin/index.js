@@ -136,7 +136,6 @@ class Admin extends React.Component {
           <HeaderNavBar>
             <HeaderImage to='/' src={logo} />
             <div className='group'>
-              <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
               <HeaderButton path='/'>Log Out</HeaderButton>
             </div>
           </HeaderNavBar>

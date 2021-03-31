@@ -20,9 +20,22 @@
 .search-bar-container input[type=submit] {
 	height: 50px;
 	width: 15%;
+	min-width: 100px;
 	font-size: 20px;
 	border-radius: 5px;
 	border: 10px;
 	background-color: silver;
-	color: white;
+	color: black;
+	margin-right: 5px;
+}
+
+.search-bar-container button {
+	height: 50px;
+	width: 8%;
+	min-width: 80px;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 10px;
+	background-color: rgb(131, 131, 236);
+	color: black;
 }

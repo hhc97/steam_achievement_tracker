@@ -11,6 +11,7 @@ const log = console.log;
 const path = require('path')
 const express = require("express");
 const app = express();
+const socket = require("socket.io")
 
 // enable CORS if in development, for React local development server to connect to the web server.
 const cors = require('cors')
@@ -22,7 +23,8 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 // import the mongoose models
 const { User } = require("./models/user");
-
+const { Chat } = require("./models/chat")
+const { storeMessage } = require("./routes/helpers/messages")
 // to validate object IDs
 const { ObjectID } = require("mongodb");
 
@@ -54,6 +56,14 @@ app.use(session({
 
 /*** Webpage routes below **********************************/
 app.use(require('./routes/login'))
+app.use(require('./routes/steam'))
+
+//for adding and getting friend
+app.use(require('./routes/friend'))
+
+app.use(require('./routes/chat'))
+
+app.use(require('./routes/reputation'))
 
 // Serve the build
 app.use(express.static(path.join(__dirname, "/achievement-tracker/build")));
@@ -67,6 +77,30 @@ app.get("*", (req, res) => {
 /*************************************************/
 // Express server listening...
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     log(`Listening on port ${port}...`);
+});
+
+
+
+const io = socket(server)
+io.on('connection', (socket) => {
+    console.log("user socket connected ...");
+
+    socket.on('room', (data) => {
+        socket.join(data.chatRoomId)
+        console.log(`Username: ${data.name} join Room: ${data.chatRoomId}`)
+        socket.emit('joined', data.chatRoomId)
+    })
+
+    socket.on('chat', (obj) => {
+        //need to store on database
+        storeMessage(socket, obj)
+        socket.to(obj.id).emit("chat", obj.data)
+    })
+
+    socket.on('close', () => {
+        socket.disconnect(0)
+        console.log('user socket disconnected ...');
+    });
 });

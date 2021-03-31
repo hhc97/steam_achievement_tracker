@@ -17,6 +17,8 @@ class GameAchievements extends React.Component {
     constructor(props){
       super(props)
       const gameName = this.props.location.state.gameName
+      const userName = this.props.location.state.userName
+      const reputation = this.props.location.state.reputation
       // game will be pull from database in phase2, now is hardcode
       const game = [
           {gameImage: settingLogo, gameName: "CSGO", 
@@ -114,8 +116,7 @@ class GameAchievements extends React.Component {
         ] 
       const gameObj = game.filter(i => i.gameName == gameName)[0]
       const searchAchievementName = ""
-      const userName = localStorage.getItem(UserKeys.user)
-      const isAdmin = localStorage.getItem(UserKeys.isAdmin) == "false" ? false : true
+      // const isAdmin = localStorage.getItem(UserKeys.isAdmin) == "false" ? false : true
 
       this.state = {
           game:game, 
@@ -123,7 +124,8 @@ class GameAchievements extends React.Component {
           gameName: gameName,
           gameObj: gameObj,
           userName: userName,
-          isAdmin: isAdmin
+          reputation: reputation
+          // isAdmin: isAdmin
       }
       this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
       this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
@@ -144,7 +146,8 @@ class GameAchievements extends React.Component {
               <HeaderNavBar>
                   <HeaderImage to='/dashboard' src={logo}/>
                   <div className='group'>
-                      {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)}
+                      {/* {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)} */}
+                      <HeaderButton path='/dashboard'>Dashboard</HeaderButton>
                       <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                       <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                       <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
@@ -157,10 +160,9 @@ class GameAchievements extends React.Component {
                   <BannerContainer>
                       <div className="bannerUserInfo">
                           <div id="bannerUserName">User Name: {this.state.userName}</div>
-                          <div id="bannerUserUID">UID: 7024568</div>
                       </div>
                       <PersonalPic src={profilePic}/>
-                      <span className="bannerReputation">Reputation: 3</span>
+                      <span className="bannerReputation">Reputation: {this.state.reputation}</span>
                       <div className="bannerLeftLinkGroup">
                           <BannerLink path="https://discord.com">Discord</BannerLink>
                           <BannerLink path='https://twitter.com'>Twitter</BannerLink>

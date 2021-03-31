@@ -1,7 +1,7 @@
 .chatBox{
     position: fixed;
     bottom: 0px;
-    right: 15%;
+    right: 12%;
     width: 328px;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
 
 .chatBody{
     width: 100%;
-    height: 75%;
+    height: 80%;
     border-bottom: 1pt solid black;
     display: flex;
     overflow: auto;
@@ -61,7 +61,7 @@
     flex-direction: column;
     list-style: none;
     padding: 0px;
-    margin:0px;
+    padding-bottom: 5px;
     height: 100%;
     margin-left: 5px;
     margin-right: 5px;
@@ -72,13 +72,13 @@
 }
 .my-message-wrapper{
     text-align: right;
+    margin-bottom: 5px;
 }
 
 .my-message{
     padding: 7px 8px 12px 12px;
     border-radius: 20px 15px 5px 15px;
     border: 1px solid black;
-    margin-bottom: 5px;
     word-wrap: break-word;
     background-color: rgb(0, 132, 255);
     width: fit-content;
@@ -91,30 +91,48 @@
 }
 .other-message-wrapper{
     text-align: left;
+    margin-bottom: 5px;
 }
 
 .other-message{
     background-color: #D3D3D3;
     border: 1px solid black;
     border-radius: 15px 20px 15px 5px;
-    margin-bottom: 5px;
     padding: 7px 8px 12px 12px;
     float: left;
     width:fit-content;
     word-wrap: break-word;
     max-width: 60%;
-
 }
 
 .person-name{
     font-size: 10px;
+    color: black;
+}
+
+.text{
+    color: black
+}
+
+.chatMessageTime-my-message{
+    color: grey;
+    font-size: 12px;
+    float: right;
+    clear: both;
+}
+
+.chatMessageTime-other-message{
+    color: grey;
+    font-size: 12px;
+    float: left;
+    clear: both;
 }
 
 .chatMessage{
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 15%;
+    height: 10%;
     justify-content: space-between;
     align-items: center;
 }
@@ -124,7 +142,7 @@
     width: 80%;
     border-radius: 50px;
     outline: none;
-    font-size: 30px;
+    font-size: 25px;
     padding-left: 10px;
     height: 90%;
 }
@@ -137,7 +155,7 @@
     cursor: pointer;
     width:fit-content;
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     outline: none;
 }
 

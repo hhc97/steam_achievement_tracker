@@ -36,6 +36,26 @@ router.post('/users', mongoChecker, async (req, res) => {
     }
 })
 
+// middleware for getting a user
+async function getUser(req, res, next) {
+    let usr
+    try {
+        usr = await User.findOne({ username: req.params.username })
+        if (usr == null) {
+            return res.status(404).json({ message: 'Cannot find user' })
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+    res.user = usr
+    next()
+}
+
+// route to get a user by their username, useful for checking if a username exists
+router.get('/usernames/:username', mongoChecker, getUser, async (req, res) => {
+    res.json(res.user)
+})
+
 
 /*** Login and Logout routes ***/
 // A route to login and create a session

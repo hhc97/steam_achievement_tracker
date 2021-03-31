@@ -3,11 +3,18 @@ import React from "react";
 import "./styles.css"
 
 class AdminSearchBar extends React.Component {
+  handleEnterKeyDown = event => {
+    if (event.key === "Enter") {
+      this.props.enterButton()
+    }
+  }
+
   render() {
     const {
       searchContent,
       handleChange,
-      enterButton
+      enterButton,
+      refreshButton
     } = this.props;
 
     return (
@@ -18,11 +25,15 @@ class AdminSearchBar extends React.Component {
           placeholder="Search..."
           onChange={handleChange}
           label="searchContent"
+          onKeyDown={this.handleEnterKeyDown}
         />
         <input type="submit"
           value="Enter"
           onClick={enterButton}
         />
+        <button onClick={refreshButton}>
+          Clear
+        </button>
       </div>
     )
   }

@@ -16,10 +16,21 @@
 
 .admin-search-bar-container input[type=submit] {
 	height: 50px;
-	width: 20%;
-	font-size: 20px;
+	width: 60px;
+	font-size: 16px;
 	border-radius: 5px;
 	border: 10px;
 	background-color: silver;
-	color: white;
+	color: black;
+	margin-right: 5px;
+}
+
+.admin-search-bar-container button {
+	height: 50px;
+	width: 60px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: 10px;
+	background-color: rgb(131, 131, 236);
+	color: black;
 }

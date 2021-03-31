@@ -32,11 +32,21 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
+            {/* renders login and dashboard depending on if the user is logged in */}
             <Route
               exact path={["/Login", "/Dashboard"]}
               render={props => (
                 <div className="App">
                   {!currentUser ? <Login {...props} app={this} /> : <DashBoard {...props} app={this} />}
+                </div>
+              )}
+            />
+            {/* renders home and dashboard depending on if the user is logged in */}
+            <Route
+              exact path="/"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Home /> : <DashBoard {...props} app={this} />}
                 </div>
               )}
             />

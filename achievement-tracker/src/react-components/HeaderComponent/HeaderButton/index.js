@@ -10,12 +10,14 @@ class HeaderButton extends React.Component {
     redirectTO(){
         if (this.props.children == "Log Out"){
             userKey.logOut()
+            this.props.logoutFunc()
             console.log(localStorage.getItem("user"))
         }
         this.props.history.push(this.props.path)
     }
 
     render() {
+        //const {logoutFunc} = this.props
         return (
             <button className ="headerButton" onClick={this.redirectTO.bind(this)}>{this.props.children}</button>
         )
