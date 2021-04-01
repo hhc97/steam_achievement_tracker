@@ -4,7 +4,11 @@ import Button from 'react-bootstrap/Button'
 import { Redirect } from 'react-router-dom'
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+
 import logo from './../../logo.svg'
+import checkmark from './imgs/checkmark.jpg'
+import cross from './imgs/cross.jpg'
+
 import ENV from '../../config'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -20,7 +24,9 @@ class Signup extends React.Component {
     passWord2: '',
     steamName: '',
     valid_username: false,
-    valid_steamID: false
+    valid_steamID: false,
+    valid_pw1: false,
+    valid_pw2: false
   }
 
   handleInputChange = (event) => {
@@ -64,6 +70,27 @@ class Signup extends React.Component {
             })
           }
         })
+    }
+
+    // set states for passwords
+    if (name === 'passWord') {
+      if (value.length >= 4) {
+        this.setState({ valid_pw1: true })
+      } else {
+        this.setState({ valid_pw1: false })
+      }
+      if (value === this.state.passWord2) {
+        this.setState({ valid_pw2: true })
+      } else {
+        this.setState({ valid_pw2: false })
+      }
+    }
+    if (name === 'passWord2') {
+      if (value === this.state.passWord) {
+        this.setState({ valid_pw2: true })
+      } else {
+        this.setState({ valid_pw2: false })
+      }
     }
   }
 
@@ -124,34 +151,62 @@ class Signup extends React.Component {
         <div id="SignupContainer">
           <p className='loginText'>Please enter your details:</p>
 
-          <input className="SignupField"
-            value={this.state.userName}
-            onChange={this.handleInputChange}
-            type='text'
-            name='userName'
-            placeholder='Create a username'
-            autoFocus></input>
+          <div>
+            <div className="FieldContainer">
+              <input className="SignupField"
+                value={this.state.userName}
+                onChange={this.handleInputChange}
+                type='text'
+                name='userName'
+                placeholder='Create a username'
+                autoFocus></input>
+            </div>
+            <div className="imgValidityCheck">
+              <img id="usernameCheck" src={this.state.valid_username ? checkmark : cross} />
+            </div>
+          </div>
 
-          <input className="SignupField"
-            value={this.state.passWord}
-            onChange={this.handleInputChange}
-            type='password'
-            name='passWord'
-            placeholder='Create a password'></input>
+          <div>
+            <div className="FieldContainer">
+              <input className="SignupField"
+                value={this.state.passWord}
+                onChange={this.handleInputChange}
+                type='password'
+                name='passWord'
+                placeholder='Create a password'></input>
+            </div>
+            <div className="imgValidityCheck">
+              <img id="passwordCheck" src={this.state.valid_pw1 ? checkmark : cross} />
+            </div>
+          </div>
 
-          <input className="SignupField"
-            value={this.state.passWord2}
-            onChange={this.handleInputChange}
-            type='password'
-            name='passWord2'
-            placeholder='Confirm password'></input>
+          <div>
+            <div className="FieldContainer">
+              <input className="SignupField"
+                value={this.state.passWord2}
+                onChange={this.handleInputChange}
+                type='password'
+                name='passWord2'
+                placeholder='Confirm password'></input>
+            </div>
+            <div className="imgValidityCheck">
+              <img id="passwordCheck2" src={this.state.valid_pw1 && this.state.valid_pw2 ? checkmark : cross} />
+            </div>
+          </div>
 
-          <input className="SignupField"
-            value={this.state.steamName}
-            onChange={this.handleInputChange}
-            type='text'
-            name='steamName'
-            placeholder='Enter Steam ID'></input>
+          <div>
+            <div className="FieldContainer">
+              <input className="SignupField"
+                value={this.state.steamName}
+                onChange={this.handleInputChange}
+                type='text'
+                name='steamName'
+                placeholder='Enter Steam ID'></input>
+            </div>
+            <div className="imgValidityCheck">
+              <img id="steamIDCheck" src={this.state.valid_steamID ? checkmark : cross} />
+            </div>
+          </div>
 
           <Button className="SignUpButton"
             variant="secondary"
