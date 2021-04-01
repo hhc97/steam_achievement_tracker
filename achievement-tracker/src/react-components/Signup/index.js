@@ -125,7 +125,7 @@ class Signup extends React.Component {
         if (res.status === 400) {
           alert('server error: account not created')
         } else if (res.status === 200) {
-          alert('account created, please proceed to log in')
+          alert('Account creation successful! Please proceed to log in.')
           this.setState({
             redirect: '/Login'
           })
@@ -210,7 +210,8 @@ class Signup extends React.Component {
 
           <Button className="SignUpButton"
             variant="secondary"
-            disabled={!(this.state.valid_username && this.state.valid_steamID)}
+            disabled={!(this.state.valid_username && this.state.valid_steamID &&
+              this.state.valid_pw1 && this.state.valid_pw2)}
             onClick={this.handleSignup}>Sign Up</Button>
         </div>
       </div>
