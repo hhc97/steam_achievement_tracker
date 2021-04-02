@@ -43,9 +43,9 @@ class Signup extends React.Component {
     if (name === 'userName') {
       fetch(`/usernames/${value}`)
         .then(res => {
-          if (res.status === 404) {
+          if (res.status === 404 && value.length > 0) {
             this.setState({ valid_username: true })
-          } else if (res.status === 200) {
+          } else if (res.status === 200 || value.length < 1) {
             this.setState({ valid_username: false })
           }
         })

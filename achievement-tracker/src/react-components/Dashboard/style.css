@@ -139,6 +139,14 @@
     color: white;
 }
 
+#DashboardSearch {
+    float: left;
+}
+
+#DashboardSort {
+    float: right;
+}
+
 .searchGame{
     height: 60px;
     margin-bottom: 5px;
@@ -152,8 +160,8 @@
     border-radius: 25px;
     padding-left:10px;
     font-size: 25px;
+    left: 0px;
 }
-
 
 .achivementProgress{
     color:white;
@@ -166,4 +174,68 @@
     font-size: 15px;
     bottom:0px;
     position: absolute;
+}
+
+#loadingIcon {
+    height: 50px;
+    width: auto;
+    vertical-align: center;
+}
+
+#loadingIcon img {
+    height: 100%;
+    width: auto;
+    animation: rotation 5s infinite linear;
+}
+
+#sortHeader {
+    width: 100px;
+    height: 30px;
+}
+
+#sortTitle {
+    display: block;
+    height: 15px;
+    width: 100px;
+    font-size: 15px;
+}
+
+#sortTypes {
+    display: block;
+    height: 15px;
+    width: 100px;
+    font-size: 12px;
+}
+
+#sortButtons {
+    height: 30px;
+}
+
+.sortType {
+    text-align: center;
+    width: 50px;
+}
+
+#alphabetical {
+    float: left;
+}
+
+#percentage {
+    float: right;
+}
+
+.sortD {
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(359deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
 }

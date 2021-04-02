@@ -47,13 +47,14 @@ async function getUser(req, res, next) {
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
-    res.user = usr
+    req.user = usr
     next()
 }
 
 // route to get a user by their username, useful for checking if a username exists
 router.get('/usernames/:username', mongoChecker, getUser, async (req, res) => {
-    res.json(res.user)
+    // if we reach here, then our middleware found a user, so send a 200
+    res.status(200).send()
 })
 
 
@@ -75,8 +76,9 @@ router.post('/users/login', mongoChecker, async (req, res) => {
         } else {
             // Add the user's id and email to the session.
             // We can check later if the session exists to ensure we are logged in.
-            req.session.user = user._id;
+            req.session.user = user._id
             req.session.username = user.username
+            req.session.steamID = user.steamName
             res.send({
                 currentUID: req.session.user,
                 currentUser: req.session.username

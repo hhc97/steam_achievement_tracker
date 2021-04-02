@@ -2,17 +2,18 @@ import React from "react";
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
 import logo from './../../logo.svg'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
-import settingLogo from './../Dashboard/Static/settingLogo.png'
+import settingLogo from "./../Dashboard/Static/settingLogo.png"
+import loadingIcon from "./../Dashboard/Static/loading.jpg"
 import { PersonalPic, BannerContainer, BannerLink, Friend, FriendList } from '../PersonalBanner'
 import { AchievementContainer, Game } from '../Achievement'
 import ChatBox from '../ChatBox';
 import ProgressBar from '../Achievement/ProgressBar'
 import { withRouter } from 'react-router-dom'
-import UserKeys from '../UserKeys'
-import {logout} from '../../actions/reactAuth'
-import {getFriend, addFriends} from '../../actions/friend'
+import { logout } from '../../actions/reactAuth'
+import { getFriend, addFriends } from '../../actions/friend'
 import './style.css'
 import { getReputation } from "../../actions/reputation";
+import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 
 
 
@@ -21,15 +22,7 @@ class DashBoard extends React.Component {
         super(props)
         const friendList = []
         const game = [
-            { gameImage: settingLogo, gameName: "CSGO", progress: 0 },
-            { gameImage: settingLogo, gameName: "Minecraft", progress: 62 },
-            { gameImage: settingLogo, gameName: "Chess", progress: 88 },
-            { gameImage: settingLogo, gameName: "GTA5", progress: 12 },
-            { gameImage: settingLogo, gameName: "Tower Defense", progress: 58 },
-            { gameImage: settingLogo, gameName: "NorthGuard", progress: 34 },
-            { gameImage: settingLogo, gameName: "Fall Guys", progress: 11 },
-            { gameImage: settingLogo, gameName: "Call of Duty", progress: 96 },
-            { gameImage: settingLogo, gameName: "Minion", progress: 100 }
+            { gameImage: settingLogo, gameName: "Loading Game Data...", progress: "NaN", gameId: "" },
         ]
         const addFriendName = ""
         const searchGameName = ""
@@ -46,7 +39,7 @@ class DashBoard extends React.Component {
             searchGameName: searchGameName,
             // isAdmin: isAdmin,
             userName: userName,
-            reputation: 0
+            reputation: 0,
         }
         this.showChatBox = this.showChatBox.bind(this)
         this.unShowChatBox = this.unShowChatBox.bind(this)
@@ -57,9 +50,58 @@ class DashBoard extends React.Component {
         this.onClickGameRedirectAchivement = this.onClickGameRedirectAchivement.bind(this)
     }
 
-    componentDidMount(){
+    extractStats(data) {
+        let completion = -1
+        if (data.achievements === undefined) {
+            return completion
+        }
+        const max = data.achievements.length
+        let achieved = 0
+        for (let i = 0; i < max; i++) {
+            const element = data.achievements[i];
+            if (element.achieved === 1) {
+                achieved++
+            }
+        }
+        completion = Math.floor((achieved / max) * 100)
+        return completion
+    }
+
+    // updates games for current user
+    updateGames = async (data) => {
+        let gameList = []
+        const baseimgURL = 'http://media.steampowered.com/steamcommunity/public/images/apps/'
+        const games = data.games
+        for (let i = 0; i < games.length; i++) {
+            let gameEntry = {}
+            const game = games[i]
+            // check game for completion
+            let completion = -1
+            await getAchievementStats(game.appid)
+                .then(res => { completion = this.extractStats(res) })
+            if (completion < 0) {
+                // if no completion, then don't show game
+                continue
+            }
+            gameEntry['gameName'] = game.name
+            gameEntry['progress'] = completion
+            gameEntry['gameImage'] = `${baseimgURL}${game.appid}/${game.img_icon_url}.jpg`
+            gameEntry['gameId'] = game.appid
+            gameList.push(gameEntry)
+            this.setState({ game: gameList })
+        }
+        this.setState({ game: gameList })
+        document.getElementById("loadingIcon").style.display = "none"
+    }
+
+    componentDidMount() {
         getFriend(this)
         getReputation(this)
+        getGameStats()
+            .then(res => {
+                this.setState({ gameStats: res })
+                this.updateGames(res)
+            })
     }
 
     showChatBox(e) {
@@ -87,13 +129,13 @@ class DashBoard extends React.Component {
 
     async onSubmitFriendRequest(e) {
         e.preventDefault()
-        try{
+        try {
             await addFriends(this)
             this.setState({ addFriendName: "" })
-        }catch(error){
+        } catch (error) {
             console.log(error)
         }
-        
+
     }
 
     onChangeGameSearch(e) {
@@ -105,22 +147,28 @@ class DashBoard extends React.Component {
         this.setState({ searchGameName: "" })
     }
 
-    onClickGameRedirectAchivement(e){
+    onClickGameRedirectAchivement(e) {
         const target = e.target
         let gameName;
-        if(target.className == "gameContainer"){
+        if (target.className == "gameContainer") {
             gameName = target.lastChild.lastChild.innerHTML;
-        }else if (target.className == "gameBody" || target.className == "gameImage" || target.className == "vertical-row"){
+        } else if (target.className == "gameBody" || target.className == "gameImage" || target.className == "vertical-row") {
             gameName = target.parentNode.lastChild.lastChild.innerHTML;
-        }else if (target.className == "filledProgress"){
+        } else if (target.className == "filledProgress") {
             gameName = target.parentNode.nextSibling.innerHTML;
-        }else{
+        } else {
             gameName = target.parentNode.lastChild.innerHTML;
         }
+        const gameId = this.state.game.filter((i) => { return i.gameName === gameName })[0].gameId
         this.props.history.push({
             pathname: '/GameAchievements',
-            state: { gameName: gameName, userName: this.state.userName, reputation: this.state.reputation }
-          })
+            state: {
+                gameName: gameName,
+                userName: this.state.userName,
+                reputation: this.state.reputation,
+                gameId: gameId
+            }
+        })
     }
 
     render() {
@@ -134,7 +182,7 @@ class DashBoard extends React.Component {
                             <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                             <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                             <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                            <HeaderButton path='/' logoutFunc = {() => {logout(this.props.app)}}>Log Out</HeaderButton>
+                            <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                         </div>
                     </HeaderNavBar>
                 </HeadContainer>
@@ -158,7 +206,7 @@ class DashBoard extends React.Component {
                         <form className="searchGame" onSubmit={e => this.onSubmitGameSearch(e)}>
                             <input
                                 className="searchGameInput"
-                                placeholder="Enter Specific Game"
+                                placeholder="Search for a Game..."
                                 value={this.state.searchGameName}
                                 onChange={e => this.onChangeGameSearch(e)}
                             />
@@ -166,16 +214,19 @@ class DashBoard extends React.Component {
                         <AchievementContainer bodyId={'shrink'}>
                             {this.state.game.map((item, i) => {
                                 if (item.gameName.toLowerCase().startsWith(this.state.searchGameName.toLowerCase())) {
-                                    return( 
+                                    return (
                                         <Game key={i} image={item.gameImage} redirect={this.onClickGameRedirectAchivement}>
                                             <span className="achivementProgress">{item.progress + '%'}</span>
-                                            <ProgressBar completed={item.progress}/>
+                                            <ProgressBar completed={item.progress} />
                                             <div className="gameInfo">{item.gameName}</div>
                                         </Game>
                                     )
                                 }
                             })}
                         </AchievementContainer>
+                        <div id="loadingIcon">
+                            <img src={loadingIcon} />
+                        </div>
                     </div>
                     <div className='right'>
                         <BannerContainer>
@@ -200,8 +251,8 @@ class DashBoard extends React.Component {
                     </div>
                     {this.state.showChat &&
                         (<ChatBox
-                            userName = {this.state.userName}
-                            friendName = {this.state.chatName}
+                            userName={this.state.userName}
+                            friendName={this.state.chatName}
                             showChatOption={this.unShowChatBox} />)}
                 </div>
             </>
@@ -209,4 +260,4 @@ class DashBoard extends React.Component {
     }
 }
 
-export default withRouter (DashBoard);
+export default withRouter(DashBoard);

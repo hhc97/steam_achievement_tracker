@@ -12,38 +12,10 @@ import "./Analytics.css"
 // In phase 2, we will use API calls to populate this part of the user's profile with the relevant statistics we pull.
 
 let stats = [
-    {
-        id: 1,
-        title: "Game01Title",
-        unlocked: 20,
-        total: 25,
-        playtime: 50.5,
-        completion: 80.00
-    },
-    {
-        id: 2,
-        title: "Game52Title",
-        unlocked: 17,
-        total: 32,
-        playtime: 32.7,
-        completion: 53.13
-    },
-    {
-        id: 3,
-        title: "Game173Title",
-        unlocked: 9,
-        total: 20,
-        playtime: 41.5,
-        completion: 45.00
-    },
-    {
-        id: 4,
-        title: "Game57Title",
-        unlocked: 12,
-        total: 20,
-        playtime: 2.5,
-        completion: 60.00
-    }
+    { id: 1, title: "Game01Title", unlocked: 20, total: 25, playtime: 50.5, completion: 80.00 },
+    { id: 2, title: "Game52Title", unlocked: 17, total: 32, playtime: 32.7, completion: 53.13 },
+    { id: 3, title: "Game173Title", unlocked: 9, total: 20, playtime: 41.5, completion: 45.00 },
+    { id: 4, title: "Game57Title", unlocked: 12, total: 20, playtime: 2.5, completion: 60.00 }
 ]
 
 class Analytics extends React.Component {
