@@ -14,6 +14,7 @@ import AccountSettings from './react-components/AccountSettings'
 import Analytics from './react-components/Analytics'
 
 import { checkSession } from './actions/reactAuth'
+import SteamInfo from './react-components/InfoPage'
 
 class App extends React.Component {
   componentDidMount() {
@@ -54,7 +55,7 @@ class App extends React.Component {
             <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
             <Route exact path='/Admin' render={() => (<Admin />)} />
             <Route exact path='/Signup' render={() => (<Signup />)} />
-            {/* <Route exact path='/Dashboard' render={() => (<DashBoard />)} /> */}
+            <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
             <Route exact path='/GameAchievements' render={(props) => (<GameAchievements {...props} />)} />
             <Route exact path='/Analytics' render={() => (<Analytics />)} />
             <Route exact path='/AccountSettings' render={() => (<AccountSettings />)} />

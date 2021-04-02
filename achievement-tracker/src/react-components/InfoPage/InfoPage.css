@@ -1,0 +1,109 @@
+body, html {
+    height: 100%;
+}
+
+#SteamInfo {
+    background: url("https://images.unsplash.com/photo-1465146633011-14f8e0781093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3450&q=80");
+    height: 100%;
+}
+
+#InfoPage {
+    display: inline-block;
+    position: relative;
+}
+
+#InfoBody {
+    display: inline-block;
+    position: relative;
+    top: 100px;
+    width: 1000px;
+}
+
+#Introduction {
+    width: 1000px;
+    margin: auto;
+}
+
+#Introduction p {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+    font-style: italic;
+}
+
+#InfoBody h2 {
+    font-size: 18pt;
+    font-weight: bold;
+    color:ghostwhite;
+    text-align: left;
+    text-decoration: underline solid 2px ghostwhite;
+    margin-top: 0px;
+}
+
+#InfoBody li {
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+#InfoTitle {
+    position: relative;
+    display: inline-block;
+    top: 100px;
+    width: 100%;
+    min-width: 1200px;
+    min-height: 80px;
+}
+
+#InfoTitle h1 {
+    font-size: 30pt;
+    font-style: italic;
+    font-weight: bold;
+    color:ghostwhite;
+    text-align: center;
+    margin-top: 0px;
+}
+
+.methodDescription {
+    text-align: left;
+    border-bottom: 1px solid ghostwhite;
+}
+
+.methodSteps {
+    margin-top: 16px;
+}
+
+.methodImage {
+    max-width: 700px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.methodImage img {
+    width: 100%;
+    height: auto;
+}
+
+#Notes {
+    border-top: 1px solid ghostwhite;
+    padding-top: 12px;
+    font-style: italic;
+}
+
+#Notes p {
+    font-size: 10pt;
+}
+
+#NotesImage1 {
+    float: left;
+    width: 400px;
+}
+
+#NotesImage2 {
+    float: right;
+    width: 550px;
+}
+
+#Notes img {
+    width: 100%;
+    height: auto;
+}

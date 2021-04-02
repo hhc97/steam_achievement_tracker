@@ -38,7 +38,7 @@ body, html {
     margin-top: 5px;
     top: 5%;
     margin-bottom: 4px;
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .FieldContainer {
@@ -64,4 +64,35 @@ body, html {
     height: 100%;
     width: auto;
     margin: 8px;
+}
+
+#inputField4 {
+    margin-left: -35px;
+}
+
+.helpIcon {
+    height: 25px;
+    float: left;
+}
+
+.helpIcon img {
+    height: 100%;
+    width: auto;
+    margin: 10px;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+#helpText {
+    display: inline;
+    position: absolute;
+    color: black;
+    border: 1px solid steelblue;
+    border-radius: 10px;
+    background: skyblue;
+    font-size: 9pt;
+    text-align: center;
+    width: 125px;
+    bottom: 3px;
+    left: 3px;
 }

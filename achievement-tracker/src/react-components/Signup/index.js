@@ -8,6 +8,7 @@ import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../Heade
 import logo from './../../logo.svg'
 import checkmark from './imgs/checkmark.jpg'
 import cross from './imgs/cross.jpg'
+import help from './imgs/help.png'
 
 import ENV from '../../config'
 
@@ -26,7 +27,8 @@ class Signup extends React.Component {
     valid_username: false,
     valid_steamID: false,
     valid_pw1: false,
-    valid_pw2: false
+    valid_pw2: false,
+    showHelp: false
   }
 
   handleInputChange = (event) => {
@@ -34,9 +36,7 @@ class Signup extends React.Component {
     const value = target.value
     const name = target.name
 
-    this.setState({
-      [name]: value
-    })
+    this.setState({ [name]: value })
 
     // if the username changed, check if the new one is already in use
     // and disable the signup button if it is
@@ -44,13 +44,9 @@ class Signup extends React.Component {
       fetch(`/usernames/${value}`)
         .then(res => {
           if (res.status === 404) {
-            this.setState({
-              valid_username: true
-            })
+            this.setState({ valid_username: true })
           } else if (res.status === 200) {
-            this.setState({
-              valid_username: false
-            })
+            this.setState({ valid_username: false })
           }
         })
     }
@@ -61,13 +57,9 @@ class Signup extends React.Component {
         .then(res => { return res.json() })
         .then(json => {
           if (json.response.players.length > 0 && json.response.players[0].communityvisibilitystate === 3) {
-            this.setState({
-              valid_steamID: true
-            })
+            this.setState({ valid_steamID: true })
           } else {
-            this.setState({
-              valid_steamID: false
-            })
+            this.setState({ valid_steamID: false })
           }
         })
     }
@@ -94,6 +86,7 @@ class Signup extends React.Component {
     }
   }
 
+  // some checks for signup and handling of the signup action
   handleSignup = () => {
     if (this.state.userName == '' ||
       this.state.passWord == '' ||
@@ -119,16 +112,14 @@ class Signup extends React.Component {
         steamName: this.state.steamName
       })
     };
-
+    // post the request to the backend to create an account
     fetch('/users', requestOptions)
       .then(res => {
         if (res.status === 400) {
           alert('server error: account not created')
         } else if (res.status === 200) {
           alert('Account creation successful! Please proceed to log in.')
-          this.setState({
-            redirect: '/Login'
-          })
+          this.setState({ redirect: '/Login' })
         }
       })
   }
@@ -162,7 +153,7 @@ class Signup extends React.Component {
                 autoFocus></input>
             </div>
             <div className="imgValidityCheck">
-              <img id="usernameCheck" src={this.state.valid_username ? checkmark : cross} />
+              <img src={this.state.valid_username ? checkmark : cross} />
             </div>
           </div>
 
@@ -176,7 +167,7 @@ class Signup extends React.Component {
                 placeholder='Create a password'></input>
             </div>
             <div className="imgValidityCheck">
-              <img id="passwordCheck" src={this.state.valid_pw1 ? checkmark : cross} />
+              <img src={this.state.valid_pw1 ? checkmark : cross} />
             </div>
           </div>
 
@@ -190,11 +181,18 @@ class Signup extends React.Component {
                 placeholder='Confirm password'></input>
             </div>
             <div className="imgValidityCheck">
-              <img id="passwordCheck2" src={this.state.valid_pw1 && this.state.valid_pw2 ? checkmark : cross} />
+              <img src={this.state.valid_pw1 && this.state.valid_pw2 ? checkmark : cross} />
             </div>
           </div>
 
-          <div>
+          <div id="inputField4">
+            <div className="helpIcon">
+              <img src={help}
+                onMouseEnter={() => { this.setState({ showHelp: true }) }}
+                onMouseOut={() => { this.setState({ showHelp: false }) }}
+                onClick={() => { window.open("/SteamInfo") }}
+                name="helpIcon" />
+            </div>
             <div className="FieldContainer">
               <input className="SignupField"
                 value={this.state.steamName}
@@ -204,15 +202,20 @@ class Signup extends React.Component {
                 placeholder='Enter Steam ID'></input>
             </div>
             <div className="imgValidityCheck">
-              <img id="steamIDCheck" src={this.state.valid_steamID ? checkmark : cross} />
+              <img src={this.state.valid_steamID ? checkmark : cross} />
             </div>
           </div>
+
+          {!(this.state.showHelp) || <div>
+            <span id="helpText">Don't know your Steam ID? Click here to find out how to get it!</span>
+          </div>}
 
           <Button className="SignUpButton"
             variant="secondary"
             disabled={!(this.state.valid_username && this.state.valid_steamID &&
               this.state.valid_pw1 && this.state.valid_pw2)}
-            onClick={this.handleSignup}>Sign Up</Button>
+            onClick={this.handleSignup}>Sign Up
+          </Button>
         </div>
       </div>
     )
