@@ -37,7 +37,9 @@ Dashboard
 Account Setting  
   
 - Expected to see the profile picture get updated if a user uploads a new image.  
-  Analytics  
+
+Analytics  
+
 - The sorting function of the form is cool.  
   
 Forum  
