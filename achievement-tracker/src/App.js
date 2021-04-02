@@ -51,41 +51,14 @@ class App extends React.Component {
                 </div>
               )}
             />
+            <Route exact path='/' render={() => (<Home />)} />
             <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
             <Route exact path='/Admin' render={() => (<Admin />)} />
-            <Route
-              exact path={["/Signup", "/Dashboard"]}
-              render={props => (
-                <div className="App">
-                  {!currentUser ? <Signup /> : <DashBoard {...props} app={this} />}
-                </div>
-              )}
-            />
+            <Route exact path='/Signup' render={() => (<Signup />)} />
             <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
-            <Route
-              exact path={["/Login", "/GameAchievements"]}
-              render={props => (
-                <div className="App">
-                  {!currentUser ? <Login {...props} app={this} /> : <GameAchievements {...props} />}
-                </div>
-              )}
-            />
-            <Route
-              exact path={["/Login", "/Analytics"]}
-              render={props => (
-                <div className="App">
-                  {!currentUser ? <Login {...props} app={this} /> : <Analytics />}
-                </div>
-              )}
-            />
-            <Route
-              exact path={["/Login", "/AccountSettings"]}
-              render={props => (
-                <div className="App">
-                  {!currentUser ? <Login {...props} app={this} /> : <AccountSettings />}
-                </div>
-              )}
-            />
+            <Route exact path='/GameAchievements' render={(props) => (<GameAchievements {...props} />)} />
+            <Route exact path='/Analytics' render={() => (<Analytics />)} />
+            <Route exact path='/AccountSettings' render={() => (<AccountSettings />)} />
           </Switch>
         </BrowserRouter>
       </div>
