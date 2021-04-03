@@ -67,3 +67,35 @@ export const addFriends = async (dashboardComp) => {
             }
         })
 };
+
+
+export const deleteFriend = async (dashboardComp, friendName) => {
+    const url = `${API_HOST}/api/friends/delete`;
+    const obj = {
+        userName: dashboardComp.state.userName,
+        friendName: friendName
+    }
+
+    const request = new Request(url, {
+        method: "delete",
+        body: JSON.stringify(obj),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    fetch(request)
+        .then(res => {
+            if (res.status === 200) {
+                let newFriendList = dashboardComp.state.friendList
+                newFriendList = newFriendList.filter((i) => {return i !== friendName})
+                dashboardComp.setState({
+                    friendList: newFriendList
+                });
+                alert("Success: delete a friend.")
+            }else {
+                alert("Error");
+            }
+        })
+}

@@ -28,6 +28,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mongoose": "^5.12.2",
+    "react-icons": "^4.2.0",
     "request": "^2.88.2",
     "socket.io": "^4.0.0",
     "validator": "^13.5.2"

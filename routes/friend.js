@@ -82,5 +82,34 @@ router.post("/api/friends/:userName", mongoChecker, async (req, res) => {
     }
 })
 
+router.delete("/api/friends/delete", mongoChecker, async (req, res) => {
+    const userName = req.body.userName
+    const friendName = req.body.friendName
+
+    try{
+        const user = await User.findOne({username: userName})
+        if(!user){
+            res.status(400).send("Resource not found")
+            return;
+        }
+        const friendUser = await User.findOne({username: friendName})
+        if(!friendUser){
+            res.status(400).send("Resource not found")
+            return;
+        }
+        user.friendList = user.friendList.filter((i) => {return i.name !== friendName})
+        friendUser.friendList = friendUser.friendList.filter((i) => {return i.name !== userName})
+        user.save()
+        friendUser.save()
+        res.send({user: user, friendUser: friendUser})
+    }catch(error){
+        if (isMongoError(error)) {
+			res.status(500).send('Internal server error')
+		} else {
+            log(error)
+			res.status(400).send('Bad Request')
+		}
+    }
+})
 
 module.exports = router

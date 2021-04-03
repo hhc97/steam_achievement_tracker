@@ -10,7 +10,7 @@ import ChatBox from '../ChatBox';
 import ProgressBar from '../Achievement/ProgressBar'
 import { withRouter } from 'react-router-dom'
 import { logout } from '../../actions/reactAuth'
-import { getFriend, addFriends } from '../../actions/friend'
+import { getFriend, addFriends, deleteFriend } from '../../actions/friend'
 import './style.css'
 import { getReputation } from "../../actions/reputation";
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
@@ -48,6 +48,7 @@ class DashBoard extends React.Component {
         this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
         this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
         this.onClickGameRedirectAchivement = this.onClickGameRedirectAchivement.bind(this)
+        this.deleteFromFriend = this.deleteFromFriend.bind(this)
     }
 
     extractStats(data) {
@@ -107,20 +108,38 @@ class DashBoard extends React.Component {
     showChatBox(e) {
         e.preventDefault();
         let friendName = "";
-        const target = e.target.className;
-        if (target == 'friendName') {
-            friendName = e.target.innerHTML
-        } else if (target == 'friendLogo') {
-            friendName = e.target.nextSibling.innerHTML
-        } else {
-            friendName = e.target.children[1].innerHTML
+        let target = e.target;
+        if (target.tagName === "path"){
+            target = target.parentNode
         }
+        if (target.tagName === "svg"){
+            if (target.className.baseVal === "deleteFriend"){
+                return;
+            }
+        }
+        let parent = e.target
+        while (parent.className !== "friendContainer"){
+            parent = parent.parentNode
+        }
+        friendName = parent.children[0].children[1].innerHTML
         this.setState({ chatName: friendName })
         this.setState({ showChat: true })
     }
 
     unShowChatBox() {
         this.setState({ showChat: false })
+    }
+
+    deleteFromFriend(e){
+        let parent = e.target
+        if (parent.tagName === "path"){
+            parent = parent.parentNode
+        }
+        if (parent.tagName === "svg"){
+            parent = parent.parentNode
+        }
+        const friendName = parent.children[0].children[1].innerHTML
+        deleteFriend(this, friendName)
     }
 
     onChangeFriendUID(e) {
@@ -244,7 +263,7 @@ class DashBoard extends React.Component {
                             </div>
                             <FriendList>
                                 {this.state.friendList.map((item, i) => {
-                                    return <Friend key={i} func={this.showChatBox}>{item}</Friend>
+                                    return <Friend key={i} chat={this.showChatBox} deleteFriend={this.deleteFromFriend}>{item}</Friend>
                                 })}
                             </FriendList>
                         </BannerContainer>
