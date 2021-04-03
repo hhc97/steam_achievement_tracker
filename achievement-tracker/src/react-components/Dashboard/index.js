@@ -67,31 +67,42 @@ class DashBoard extends React.Component {
         return completion
     }
 
+    async updatePercentages() {
+        let gameList = this.state.game
+        for (let i = 0; i < gameList.length; i++) {
+            const game = gameList[i];
+            let completion = -1
+            await getAchievementStats(game.gameId)
+                .then(res => { completion = this.extractStats(res) })
+            if (completion < 0) {
+                gameList.splice(i, 1)
+                i--
+            } else {
+                game.progress = completion
+            }
+            this.setState({ game: gameList })
+        }
+        this.setState({ game: gameList })
+        document.getElementById("loadingIcon").style.display = "none"
+    }
+
     // updates games for current user
-    updateGames = async (data) => {
+    updateGames(data) {
         let gameList = []
         const baseimgURL = 'http://media.steampowered.com/steamcommunity/public/images/apps/'
         const games = data.games
         for (let i = 0; i < games.length; i++) {
             let gameEntry = {}
             const game = games[i]
-            // check game for completion
-            let completion = -1
-            await getAchievementStats(game.appid)
-                .then(res => { completion = this.extractStats(res) })
-            if (completion < 0) {
-                // if no completion, then don't show game
-                continue
-            }
             gameEntry['gameName'] = game.name
-            gameEntry['progress'] = completion
+            gameEntry['progress'] = 'Calculating...'
             gameEntry['gameImage'] = `${baseimgURL}${game.appid}/${game.img_icon_url}.jpg`
             gameEntry['gameId'] = game.appid
             gameList.push(gameEntry)
             this.setState({ game: gameList })
         }
         this.setState({ game: gameList })
-        document.getElementById("loadingIcon").style.display = "none"
+        this.updatePercentages()
     }
 
     componentDidMount() {
@@ -99,7 +110,6 @@ class DashBoard extends React.Component {
         getReputation(this)
         getGameStats()
             .then(res => {
-                this.setState({ gameStats: res })
                 this.updateGames(res)
             })
     }
