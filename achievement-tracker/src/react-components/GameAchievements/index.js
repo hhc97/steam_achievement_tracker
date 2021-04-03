@@ -8,7 +8,7 @@ import {PersonalPic, BannerContainer, BannerLink} from '../PersonalBanner'
 import {AchievementContainer, Game} from '../Achievement'
 import './style.css';
 import { getAchievementStats, getGameSchema } from '../../actions/steamHelpers'
-
+const dateFormat = require('dateformat');
 
 class GameAchievements extends React.Component {
     constructor(props){
@@ -40,6 +40,7 @@ class GameAchievements extends React.Component {
     async getStats(id){
       const achievementsList = []
       const data = await getAchievementStats(id)
+      console.log(data)
       const apiAchievement = await getGameSchema(id)
       const achievements = data.achievements
       for (let i =0; i < achievements.length; i++){
@@ -48,6 +49,12 @@ class GameAchievements extends React.Component {
         obj.image = apiAchievement[key].icon
         obj.name = apiAchievement[key].displayName
         obj.achieved = achievements[i].achieved
+        if(achievements[i].unlocktime === 0){
+          obj.achievedTime = "N/A"
+        }else{
+          const date = new Date(achievements[i].unlocktime)
+          obj.achievedTime = dateFormat(date, "dd/mm/yyyy hh:MM:ss tt")
+        }
         achievementsList.push(obj)
       }
       this.setState({achievementsList: achievementsList})
@@ -117,6 +124,7 @@ class GameAchievements extends React.Component {
                               return (
                                 <Game key = {i} image={item.image} isAchievedBg={isAchievedBg} opac = {opac}>
                                     <div className="AchievementName">{item.name}</div>
+                                    <div className="AchievedTime">{item.achievedTime}</div>
                                 </Game>
                             )
                           }
