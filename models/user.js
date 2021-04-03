@@ -11,6 +11,11 @@ const FriendSchema = new mongoose.Schema({
     chatRoomId: String
 })
 
+const PendingFriendSchema = new mongoose.Schema({
+    sender: String,
+    accepted: Boolean
+})
+
 // the schema for a user
 const UserSchema = new mongoose.Schema({
     username: {
@@ -32,6 +37,7 @@ const UserSchema = new mongoose.Schema({
         immutable: true
     },
     friendList: [FriendSchema],
+    pendingFriendList: [PendingFriendSchema],
     signUpTime: {
         type: Date,
         required: true,

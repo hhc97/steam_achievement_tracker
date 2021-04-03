@@ -39,3 +39,24 @@
     border: 2px solid black;
     border-radius: 10px;
 }
+
+.friendPendingButton{
+    display: flex;
+    flex-direction: row;
+    font-size: 25px;
+    justify-content: space-evenly;
+}
+
+.friendPendingAccept{
+    transition: 0.5s ease;
+}
+.friendPendingAccept:hover{
+    font-size: 30px;
+}
+
+.friendPendingDecline{
+    transition: 0.5s ease;
+}
+.friendPendingDecline:hover{
+    font-size: 30px;
+}

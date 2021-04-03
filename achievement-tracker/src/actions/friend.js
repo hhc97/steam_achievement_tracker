@@ -22,8 +22,11 @@ export const getFriend = (friendList) => {
         .then(json => {
             // the resolved promise with the JSON body
             let list = []
-            for (let i = 0; i < json.length; i++){
-                list.push(json[i].name)
+            for (let i = 0; i < json.friendList.length; i++){
+                list.push({name: json.friendList[i].name, onPending: false})
+            }
+            for (let i = 0; i < json.pendingList.length; i++){
+                list.push({name: json.pendingList[i].sender, onPending: true})
             }
             friendList.setState({ friendList: list });
         })
@@ -56,14 +59,14 @@ export const addFriends = async (dashboardComp) => {
         .then(res => {
             if (res.status === 200) {
                 // return a promise that resolves with the JSON body
-                const newFriendList = dashboardComp.state.friendList
-                newFriendList.push(friendName)
-                dashboardComp.setState({
-                    friendList: newFriendList
-                });
-                alert("Success: Adding a friend.")
+                // const newFriendList = dashboardComp.state.friendList
+                // newFriendList.push(friendName)
+                // dashboardComp.setState({
+                //     friendList: newFriendList
+                // });
+                alert("Success: Waiting for your friend to accept.")
             } else {
-                alert("Error: Friend does not exist or its already your friend");
+                alert("Error: Friend does not exist or its pending");
             }
         })
 };
@@ -85,17 +88,83 @@ export const deleteFriend = async (dashboardComp, friendName) => {
         }
     });
 
-    fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                let newFriendList = dashboardComp.state.friendList
-                newFriendList = newFriendList.filter((i) => {return i !== friendName})
-                dashboardComp.setState({
-                    friendList: newFriendList
-                });
-                alert("Success: delete a friend.")
-            }else {
-                alert("Error");
-            }
-        })
+    await fetch(request)
+            .then(res => {
+                if (res.status === 200) {
+                    let newFriendList = dashboardComp.state.friendList
+                    newFriendList = newFriendList.filter((i) => {return i.name !== friendName})
+                    dashboardComp.setState({
+                        friendList: newFriendList
+                    });
+                    alert("Success: delete a friend.")
+                }else {
+                    alert("Error");
+                }
+            })
+}
+
+export const acceptFriend = async (dashboardComp, friendName) => {
+    const url = `${API_HOST}/api/friends/accept`;
+    const obj = {
+        userName: dashboardComp.state.userName,
+        friendName: friendName
+    }
+
+    const request = new Request(url, {
+        method: "PATCH",
+        body: JSON.stringify(obj),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    await fetch(request)
+            .then(res=>{
+                if (res.status === 200) {
+                    let newFriendList = dashboardComp.state.friendList
+                    for(let i =0; i< newFriendList.length; i++){
+                        if(newFriendList[i].name === friendName){
+                            newFriendList[i].onPending = false
+                        }
+                    }
+                    dashboardComp.setState({
+                        friendList: newFriendList
+                    });
+                    alert("Success: friend added")
+                }else {
+                    alert("Error");
+                }
+            })
+}
+
+export const declineFriend = async (dashboardComp, friendName) => {
+    const url = `${API_HOST}/api/friends/decline`;
+    const obj = {
+        userName: dashboardComp.state.userName,
+        friendName: friendName
+    }
+
+    const request = new Request(url, {
+        method: "PATCH",
+        body: JSON.stringify(obj),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    });
+
+    await fetch(request)
+            .then(res=>{
+                if (res.status === 200) {
+                    let newFriendList = dashboardComp.state.friendList
+                    newFriendList = newFriendList.filter(i => {return i.name !== friendName})
+                    dashboardComp.setState({
+                        friendList: newFriendList
+                    });
+                    alert("Success: friend rejected")
+                }else {
+                    alert("Error");
+                }
+            })
 }

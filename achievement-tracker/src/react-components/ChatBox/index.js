@@ -33,12 +33,12 @@ class ChatBox extends React.Component {
     }
     async componentDidMount(){
         if(this.state.socket !== undefined){
-            console.log("connect to socket...")
+            // console.log("connect to socket...")
         }
         await getMessages(this, this.props.userName, this.props.friendName)
         this.state.socket.emit("room", {name: this.props.userName, chatRoomId: this.state.chatRoomId})
         this.state.socket.on('joined', room => {
-            console.log('i have joined', room)
+            // console.log('i have joined', room)
         })
 
     }
@@ -48,14 +48,14 @@ class ChatBox extends React.Component {
             await getMessages(this, this.props.userName, this.props.friendName)
             this.state.socket.emit("room", {name: this.props.userName, chatRoomId: this.state.chatRoomId})
             this.state.socket.on('joined', room => {
-                console.log('I have joined', room)
+                // console.log('I have joined', room)
             })
         }
     }
 
     componentWillUnmount(){
         this.state.socket.emit("close")
-        console.log("disconnect from socket...")
+        // console.log("disconnect from socket...")
     }
 
     onChange(e) {
