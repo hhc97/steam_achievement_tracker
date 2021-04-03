@@ -60,15 +60,26 @@ class ChatBox extends React.Component {
 
     onChange(e) {
         this.setState({ text: e.target.value })
+        const elem = e.target
+        const toBeAddHeight = (elem.scrollHeight)+"px";
+        if (parseInt(toBeAddHeight.substring(0,toBeAddHeight.length-2)) <= 110){
+            elem.style.height = toBeAddHeight
+        }
     }
-
     onSubmit(e) {
         e.preventDefault();
+        //check if its empty message
+        if (this.state.text === ""){
+            return;
+        }
+
         const data = {
             name: this.props.userName,
             content: this.state.text,
             time: Date.now()
         }
+        //change textarea height back to normal
+        e.target.children[0].style.height = "70%"
         //update our own message
         const newMessages = this.state.messages
         newMessages.push(data)
@@ -87,6 +98,7 @@ class ChatBox extends React.Component {
         const className = myMessage ? "my-message" : "other-message"
         return className
     }
+
 
     render() {
         const {friendName, showChatOption} = this.props
@@ -118,7 +130,15 @@ class ChatBox extends React.Component {
                     </div>
                 </div>
                 <form className='chatMessage' onSubmit={e => this.onSubmit(e)}>
-                    <input className='message' onChange={e => this.onChange(e)} placeholder="Enter message" value={this.state.text} />
+                    <textarea 
+                        className='message' 
+                        onChange={e => this.onChange(e)} 
+                        placeholder="Enter message" 
+                        value={this.state.text}
+                        rows="1"
+                        style={{maxHeight: "100px"}}
+                    >
+                    </textarea>
                     <button className='sendMessage'>Send</button>
                 </form>
             </div>

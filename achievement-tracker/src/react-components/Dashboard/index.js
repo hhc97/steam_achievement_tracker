@@ -183,6 +183,12 @@ class DashBoard extends React.Component {
 
     async onSubmitFriendRequest(e) {
         e.preventDefault()
+        //check if its user it self
+        if(this.state.addFriendName === this.state.userName){
+            alert("Cannot add yourself!")
+            this.setState({ addFriendName: "" })
+                return;
+        }
         //check if friend already exist
         for(let i = 0; i < this.state.friendList.length; i++){
             if (this.state.friendList[i].name == this.state.addFriendName){
