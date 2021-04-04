@@ -29,10 +29,10 @@ router.post('/api/reviews', mongoChecker, async (req, res) => {
     res.send(result)
   } catch (error) {
     if (isMongoError(error)) {
-        res.status(500).send('Internal server error')
+      res.status(500).send('Internal server error')
     } else {
-        log(error)
-        res.status(400).send('Bad Request')
+      log(error)
+      res.status(400).send('Bad Request')
     }
   }
 })
@@ -40,8 +40,8 @@ router.post('/api/reviews', mongoChecker, async (req, res) => {
 router.get('/api/reviews', mongoChecker, async (req, res) => {
   try {
     const reviews = await Review.find()
-    res.send({reviews})
-  } catch(error) {
+    res.send({ reviews })
+  } catch (error) {
     log(error)
     res.status(500).send("Internal Server Error")
   }
