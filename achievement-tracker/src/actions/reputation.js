@@ -6,14 +6,14 @@ export const getReputation = (dashComp) => {
 
     fetch(url)
         .then(res => {
-            if (res.status === 200){
+            if (res.status === 200) {
                 return res.json()
-            }else{
+            } else {
                 console.log("Error: Could not get reputation")
             }
         })
         .then(json => {
-            dashComp.setState({reputation: json.reputation})
+            dashComp.setState({ reputation: json.reputation })
         })
         .catch(error => {
             console.log(error);

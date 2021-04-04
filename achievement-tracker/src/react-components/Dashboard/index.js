@@ -122,25 +122,25 @@ class DashBoard extends React.Component {
         e.preventDefault();
         let friendName = "";
         let target = e.target;
-        if (target.tagName === "path"){
+        if (target.tagName === "path") {
             target = target.parentNode
         }
-        if (target.tagName === "svg"){
-            if (target.className.baseVal === "deleteFriend"){
+        if (target.tagName === "svg") {
+            if (target.className.baseVal === "deleteFriend") {
                 return;
-            }else if (target.className.baseVal === "friendPendingAccept"){
+            } else if (target.className.baseVal === "friendPendingAccept") {
                 return;
-            }else if (target.className.baseVal === "friendPendingDecline"){
+            } else if (target.className.baseVal === "friendPendingDecline") {
                 return;
             }
         }
         let parent = e.target
-        while (parent.className !== "friendContainer"){
+        while (parent.className !== "friendContainer") {
             parent = parent.parentNode
         }
         friendName = parent.children[0].children[1].innerHTML
         //check if this friend is still on pending status
-        if(this.state.friendList.filter(i=>{return i.name == friendName})[0].onPending){
+        if (this.state.friendList.filter(i => { return i.name == friendName })[0].onPending) {
             alert("Accept your friend to chat")
             return;
         }
@@ -152,36 +152,36 @@ class DashBoard extends React.Component {
         this.setState({ showChat: false })
     }
 
-    deleteFromFriend(e){
+    deleteFromFriend(e) {
         let parent = e.target
-        if (parent.tagName === "path"){
+        if (parent.tagName === "path") {
             parent = parent.parentNode
         }
-        if (parent.tagName === "svg"){
+        if (parent.tagName === "svg") {
             parent = parent.parentNode
         }
         const friendName = parent.children[0].children[1].innerHTML
         deleteFriend(this, friendName)
     }
 
-    acceptFriendHandler(e){
+    acceptFriendHandler(e) {
         let parent = e.target
-        if (parent.tagName === "path"){
+        if (parent.tagName === "path") {
             parent = parent.parentNode
         }
-        if (parent.tagName === "svg"){
+        if (parent.tagName === "svg") {
             parent = parent.parentNode
         }
         const friendName = parent.parentNode.children[0].children[1].innerHTML
         acceptFriend(this, friendName)
     }
 
-    declineFriendHandler(e){
+    declineFriendHandler(e) {
         let parent = e.target
-        if (parent.tagName === "path"){
+        if (parent.tagName === "path") {
             parent = parent.parentNode
         }
-        if (parent.tagName === "svg"){
+        if (parent.tagName === "svg") {
             parent = parent.parentNode
         }
         const friendName = parent.parentNode.children[0].children[1].innerHTML
@@ -195,14 +195,14 @@ class DashBoard extends React.Component {
     async onSubmitFriendRequest(e) {
         e.preventDefault()
         //check if its user it self
-        if(this.state.addFriendName === this.state.userName){
+        if (this.state.addFriendName === this.state.userName) {
             alert("Cannot add yourself!")
             this.setState({ addFriendName: "" })
-                return;
+            return;
         }
         //check if friend already exist
-        for(let i = 0; i < this.state.friendList.length; i++){
-            if (this.state.friendList[i].name == this.state.addFriendName){
+        for (let i = 0; i < this.state.friendList.length; i++) {
+            if (this.state.friendList[i].name == this.state.addFriendName) {
                 alert("Friend already exist in your friend list")
                 this.setState({ addFriendName: "" })
                 return;
@@ -324,16 +324,16 @@ class DashBoard extends React.Component {
                             </div>
                             <FriendList>
                                 {this.state.friendList.map((item, i) => {
-                                    return <Friend 
-                                                key={i} 
-                                                chat={this.showChatBox} 
-                                                deleteFriend={this.deleteFromFriend}
-                                                pendingStatus = {item.onPending}
-                                                accept = {this.acceptFriendHandler}
-                                                decline = {this.declineFriendHandler}
-                                            >
-                                                {item.name}
-                                            </Friend>
+                                    return <Friend
+                                        key={i}
+                                        chat={this.showChatBox}
+                                        deleteFriend={this.deleteFromFriend}
+                                        pendingStatus={item.onPending}
+                                        accept={this.acceptFriendHandler}
+                                        decline={this.declineFriendHandler}
+                                    >
+                                        {item.name}
+                                    </Friend>
                                 })}
                             </FriendList>
                         </BannerContainer>

@@ -80,7 +80,7 @@ const userVoteRecords = {
 class ReviewForum extends React.Component {
 	constructor(props) {
 		super(props)
-		
+
 		this.state = {
 			userVoteRecords: userVoteRecords
 		}
@@ -94,21 +94,21 @@ class ReviewForum extends React.Component {
 		return (
 			<div>
 				<HeadContainer bgId={"dashboard"}>
-						<HeaderNavBar>
-								{
-									this.props.app.state.currentUser !== null ?
-									<HeaderImage to='/dashboard' src={logo} /> :
-									<HeaderImage to='/' src={logo} />
-								}
-								<div className='group'>
-										<HeaderButton path='/reviewForum'>Forum</HeaderButton>
-										{
-											this.props.app.state.currentUser !== null ?
-											<HeaderButton path='/Dashboard'>{this.props.app.state.currentUser}</HeaderButton> :
-											<HeaderButton path='/Login'>Log In</HeaderButton>
-										}	
-								</div>
-						</HeaderNavBar>
+					<HeaderNavBar>
+						{
+							this.props.app.state.currentUser !== null ?
+								<HeaderImage to='/dashboard' src={logo} /> :
+								<HeaderImage to='/' src={logo} />
+						}
+						<div className='group'>
+							<HeaderButton path='/reviewForum'>Forum</HeaderButton>
+							{
+								this.props.app.state.currentUser !== null ?
+									<HeaderButton path='/Dashboard'>{this.props.app.state.currentUser}</HeaderButton> :
+									<HeaderButton path='/Login'>Log In</HeaderButton>
+							}
+						</div>
+					</HeaderNavBar>
 				</HeadContainer>
 
 				<ReviewSection
