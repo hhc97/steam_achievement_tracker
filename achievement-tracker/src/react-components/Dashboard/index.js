@@ -40,6 +40,7 @@ class DashBoard extends React.Component {
             // isAdmin: isAdmin,
             userName: userName,
             reputation: 0,
+            showLoading: true
         }
         this.showChatBox = this.showChatBox.bind(this)
         this.unShowChatBox = this.unShowChatBox.bind(this)
@@ -83,7 +84,7 @@ class DashBoard extends React.Component {
             this.setState({ game: gameList })
         }
         this.setState({ game: gameList })
-        document.getElementById("loadingIcon").style.display = "none"
+        this.setState({ showLoading: false })
     }
 
     // updates games for current user
@@ -234,9 +235,10 @@ class DashBoard extends React.Component {
                                 }
                             })}
                         </AchievementContainer>
-                        <div id="loadingIcon">
+                        {!(this.state.showLoading) || <div id="loadingIcon">
                             <img src={loadingIcon} />
-                        </div>
+                        </div>}
+
                     </div>
                     <div className='right'>
                         <BannerContainer>
