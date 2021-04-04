@@ -51,7 +51,14 @@ class App extends React.Component {
               )}
             />
             <Route exact path='/' render={() => (<Home />)} />
-            <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
+            <Route
+              exact path='/ReviewForum'
+              render={props => (
+                <div className="App">
+                  <ReviewForum {...props} app={this}/>
+                </div>
+              )}
+            />
             <Route exact path='/Admin' render={() => (<Admin />)} />
             <Route exact path='/Signup' render={() => (<Signup />)} />
             {/* <Route exact path='/Dashboard' render={() => (<DashBoard />)} /> */}
