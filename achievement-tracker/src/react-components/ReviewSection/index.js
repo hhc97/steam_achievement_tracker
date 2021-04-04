@@ -14,384 +14,384 @@ const log = console.log
 const reviewNumLimit = 3;
 
 class ReviewSection extends React.Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props)
 
-    this.state = {
-      currentUser: this.props.currentUser,
-      searchContent: "",
-      userVoteRecords: this.props.userVoteRecords,
-      reviews: [],
-      reviewsInSection: [],
-      reviewsOnPage: [],
-      currentPage: 1,
-      reviewSubmitTitle: "",
-      reviewSubmitContent: ""
-    }
-
-    this.upvoteAction = this.upvoteAction.bind(this)
-    this.downvoteAction = this.downvoteAction.bind(this)
-    this.reportAction = this.reportAction.bind(this)
-  }
-
-  componentDidMount() {
-		getReviews(this, reviewNumLimit)
-	}
-
-  upvoteAction = id => {
-    const user = this.state.currentUser
-    if (!user) {
-      alert("You have to login before you vote.")
-      return
-    }
-
-    const voteRecords = this.state.userVoteRecords
-    if (!(id in voteRecords[user]) || voteRecords[user][id] !== 1) {
-      const reviewList = this.state.reviews.map(review => {
-        if (review.id === id) {
-          review.upvotes = review.upvotes + 1
-          if (id in voteRecords[user] && voteRecords[user][id] === 0) {
-            review.downvotes = review.downvotes - 1
-          }
+        this.state = {
+            currentUser: this.props.currentUser,
+            searchContent: "",
+            userVoteRecords: this.props.userVoteRecords,
+            reviews: [],
+            reviewsInSection: [],
+            reviewsOnPage: [],
+            currentPage: 1,
+            reviewSubmitTitle: "",
+            reviewSubmitContent: ""
         }
-        return review
-      })
-      voteRecords[user][id] = 1
 
-      this.setState({
-        reviews: reviewList
-      })
-    } else if (voteRecords[user][id] === 1) {
-      const reviewList = this.state.reviews.map(review => {
-        if (review.id === id) {
-          review.upvotes = review.upvotes - 1
+        this.upvoteAction = this.upvoteAction.bind(this)
+        this.downvoteAction = this.downvoteAction.bind(this)
+        this.reportAction = this.reportAction.bind(this)
+    }
+
+    componentDidMount() {
+        getReviews(this, reviewNumLimit)
+    }
+
+    upvoteAction = id => {
+        const user = this.state.currentUser
+        if (!user) {
+            alert("You have to login before you vote.")
+            return
         }
-        return review
-      })
-      delete(voteRecords[user][id])
 
-      this.setState({
-        reviews: reviewList
-      })
-    }
-  }
+        const voteRecords = this.state.userVoteRecords
+        if (!(id in voteRecords[user]) || voteRecords[user][id] !== 1) {
+            const reviewList = this.state.reviews.map(review => {
+                if (review.id === id) {
+                    review.upvotes = review.upvotes + 1
+                    if (id in voteRecords[user] && voteRecords[user][id] === 0) {
+                        review.downvotes = review.downvotes - 1
+                    }
+                }
+                return review
+            })
+            voteRecords[user][id] = 1
 
-  downvoteAction = id => {
-    const user = this.state.currentUser
-    if (!user) {
-      alert("You have to login before you vote.")
-      return
-    }
+            this.setState({
+                reviews: reviewList
+            })
+        } else if (voteRecords[user][id] === 1) {
+            const reviewList = this.state.reviews.map(review => {
+                if (review.id === id) {
+                    review.upvotes = review.upvotes - 1
+                }
+                return review
+            })
+            delete (voteRecords[user][id])
 
-    const voteRecords = this.state.userVoteRecords
-    if (!(id in voteRecords[user]) || voteRecords[user][id] !== 0) {
-      const reviewList = this.state.reviews.map(review => {
-        if (review.id === id) {
-          review.downvotes = review.downvotes + 1
-          if (id in voteRecords[user] && voteRecords[user][id] === 1) {
-            review.upvotes = review.upvotes - 1
-          }
+            this.setState({
+                reviews: reviewList
+            })
         }
-        return review
-      })
-      voteRecords[user][id] = 0
+    }
 
-      this.setState({
-        reviews: reviewList
-      })
-    } else if (voteRecords[user][id] === 0) {
-      const reviewList = this.state.reviews.map(review => {
-        if (review.id === id) {
-          review.downvotes = review.downvotes - 1
+    downvoteAction = id => {
+        const user = this.state.currentUser
+        if (!user) {
+            alert("You have to login before you vote.")
+            return
         }
-        return review
-      })
-      delete(voteRecords[user][id])
 
-      this.setState({
-        reviews: reviewList
-      })
-    }
-  }
+        const voteRecords = this.state.userVoteRecords
+        if (!(id in voteRecords[user]) || voteRecords[user][id] !== 0) {
+            const reviewList = this.state.reviews.map(review => {
+                if (review.id === id) {
+                    review.downvotes = review.downvotes + 1
+                    if (id in voteRecords[user] && voteRecords[user][id] === 1) {
+                        review.upvotes = review.upvotes - 1
+                    }
+                }
+                return review
+            })
+            voteRecords[user][id] = 0
 
-  reportAction = id => {
-    console.log("Report Review")
+            this.setState({
+                reviews: reviewList
+            })
+        } else if (voteRecords[user][id] === 0) {
+            const reviewList = this.state.reviews.map(review => {
+                if (review.id === id) {
+                    review.downvotes = review.downvotes - 1
+                }
+                return review
+            })
+            delete (voteRecords[user][id])
 
-    const reviewList = this.state.reviews.map(review => {
-      if (review.id === id) {
-        review.reported = true
-      }
-      return review
-    })
-
-    this.setState({
-      reviews: reviewList
-    })
-
-    alert("Review reported.")
-  }
-
-  handleSearchContentChange = event => {
-    const target = event.target;
-    this.setState({
-      searchContent: target.value
-    })
-  }
-
-	searchReview = () => {
-		console.log("Search!")
-
-    const currentSectionReviews = this.state.reviews.filter(review => {
-      return review.title.includes(this.state.searchContent)
-    })
-    const currentPageReviews = currentSectionReviews.slice(
-      0,
-      reviewNumLimit
-    )
-    
-    this.setState({
-      reviewsInSection: currentSectionReviews,
-      reviewsOnPage: currentPageReviews,
-      currentPage: 1
-    })
-	}
-
-  prevPage = () => {
-    console.log("previous page")
-
-    if (this.state.currentPage > 1) {
-      const currentPage = this.state.currentPage - 1
-      const currentPageReviews = this.state.reviewsInSection.slice(
-        (currentPage - 1) * reviewNumLimit,
-        (currentPage - 1) * reviewNumLimit + reviewNumLimit
-      )
-      this.setState({
-        reviewsOnPage: currentPageReviews,
-        currentPage: currentPage
-      })
-    }
-  }
-
-  nextPage = () => {
-    console.log("next page")
-
-    if (this.state.currentPage < this.state.reviewsInSection.length / reviewNumLimit) {
-      const currentPage = this.state.currentPage + 1
-      const currentPageReviews = this.state.reviewsInSection.slice(
-        (currentPage - 1) * reviewNumLimit,
-        (currentPage - 1) * reviewNumLimit + reviewNumLimit
-      )
-      this.setState({
-        reviewsOnPage: currentPageReviews,
-        currentPage: currentPage
-      })
-    }
-  }
-
-  firstPage = () => {
-    console.log("first page")
-
-    const currentPageReviews = this.state.reviewsInSection.slice(
-      0,
-      reviewNumLimit
-    )
-    this.setState({
-      reviewsOnPage: currentPageReviews,
-      currentPage: 1
-    })
-  }
-
-  lastPage = () => {
-    console.log("last page")
-
-    const currentPage = Math.ceil(this.state.reviewsInSection.length / reviewNumLimit)
-    const currentPageReviews = this.state.reviewsInSection.slice(
-      (currentPage - 1) * reviewNumLimit,
-      (currentPage - 1) * reviewNumLimit + reviewNumLimit
-    )
-    this.setState({
-      reviewsOnPage: currentPageReviews,
-      currentPage: currentPage
-    })
-  }
-
-  handleSubmitTitleChange = event => {
-		const target = event.target;
-		this.setState({
-			reviewSubmitTitle: target.value
-		})
-	}
-
-	handleSubmitContentChange = event => {
-		const target = event.target;
-		this.setState({
-			reviewSubmitContent: target.value
-		})
-	}
-
-	addReview = () => {
-    const user = this.state.currentUser
-    log("add review!")
-    if (!user) {
-      alert("You have to login before you submit your review.")
-      return
-    } else if (this.state.reviewSubmitTitle === "") {
-      alert("Review title cannot be empty")
-      return
-    } else if (this.state.reviewSubmitContent === "") {
-      alert("Review content cannot be empty")
-      return
+            this.setState({
+                reviews: reviewList
+            })
+        }
     }
 
-		const reviewList = this.state.reviews
-		const newReview = {
-      id: this.state.reviews.length + 1,
-			title: this.state.reviewSubmitTitle,
-			content: this.state.reviewSubmitContent,
-			upvotes: 0,
-			downvotes: 0,
-			author: this.state.currentUser,
-			reputation: 1
-		}
-    reviewList.push(newReview)
-    this.setState({
-      reviewSubmitTitle: "",
-      reviewSubmitContent: "",
-      reviews: reviewList,
-      reviewsInSection: reviewList,
-      reviewsOnPage: reviewList.slice(
-        (this.state.currentPage - 1) * reviewNumLimit,
-        (this.state.currentPage - 1) * reviewNumLimit + reviewNumLimit
-      )
-    })
+    reportAction = id => {
+        console.log("Report Review")
 
-    // Update database
-    const url = '/api/reviews'
-    const request = new Request(url, {
-      method: 'post',
-      body: JSON.stringify(newReview),
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    })
+        const reviewList = this.state.reviews.map(review => {
+            if (review.id === id) {
+                review.reported = true
+            }
+            return review
+        })
 
-    fetch(request)
-    .then(function(res) {
-      if (res.status === 200) {
-        log("New review saved")
-      } else {
-        log("Error: Cannot add review")
-      }
-      log(res)
-    }).catch((error) => {
-      log(error)
-    })
-	}
+        this.setState({
+            reviews: reviewList
+        })
 
-  refreshForum = () => {
-    const reviewList = this.state.reviews
-    this.setState({
-      reviewsInSection: reviewList,
-      reviewsOnPage: reviewList.slice(
-        0,
-        reviewNumLimit
-      ),
-      searchContent: ""
-    })
-  }
+        alert("Review reported.")
+    }
 
-  render() {
-    return (
-      <div>
-        <ForumSearchBar
-          searchContent={this.state.searchContent}
-					handleChange={this.handleSearchContentChange}
-					enterButton={this.searchReview}
-          refreshButton={this.refreshForum}
-				/>
+    handleSearchContentChange = event => {
+        const target = event.target;
+        this.setState({
+            searchContent: target.value
+        })
+    }
 
-        <div className="review-section">
-          <h1>Review Section</h1>
+    searchReview = () => {
+        console.log("Search!")
 
-          <div className="page-button-bar">
-            <div className="btn-group" role="group" aria-label="Basic example">
-              <button type="button"
-                      className="btn btn-dark"
-                      onClick={this.firstPage}>
-                First
+        const currentSectionReviews = this.state.reviews.filter(review => {
+            return review.title.includes(this.state.searchContent)
+        })
+        const currentPageReviews = currentSectionReviews.slice(
+            0,
+            reviewNumLimit
+        )
+
+        this.setState({
+            reviewsInSection: currentSectionReviews,
+            reviewsOnPage: currentPageReviews,
+            currentPage: 1
+        })
+    }
+
+    prevPage = () => {
+        console.log("previous page")
+
+        if (this.state.currentPage > 1) {
+            const currentPage = this.state.currentPage - 1
+            const currentPageReviews = this.state.reviewsInSection.slice(
+                (currentPage - 1) * reviewNumLimit,
+                (currentPage - 1) * reviewNumLimit + reviewNumLimit
+            )
+            this.setState({
+                reviewsOnPage: currentPageReviews,
+                currentPage: currentPage
+            })
+        }
+    }
+
+    nextPage = () => {
+        console.log("next page")
+
+        if (this.state.currentPage < this.state.reviewsInSection.length / reviewNumLimit) {
+            const currentPage = this.state.currentPage + 1
+            const currentPageReviews = this.state.reviewsInSection.slice(
+                (currentPage - 1) * reviewNumLimit,
+                (currentPage - 1) * reviewNumLimit + reviewNumLimit
+            )
+            this.setState({
+                reviewsOnPage: currentPageReviews,
+                currentPage: currentPage
+            })
+        }
+    }
+
+    firstPage = () => {
+        console.log("first page")
+
+        const currentPageReviews = this.state.reviewsInSection.slice(
+            0,
+            reviewNumLimit
+        )
+        this.setState({
+            reviewsOnPage: currentPageReviews,
+            currentPage: 1
+        })
+    }
+
+    lastPage = () => {
+        console.log("last page")
+
+        const currentPage = Math.ceil(this.state.reviewsInSection.length / reviewNumLimit)
+        const currentPageReviews = this.state.reviewsInSection.slice(
+            (currentPage - 1) * reviewNumLimit,
+            (currentPage - 1) * reviewNumLimit + reviewNumLimit
+        )
+        this.setState({
+            reviewsOnPage: currentPageReviews,
+            currentPage: currentPage
+        })
+    }
+
+    handleSubmitTitleChange = event => {
+        const target = event.target;
+        this.setState({
+            reviewSubmitTitle: target.value
+        })
+    }
+
+    handleSubmitContentChange = event => {
+        const target = event.target;
+        this.setState({
+            reviewSubmitContent: target.value
+        })
+    }
+
+    addReview = () => {
+        const user = this.state.currentUser
+        log("add review!")
+        if (!user) {
+            alert("You have to login before you submit your review.")
+            return
+        } else if (this.state.reviewSubmitTitle === "") {
+            alert("Review title cannot be empty")
+            return
+        } else if (this.state.reviewSubmitContent === "") {
+            alert("Review content cannot be empty")
+            return
+        }
+
+        const reviewList = this.state.reviews
+        const newReview = {
+            id: this.state.reviews.length + 1,
+            title: this.state.reviewSubmitTitle,
+            content: this.state.reviewSubmitContent,
+            upvotes: 0,
+            downvotes: 0,
+            author: this.state.currentUser,
+            reputation: 1
+        }
+        reviewList.push(newReview)
+        this.setState({
+            reviewSubmitTitle: "",
+            reviewSubmitContent: "",
+            reviews: reviewList,
+            reviewsInSection: reviewList,
+            reviewsOnPage: reviewList.slice(
+                (this.state.currentPage - 1) * reviewNumLimit,
+                (this.state.currentPage - 1) * reviewNumLimit + reviewNumLimit
+            )
+        })
+
+        // Update database
+        const url = '/api/reviews'
+        const request = new Request(url, {
+            method: 'post',
+            body: JSON.stringify(newReview),
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        })
+
+        fetch(request)
+            .then(function (res) {
+                if (res.status === 200) {
+                    log("New review saved")
+                } else {
+                    log("Error: Cannot add review")
+                }
+                log(res)
+            }).catch((error) => {
+                log(error)
+            })
+    }
+
+    refreshForum = () => {
+        const reviewList = this.state.reviews
+        this.setState({
+            reviewsInSection: reviewList,
+            reviewsOnPage: reviewList.slice(
+                0,
+                reviewNumLimit
+            ),
+            searchContent: ""
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <ForumSearchBar
+                    searchContent={this.state.searchContent}
+                    handleChange={this.handleSearchContentChange}
+                    enterButton={this.searchReview}
+                    refreshButton={this.refreshForum}
+                />
+
+                <div className="review-section">
+                    <h1>Review Section</h1>
+
+                    <div className="page-button-bar">
+                        <div className="btn-group" role="group" aria-label="Basic example">
+                            <button type="button"
+                                className="btn btn-dark"
+                                onClick={this.firstPage}>
+                                First
               </button>
-              <button type="button"
-                      className="btn btn-secondary"
-                      onClick={this.prevPage}>
-                Prev
+                            <button type="button"
+                                className="btn btn-secondary"
+                                onClick={this.prevPage}>
+                                Prev
               </button>
-              <button type="button"
-                      className="btn btn-secondary"
-                      onClick={this.nextPage}>
-                Next
+                            <button type="button"
+                                className="btn btn-secondary"
+                                onClick={this.nextPage}>
+                                Next
               </button>
-              <button type="button"
-                      className="btn btn-dark"
-                      onClick={this.lastPage}>
-                Last
+                            <button type="button"
+                                className="btn btn-dark"
+                                onClick={this.lastPage}>
+                                Last
               </button>
+                        </div>
+                    </div>
+
+                    {this.state.reviewsOnPage.map(review => (
+                        <Review
+                            key={uid(review)}
+                            id={review.id}
+                            title={review.title}
+                            content={review.content}
+                            upvotes={review.upvotes}
+                            downvotes={review.downvotes}
+                            author={review.author}
+                            reputation={review.reputation}
+                            upvoteAction={this.upvoteAction}
+                            downvoteAction={this.downvoteAction}
+                            reportAction={this.reportAction}
+                        />
+                    ))}
+
+                    <div className="page-button-bar">
+                        <div className="btn-group" role="group" aria-label="Basic example">
+                            <button type="button"
+                                className="btn btn-dark"
+                                onClick={this.firstPage}>
+                                First
+              </button>
+                            <button type="button"
+                                className="btn btn-secondary"
+                                onClick={this.prevPage}>
+                                Prev
+              </button>
+                            <button type="button"
+                                className="btn btn-secondary"
+                                onClick={this.nextPage}>
+                                Next
+              </button>
+                            <button type="button"
+                                className="btn btn-dark"
+                                onClick={this.lastPage}>
+                                Last
+              </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <ReviewSubmit
+                    reviewSubmitTitle={this.state.reviewSubmitTitle}
+                    reviewSubmitContent={this.state.reviewSubmitContent}
+                    handleTitleChange={this.handleSubmitTitleChange}
+                    handleContentChange={this.handleSubmitContentChange}
+                    addReview={() => this.addReview()}
+                />
             </div>
-          </div>
-
-          {this.state.reviewsOnPage.map(review => (
-            <Review
-              key={uid(review)}
-              id={review.id}
-              title={review.title}
-              content={review.content}
-              upvotes={review.upvotes}
-              downvotes={review.downvotes}
-              author={review.author}
-              reputation={review.reputation}
-              upvoteAction={this.upvoteAction}
-              downvoteAction={this.downvoteAction}
-              reportAction={this.reportAction}
-            />
-          ))}
-
-          <div className="page-button-bar">
-            <div className="btn-group" role="group" aria-label="Basic example">
-              <button type="button"
-                      className="btn btn-dark"
-                      onClick={this.firstPage}>
-                First
-              </button>
-              <button type="button"
-                      className="btn btn-secondary"
-                      onClick={this.prevPage}>
-                Prev
-              </button>
-              <button type="button"
-                      className="btn btn-secondary"
-                      onClick={this.nextPage}>
-                Next
-              </button>
-              <button type="button"
-                      className="btn btn-dark"
-                      onClick={this.lastPage}>
-                Last
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-				<ReviewSubmit
-					reviewSubmitTitle={this.state.reviewSubmitTitle}
-					reviewSubmitContent={this.state.reviewSubmitContent}
-					handleTitleChange={this.handleSubmitTitleChange}
-					handleContentChange={this.handleSubmitContentChange}
-					addReview={() => this.addReview()}
-				/>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 export default ReviewSection;
