@@ -231,6 +231,7 @@ class ReviewSection extends React.Component {
 
 	addReview = () => {
     const user = this.state.currentUser
+    log("add review!")
     if (!user) {
       alert("You have to login before you submit your review.")
       return

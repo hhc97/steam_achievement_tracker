@@ -112,7 +112,7 @@ class ReviewForum extends React.Component {
 				</HeadContainer>
 
 				<ReviewSection
-					currentUser={this.state.currentUser}
+					currentUser={this.props.app.state.currentUser}
 					userVoteRecords={this.state.userVoteRecords}
 				/>
 			</div>
