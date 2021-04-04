@@ -51,20 +51,53 @@ class App extends React.Component {
                 </div>
               )}
             />
-            <Route exact path='/' render={() => (<Home />)} />
+            <Route
+              exact path="/Signup"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Signup /> : <DashBoard {...props} app={this} />}
+                </div>
+              )}
+            />
+            {/* pages only available if a user is logged in */}
+            <Route
+              exact path="/GameAchievements"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Login /> : <GameAchievements {...props} app={this} />}
+                </div>
+              )}
+            />
+            <Route
+              exact path="/Analytics"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Login /> : <Analytics {...props} app={this} />}
+                </div>
+              )}
+            />
+            <Route
+              exact path="/AccountSettings"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Login /> : <AccountSettings {...props} app={this} />}
+                </div>
+              )}
+            />
+            {/* static routes available to public */}
             <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
-            <Route exact path='/Admin' render={() => (<Admin />)} />
-            <Route exact path='/Signup' render={() => (<Signup />)} />
             <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
-            <Route exact path='/GameAchievements' render={(props) => (<GameAchievements {...props} />)} />
-            <Route exact path='/Analytics' render={() => (<Analytics />)} />
-            <Route exact path='/AccountSettings' render={() => (<AccountSettings />)} />
+
+            {/* admin route TODO update security check */}
+            <Route exact path='/Admin' render={() => (<Admin />)} />
+
+            {/* any other route defaults to homepage */}
+            <Route exact path='/*' render={() => (<Home />)} />
           </Switch>
         </BrowserRouter>
       </div>
     )
   }
-
 }
 
 export default App;
