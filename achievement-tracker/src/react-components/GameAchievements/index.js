@@ -3,20 +3,34 @@ import React from 'react';
 import {HeaderButton, HeaderImage, HeadContainer, HeaderNavBar} from '../HeaderComponent'
 import logo from './../../logo.svg'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
-
+import { logout } from '../../actions/reactAuth'
 import {PersonalPic, BannerContainer, BannerLink} from '../PersonalBanner'
 import {AchievementContainer, Game} from '../Achievement'
 import './style.css';
 import { getAchievementStats, getGameSchema } from '../../actions/steamHelpers'
-
+const dateFormat = require('dateformat');
 
 class GameAchievements extends React.Component {
     constructor(props){
       super(props)
-      const gameName = this.props.location.state.gameName
-      const userName = this.props.location.state.userName
-      const reputation = this.props.location.state.reputation
-      const gameId = this.props.location.state.gameId
+      
+      let gameName = ""
+      let userName = ""
+      let reputation = 0
+      let gameId = ""
+
+
+
+      if(this.props.location.state === undefined){
+        this.props.history.push('/dashboard')
+      }else{
+        gameName = this.props.location.state.gameName
+        userName = this.props.location.state.userName
+        reputation = this.props.location.state.reputation
+        gameId = this.props.location.state.gameId
+      }
+
+      
       const achievementsList = []
       const searchAchievementName = ""
 
@@ -34,7 +48,9 @@ class GameAchievements extends React.Component {
     }
 
     componentDidMount(){
-      this.getStats(this.state.gameId)
+      if (this.props.location.state !== undefined){
+        this.getStats(this.state.gameId)
+      }
     }
 
     async getStats(id){
@@ -48,6 +64,12 @@ class GameAchievements extends React.Component {
         obj.image = apiAchievement[key].icon
         obj.name = apiAchievement[key].displayName
         obj.achieved = achievements[i].achieved
+        if(achievements[i].unlocktime === 0){
+          obj.achievedTime = "N/A"
+        }else{
+          const date = new Date(achievements[i].unlocktime * 1000)
+          obj.achievedTime = dateFormat(date, "dd/mm/yyyy hh:MM:ss tt")
+        }
         achievementsList.push(obj)
       }
       this.setState({achievementsList: achievementsList})
@@ -74,7 +96,7 @@ class GameAchievements extends React.Component {
                       <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                       <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                       <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                      <HeaderButton path='/'>LogOut</HeaderButton>
+                      <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                   </div>
               </HeaderNavBar>
           </HeadContainer>
@@ -117,6 +139,7 @@ class GameAchievements extends React.Component {
                               return (
                                 <Game key = {i} image={item.image} isAchievedBg={isAchievedBg} opac = {opac}>
                                     <div className="AchievementName">{item.name}</div>
+                                    <div className="AchievedTime">{item.achievedTime}</div>
                                 </Game>
                             )
                           }

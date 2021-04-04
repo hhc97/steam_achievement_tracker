@@ -97,6 +97,11 @@
     padding-left: 5px;
 }
 
+.AchievedTime{
+    text-align: right;
+    padding-right: 5px;
+}
+
 .Achieved{
     color:white;
     bottom:0;
