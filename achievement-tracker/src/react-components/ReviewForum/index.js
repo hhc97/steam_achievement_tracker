@@ -71,53 +71,53 @@ const log = console.log
 ** 0 represents downvote and 1 represents upvote
 */
 const userVoteRecords = {
-	"user": {
-	},
-	"admin": {
-	}
+    "user": {
+    },
+    "admin": {
+    }
 }
 
 class ReviewForum extends React.Component {
-	constructor(props) {
-		super(props)
+    constructor(props) {
+        super(props)
 
-		this.state = {
-			userVoteRecords: userVoteRecords
-		}
-	}
+        this.state = {
+            userVoteRecords: userVoteRecords
+        }
+    }
 
-	componentDidMount() {
-		log(this.props.app.state.currentUser)
-	}
+    componentDidMount() {
+        log(this.props.app.state.currentUser)
+    }
 
-	render() {
-		return (
-			<div>
-				<HeadContainer bgId={"dashboard"}>
-					<HeaderNavBar>
-						{
-							this.props.app.state.currentUser !== null ?
-								<HeaderImage to='/dashboard' src={logo} /> :
-								<HeaderImage to='/' src={logo} />
-						}
-						<div className='group'>
-							<HeaderButton path='/reviewForum'>Forum</HeaderButton>
-							{
-								this.props.app.state.currentUser !== null ?
-									<HeaderButton path='/Dashboard'>{this.props.app.state.currentUser}</HeaderButton> :
-									<HeaderButton path='/Login'>Log In</HeaderButton>
-							}
-						</div>
-					</HeaderNavBar>
-				</HeadContainer>
+    render() {
+        return (
+            <div>
+                <HeadContainer bgId={"dashboard"}>
+                    <HeaderNavBar>
+                        {
+                            this.props.app.state.currentUser !== null ?
+                                <HeaderImage to='/dashboard' src={logo} /> :
+                                <HeaderImage to='/' src={logo} />
+                        }
+                        <div className='group'>
+                            <HeaderButton path='/reviewForum'>Forum</HeaderButton>
+                            {
+                                this.props.app.state.currentUser !== null ?
+                                    <HeaderButton path='/Dashboard'>{this.props.app.state.currentUser}</HeaderButton> :
+                                    <HeaderButton path='/Login'>Log In</HeaderButton>
+                            }
+                        </div>
+                    </HeaderNavBar>
+                </HeadContainer>
 
-				<ReviewSection
-					currentUser={this.props.app.state.currentUser}
-					userVoteRecords={this.state.userVoteRecords}
-				/>
-			</div>
-		)
-	}
+                <ReviewSection
+                    currentUser={this.props.app.state.currentUser}
+                    userVoteRecords={this.state.userVoteRecords}
+                />
+            </div>
+        )
+    }
 }
 
 export default ReviewForum;
