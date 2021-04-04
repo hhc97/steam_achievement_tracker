@@ -42,15 +42,6 @@ class App extends React.Component {
                 </div>
               )}
             />
-            {/* renders home and dashboard depending on if the user is logged in */}
-            <Route
-              exact path="/"
-              render={props => (
-                <div className="App">
-                  {!currentUser ? <Home /> : <DashBoard {...props} app={this} />}
-                </div>
-              )}
-            />
             <Route
               exact path="/Signup"
               render={props => (
@@ -91,8 +82,15 @@ class App extends React.Component {
             {/* admin route TODO update security check */}
             <Route exact path='/Admin' render={() => (<Admin />)} />
 
-            {/* any other route defaults to homepage */}
-            <Route exact path='/*' render={() => (<Home />)} />
+            {/* any other route defaults to dashboard if logged in and homepage if not (404 route) */}
+            <Route
+              exact path="/*"
+              render={props => (
+                <div className="App">
+                  {!currentUser ? <Home /> : <DashBoard {...props} app={this} />}
+                </div>
+              )}
+            />
           </Switch>
         </BrowserRouter>
       </div>
