@@ -8,33 +8,38 @@ import ReviewSubmit from "./../ReviewSubmit"
 import "./styles.css"
 
 import UserKeys from '../UserKeys'
+import { getReviews } from '../../actions/review'
 
+const log = console.log
 const reviewNumLimit = 3;
 
 class ReviewSection extends React.Component {
-  state = {
-    searchContent: "",
-    userVoteRecords: this.props.userVoteRecords,
-    reviews: this.props.reviews,
-    reviewsInSection: this.props.reviews,
-    reviewsOnPage: this.props.reviews.slice(
-      0,
-      reviewNumLimit
-    ),
-    currentPage: 1,
-    reviewSubmitTitle: "",
-    reviewSubmitContent: ""
-  }
-
   constructor(props) {
     super(props)
+
+    this.state = {
+      currentUser: this.props.currentUser,
+      searchContent: "",
+      userVoteRecords: this.props.userVoteRecords,
+      reviews: [],
+      reviewsInSection: [],
+      reviewsOnPage: [],
+      currentPage: 1,
+      reviewSubmitTitle: "",
+      reviewSubmitContent: ""
+    }
+
     this.upvoteAction = this.upvoteAction.bind(this)
     this.downvoteAction = this.downvoteAction.bind(this)
     this.reportAction = this.reportAction.bind(this)
   }
 
+  componentDidMount() {
+		getReviews(this, reviewNumLimit)
+	}
+
   upvoteAction = id => {
-    const user = UserKeys.getCurrUser()
+    const user = this.state.currentUser
     if (!user) {
       alert("You have to login before you vote.")
       return
@@ -72,7 +77,7 @@ class ReviewSection extends React.Component {
   }
 
   downvoteAction = id => {
-    const user = UserKeys.getCurrUser()
+    const user = this.state.currentUser
     if (!user) {
       alert("You have to login before you vote.")
       return
@@ -225,7 +230,7 @@ class ReviewSection extends React.Component {
 	}
 
 	addReview = () => {
-    const user = UserKeys.getCurrUser()
+    const user = this.state.currentUser
     if (!user) {
       alert("You have to login before you submit your review.")
       return
@@ -244,20 +249,43 @@ class ReviewSection extends React.Component {
 			content: this.state.reviewSubmitContent,
 			upvotes: 0,
 			downvotes: 0,
-			author: UserKeys.getCurrUser(),
+			author: this.state.currentUser,
 			reputation: 1
 		}
-		reviewList.push(newReview)
-		this.setState({
+    reviewList.push(newReview)
+    this.setState({
       reviewSubmitTitle: "",
       reviewSubmitContent: "",
-			reviews: reviewList,
+      reviews: reviewList,
       reviewsInSection: reviewList,
       reviewsOnPage: reviewList.slice(
         (this.state.currentPage - 1) * reviewNumLimit,
         (this.state.currentPage - 1) * reviewNumLimit + reviewNumLimit
-      ),
-		})
+      )
+    })
+
+    // Update database
+    const url = '/api/reviews'
+    const request = new Request(url, {
+      method: 'post',
+      body: JSON.stringify(newReview),
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+
+    fetch(request)
+    .then(function(res) {
+      if (res.status === 200) {
+        log("New review saved")
+      } else {
+        log("Error: Cannot add review")
+      }
+      log(res)
+    }).catch((error) => {
+      log(error)
+    })
 	}
 
   refreshForum = () => {
@@ -273,7 +301,6 @@ class ReviewSection extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <ForumSearchBar

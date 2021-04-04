@@ -23,7 +23,7 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 // import the mongoose models
 const { User } = require("./models/user");
-const { Chat } = require("./models/chat")
+const { Chat } = require("./models/chat");
 const { storeMessage } = require("./routes/helpers/messages")
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -64,6 +64,8 @@ app.use(require('./routes/friend'))
 app.use(require('./routes/chat'))
 
 app.use(require('./routes/reputation'))
+
+app.use(require('./routes/review'))
 
 // Serve the build
 app.use(express.static(path.join(__dirname, "/achievement-tracker/build")));
