@@ -20,14 +20,14 @@ let stats = [
 
 class Analytics extends React.Component {
 
-    state= {
+    state = {
         stats: stats
     }
 
     onSortDown(column) {
         stats.sort((a, b) => {
-            if (typeof(a[column]) == "string") {
-                console.log(typeof(a[column]))
+            if (typeof (a[column]) == "string") {
+                console.log(typeof (a[column]))
                 return (a[column].localeCompare(b[column]))
             }
             return (a[column] - b[column])
@@ -40,8 +40,8 @@ class Analytics extends React.Component {
 
     onSortUp(column) {
         stats.sort((a, b) => {
-            if (typeof(a[column]) == "string") {
-                console.log(typeof(a[column]))
+            if (typeof (a[column]) == "string") {
+                console.log(typeof (a[column]))
                 return (b[column].localeCompare(a[column]))
             }
             return (b[column] - a[column])
@@ -78,15 +78,15 @@ class Analytics extends React.Component {
                         <div id="StatsHeader">
                             <div id="StatsUser">
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
-                                <div id="StatsUserCaption"> 
+                                <div id="StatsUserCaption">
                                     <p>user</p>
                                     <span>Member for 5 months</span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
-                                    <p>Reputation Level:</p>
-                                    <span> 3 </span>
-                                </div>
+                                <p>Reputation Level:</p>
+                                <span> 3 </span>
+                            </div>
                         </div>
 
                         <div className="StatsRow" id="StatsRow1">
@@ -126,56 +126,56 @@ class Analytics extends React.Component {
                         <table id="StatsTable">
                             <thead >
                                 <tr>
-                                    <th id="tableID" className="tableHeader">ID 
+                                    <th id="tableID" className="tableHeader">ID
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("id")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("id")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                     <th id="tableTitle" className="tableHeader">Title
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("title")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("title")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                     <th id="tableCompletion" className="tableHeader">Completion%
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("completion")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("completion")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                     <th id="tableUnlocked" className="tableHeader">Unlocked
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("unlocked")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("unlocked")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                     <th id="tableTotal" className="tableHeader">Total
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("total")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("total")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                     <th id="tablePlaytime" className="tableHeader">Playtime
                                         <div className="sort">
                                             <button className="sortUp" onClick={() => this.onSortUp("playtime")}><span>▲</span></button>
                                             <button className="sortDown" onClick={() => this.onSortDown("playtime")}><span>▼</span></button>
-                                        </div> 
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                this.state.stats.map(row => (
-                                    <tr key={uid(row)}>
-                                        <td className="tableCell">{row.id}</td>
-                                        <td className="tableCell">{row.title}</td>
-                                        <td className="tableCell">{row.completion}</td>
-                                        <td className="tableCell">{row.unlocked}</td>
-                                        <td className="tableCell">{row.total}</td>
-                                        <td className="tableCell">{row.playtime}</td>
-                                    </tr>
-                                ))
+                                    this.state.stats.map(row => (
+                                        <tr key={uid(row)}>
+                                            <td className="tableCell">{row.id}</td>
+                                            <td className="tableCell">{row.title}</td>
+                                            <td className="tableCell">{row.completion}</td>
+                                            <td className="tableCell">{row.unlocked}</td>
+                                            <td className="tableCell">{row.total}</td>
+                                            <td className="tableCell">{row.playtime}</td>
+                                        </tr>
+                                    ))
                                 }
                             </tbody>
                         </table>

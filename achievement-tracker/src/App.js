@@ -76,7 +76,7 @@ class App extends React.Component {
               )}
             />
             {/* static routes available to public */}
-            <Route exact path='/ReviewForum' render={() => (<ReviewForum />)} />
+            <Route exact path='/ReviewForum' render={props => (<ReviewForum {...props} app={this} />)} />
             <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
 
             {/* admin route TODO update security check */}

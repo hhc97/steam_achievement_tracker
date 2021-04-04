@@ -6,14 +6,14 @@ export const getMessages = async (chatComp, userName, friendName) => {
 
     await fetch(url)
         .then(res => {
-            if(res.status === 200){
+            if (res.status === 200) {
                 return res.json();
-            }else{
+            } else {
                 console.log("cannot fetch request")
             }
         })
         .then(json => {
-            chatComp.setState({messages: json.messages, chatRoomId: json.id})
+            chatComp.setState({ messages: json.messages, chatRoomId: json.id })
         })
         .catch(error => {
             console.log(error);

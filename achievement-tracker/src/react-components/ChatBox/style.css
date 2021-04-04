@@ -48,7 +48,7 @@
 
 .chatBody{
     width: 100%;
-    height: 80%;
+    height: 100vh;
     border-bottom: 1pt solid black;
     display: flex;
     overflow: auto;
@@ -132,19 +132,22 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 10%;
+    height: fit-content;
     justify-content: space-between;
     align-items: center;
+    max-height: 40%;
 }
 
 .message{
     margin-left: 5px;
     width: 80%;
-    border-radius: 50px;
+    border-radius: 10px;
     outline: none;
-    font-size: 25px;
+    resize: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding-left: 10px;
-    height: 90%;
+    height: 70%;
 }
 
 .sendMessage{
