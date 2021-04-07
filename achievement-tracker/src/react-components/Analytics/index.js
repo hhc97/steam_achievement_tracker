@@ -39,6 +39,9 @@ class Analytics extends React.Component {
     onSortDown(column) {
         let stats = this.state.statsShown
         stats.sort((a, b) => {
+            if (typeof (a[column]) !== typeof (b[column])) {
+                return typeof (a[column]) == 'string' ? 1 : -1
+            }
             if (typeof (a[column]) == "string") {
                 return (a[column].localeCompare(b[column]))
             }
@@ -52,6 +55,9 @@ class Analytics extends React.Component {
     onSortUp(column) {
         let stats = this.state.statsShown
         stats.sort((a, b) => {
+            if (typeof (a[column]) !== typeof (b[column])) {
+                return typeof (a[column]) == 'string' ? 1 : -1
+            }
             if (typeof (a[column]) == "string") {
                 return (b[column].localeCompare(a[column]))
             }
