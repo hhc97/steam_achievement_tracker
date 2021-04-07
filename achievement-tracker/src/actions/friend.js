@@ -64,7 +64,7 @@ export const addFriends = async (dashboardComp) => {
                 // dashboardComp.setState({
                 //     friendList: newFriendList
                 // });
-                alert("Success: Waiting for your friend to accept.")
+                //alert("Success: Waiting for your friend to accept.")
             } else {
                 alert("Error: Friend does not exist or its pending");
             }
@@ -96,7 +96,6 @@ export const deleteFriend = async (dashboardComp, friendName) => {
                 dashboardComp.setState({
                     friendList: newFriendList
                 });
-                alert("Success: delete a friend.")
             } else {
                 alert("Error");
             }
@@ -131,7 +130,6 @@ export const acceptFriend = async (dashboardComp, friendName) => {
                 dashboardComp.setState({
                     friendList: newFriendList
                 });
-                alert("Success: friend added")
             } else {
                 alert("Error");
             }
@@ -162,7 +160,6 @@ export const declineFriend = async (dashboardComp, friendName) => {
                 dashboardComp.setState({
                     friendList: newFriendList
                 });
-                alert("Success: friend rejected")
             } else {
                 alert("Error");
             }

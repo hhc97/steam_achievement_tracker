@@ -306,7 +306,6 @@ class DashBoard extends React.Component {
                         {!(this.state.showLoading) || <div id="loadingIcon">
                             <img src={loadingIcon} />
                         </div>}
-
                     </div>
                     <div className='right'>
                         <BannerContainer>

@@ -45,6 +45,9 @@ class Signup extends React.Component {
         .then(res => {
           if (res.status === 404 && value.length > 0) {
             this.setState({ valid_username: true })
+            if (value.toLowerCase().startsWith('admin')) {
+              this.setState({ valid_username: false })
+            }
           } else if (res.status === 200 || value.length < 1) {
             this.setState({ valid_username: false })
           }

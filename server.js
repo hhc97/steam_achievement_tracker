@@ -66,6 +66,7 @@ app.use(require('./routes/chat'))
 app.use(require('./routes/reputation'))
 
 app.use(require('./routes/review'))
+app.use(require('./routes/voteRecord'))
 
 // Serve the build
 app.use(express.static(path.join(__dirname, "/achievement-tracker/build")));

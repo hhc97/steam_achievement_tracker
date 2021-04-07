@@ -3,53 +3,153 @@ import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../logo.svg'
+import loadingIcon from "./../Dashboard/Static/loading.jpg"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import { logout } from '../../actions/reactAuth'
+import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 
 import "./Analytics.css"
 
 // All of the statistics listed on this page, both in the banner and in the below table, are hardcoded sample values.
 // In phase 2, we will use API calls to populate this part of the user's profile with the relevant statistics we pull.
 
-let stats = [
-    { id: 1, title: "Game01Title", unlocked: 20, total: 25, playtime: 50.5, completion: 80.00 },
-    { id: 2, title: "Game52Title", unlocked: 17, total: 32, playtime: 32.7, completion: 53.13 },
-    { id: 3, title: "Game173Title", unlocked: 9, total: 20, playtime: 41.5, completion: 45.00 },
-    { id: 4, title: "Game57Title", unlocked: 12, total: 20, playtime: 2.5, completion: 60.00 }
-]
-
 class Analytics extends React.Component {
+    constructor(props) {
+        super(props)
+        const stats = [
+            { id: 0, title: "Loading Game Info...", unlocked: 0, total: 0, playtime: 0, completion: NaN }
+        ]
+        const username = this.props.app.state.currentUser
 
-    state = {
-        stats: stats
+        this.state = {
+            username: username,
+            stats: stats,
+            statsShown: [],
+            reputation: 1,
+            totalAchievements: 0,
+            averageCompletion: 0,
+            totalPlaytime: 0,
+            averagePlaytime: 0,
+            totalGames: 0,
+            showLoading: true
+        }
     }
 
     onSortDown(column) {
+        let stats = this.state.statsShown
         stats.sort((a, b) => {
             if (typeof (a[column]) == "string") {
-                console.log(typeof (a[column]))
                 return (a[column].localeCompare(b[column]))
             }
             return (a[column] - b[column])
         })
-        console.log("sorted down")
         this.setState({
             stats: stats
         })
     }
 
     onSortUp(column) {
+        let stats = this.state.statsShown
         stats.sort((a, b) => {
             if (typeof (a[column]) == "string") {
-                console.log(typeof (a[column]))
                 return (b[column].localeCompare(a[column]))
             }
             return (b[column] - a[column])
         })
-        console.log("sorted up")
         this.setState({
             stats: stats
         })
+    }
+
+    extractStats(data) {
+        let completion = -1
+        if (data.achievements === undefined) {
+            return completion
+        }
+        const max = data.achievements.length
+        let achieved = 0
+        for (let i = 0; i < max; i++) {
+            const element = data.achievements[i];
+            if (element.achieved === 1) {
+                achieved++
+            }
+        }
+        completion = (achieved / max) * 100
+        return [achieved, max, completion]
+    }
+
+    updateBannerStats() {
+        const tableStats = this.state.stats
+        let totalAchievements = 0
+        let totalPlaytime = 0
+        let totalCompletion = 0
+        let numGames = 0
+        for (let i = 0; i < tableStats.length; i++) {
+            const game = tableStats[i];
+            if (game.completion > 0) {
+                totalAchievements += game.unlocked
+                totalCompletion += game.completion
+                totalPlaytime += game.playtime
+                numGames++
+            }
+        }
+        this.setState({ totalAchievements: totalAchievements })
+        this.setState({ averageCompletion: (totalCompletion / numGames) })
+        this.setState({ totalPlaytime: totalPlaytime })
+        this.setState({ averagePlaytime: (totalPlaytime / numGames) })
+    }
+
+    async updateAchievements() {
+        let gameList = this.state.stats
+        this.setState({ statsShown: gameList.slice() })
+        for (let i = 0; i < gameList.length; i++) {
+            const game = gameList[i];
+            let gameStats = -1
+            await getAchievementStats(game.id)
+                .then(res => { gameStats = this.extractStats(res) })
+            if (gameStats === -1) {
+                gameList.splice(i, 1)
+                i--
+                let shownStats = this.state.statsShown
+                const removeIndex = shownStats.indexOf(game);
+                if (removeIndex > -1) {
+                    shownStats.splice(removeIndex, 1);
+                }
+            } else {
+                game.unlocked = gameStats[0]
+                game.total = gameStats[1]
+                game.completion = gameStats[2]
+                this.updateBannerStats()
+            }
+        }
+        this.setState({ showLoading: false })
+    }
+
+    updateStats(data) {
+        let gameList = []
+        const games = data.games
+        for (let i = 0; i < games.length; i++) {
+            let gameEntry = {}
+            const game = games[i]
+            gameEntry['title'] = game.name
+            gameEntry['unlocked'] = 'Calculating...'
+            gameEntry['total'] = 'Calculating...'
+            gameEntry['completion'] = 'Calculating...'
+            gameEntry['playtime'] = game.playtime_forever / 60
+            gameEntry['id'] = game.appid
+            gameList.push(gameEntry)
+            this.setState({ stats: gameList })
+        }
+        this.setState({ stats: gameList })
+        this.updateAchievements()
+    }
+
+    componentDidMount() {
+        getGameStats()
+            .then(res => {
+                this.updateStats(res)
+            })
     }
 
     render() {
@@ -63,7 +163,7 @@ class Analytics extends React.Component {
                             <div className='group'>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
                                 <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                                <HeaderButton path='/'>Log Out</HeaderButton>
+                                <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                             </div>
                         </HeaderNavBar>
                     </HeadContainer>
@@ -79,7 +179,7 @@ class Analytics extends React.Component {
                             <div id="StatsUser">
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
-                                    <p>user</p>
+                                    <p> {this.state.username} </p>
                                     <span>Member for 5 months</span>
                                 </div>
                             </div>
@@ -92,11 +192,11 @@ class Analytics extends React.Component {
                         <div className="StatsRow" id="StatsRow1">
                             <div className="StatBoxLeft">
                                 <p>Total Achievements</p>
-                                <span> 79 </span>
+                                <span> {this.state.totalAchievements} </span>
                             </div>
                             <div className="StatBoxCenter">
                                 <p>Total Playtime</p>
-                                <span> 625.7 hours </span>
+                                <span> {(Math.round(this.state.totalPlaytime * 100) / 100).toFixed(2)} hours </span>
                             </div>
                             <div className="StatBoxRight">
                                 <p>Reviews Posted</p>
@@ -107,11 +207,11 @@ class Analytics extends React.Component {
                         <div className="StatsRow" id="StatsRow2">
                             <div className="StatBoxLeft">
                                 <p>Average Completion</p>
-                                <span> 37.8% </span>
+                                <span> {(Math.round(this.state.averageCompletion * 100) / 100).toFixed(2)} </span>
                             </div>
                             <div className="StatBoxCenter">
                                 <p>Average Playtime</p>
-                                <span> 70.7 hours </span>
+                                <span> {(Math.round(this.state.averagePlaytime * 100) / 100).toFixed(2)} hours </span>
                             </div>
                             <div className="StatBoxRight">
                                 <p>Review Score</p>
@@ -121,8 +221,12 @@ class Analytics extends React.Component {
                     </div>
 
                     <div id="TableSection">
-                        <p>Lifetime Stats</p>
-
+                        <div id="StatsTitle">
+                            <p>Lifetime Stats</p>
+                            {!(this.state.showLoading) || <div id="loadingIcon">
+                                <img src={loadingIcon} />
+                            </div>}
+                        </div>
                         <table id="StatsTable">
                             <thead >
                                 <tr>
@@ -166,14 +270,14 @@ class Analytics extends React.Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.state.stats.map(row => (
+                                    this.state.statsShown.map(row => (
                                         <tr key={uid(row)}>
                                             <td className="tableCell">{row.id}</td>
                                             <td className="tableCell">{row.title}</td>
-                                            <td className="tableCell">{row.completion}</td>
+                                            <td className="tableCell">{(Math.round(row.completion * 100) / 100).toFixed(2)} </td>
                                             <td className="tableCell">{row.unlocked}</td>
                                             <td className="tableCell">{row.total}</td>
-                                            <td className="tableCell">{row.playtime}</td>
+                                            <td className="tableCell">{(row.playtime).toFixed(2)} h </td>
                                         </tr>
                                     ))
                                 }

@@ -1,7 +1,7 @@
 .chatBox{
     position: fixed;
     bottom: 0px;
-    right: 12%;
+    right: 7%;
     width: 328px;
     display: flex;
     flex-direction: column;
@@ -144,6 +144,8 @@
     border-radius: 10px;
     outline: none;
     resize: none;
+    min-height: 30px;
+    overflow: hidden;
     margin-top: 5px;
     margin-bottom: 5px;
     padding-left: 10px;

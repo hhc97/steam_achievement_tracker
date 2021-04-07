@@ -47,4 +47,43 @@ router.get('/api/reviews', mongoChecker, async (req, res) => {
   }
 })
 
+router.patch('/api/reviews/:id', mongoChecker, async (req, res) => {
+  const id = req.params.id
+
+	try {
+		const review = await Review.findOne({id: id})
+		if (!review) {
+			res.status(404).send()
+		} else {
+			review.upvotes = req.body.upvotes
+			review.downvotes = req.body.downvotes
+			review.save()
+			res.send(review)
+		}
+	} catch (error) {
+		log(error) // log server error to the console, not to the client.
+		if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') // bad request for changing the student.
+		}
+	}
+})
+
+router.delete('/api/reviews/:id', mongoChecker, async (req, res) => {
+	const id = req.params.id
+
+	try {
+		const review = await Review.findByIdAndRemove(id)
+		if (!review) {
+			res.status(404).send()
+		} else {   
+			res.send(review)
+		}
+	} catch(error) {
+		log(error)
+		res.status(500).send()
+	}
+})
+
 module.exports = router

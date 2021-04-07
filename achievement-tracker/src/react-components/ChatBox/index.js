@@ -30,6 +30,7 @@ class ChatBox extends React.Component {
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.checkMessagePerson = this.checkMessagePerson.bind(this)
+        this.onEnterPress = this.onEnterPress.bind(this)
     }
     async componentDidMount() {
         if (this.state.socket !== undefined) {
@@ -61,25 +62,37 @@ class ChatBox extends React.Component {
     onChange(e) {
         this.setState({ text: e.target.value })
         const elem = e.target
+        elem.style.height = "1px"
         const toBeAddHeight = (elem.scrollHeight) + "px";
         if (parseInt(toBeAddHeight.substring(0, toBeAddHeight.length - 2)) <= 110) {
             elem.style.height = toBeAddHeight
         }
     }
+
+    onEnterPress = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            this.onSubmit(e)
+          }
+    }
+
     onSubmit(e) {
         e.preventDefault();
         //check if its empty message
         if (this.state.text === "") {
             return;
         }
-
+        let target = e.target
         const data = {
             name: this.props.userName,
             content: this.state.text,
             time: Date.now()
         }
         //change textarea height back to normal
-        e.target.children[0].style.height = "70%"
+        if (e.target.className !== 'chatMessage'){
+            target = target.parentNode
+        }
+        target.children[0].style.height = "70%"
         //update our own message
         const newMessages = this.state.messages
         newMessages.push(data)
@@ -137,6 +150,7 @@ class ChatBox extends React.Component {
                         value={this.state.text}
                         rows="1"
                         style={{ maxHeight: "100px" }}
+                        onKeyPress={this.onEnterPress}
                     >
                     </textarea>
                     <button className='sendMessage'>Send</button>

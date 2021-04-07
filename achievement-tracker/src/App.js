@@ -79,8 +79,16 @@ class App extends React.Component {
             <Route exact path='/ReviewForum' render={props => (<ReviewForum {...props} app={this} />)} />
             <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
 
-            {/* admin route TODO update security check */}
-            <Route exact path='/Admin' render={() => (<Admin />)} />
+            {/* admin route can only be accessed if current user is an admin */}
+            <Route
+              exact path="/Admin"
+              render={props => (
+                <div className="App">
+                  {(currentUser && currentUser.toLowerCase().startsWith('admin')) ?
+                    <Admin {...props} app={this} /> : <Home />}
+                </div>
+              )}
+            />
 
             {/* any other route defaults to dashboard if logged in and homepage if not (404 route) */}
             <Route

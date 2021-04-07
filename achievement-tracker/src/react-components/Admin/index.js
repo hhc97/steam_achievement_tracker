@@ -7,7 +7,6 @@ import ReviewBar from "./../ReviewBar";
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
 import logo from './../../logo.svg'
 import "./styles.css"
-import UserKeys from '../UserKeys.js'
 
 /*
 ** Hardcoded Data
@@ -123,13 +122,6 @@ class Admin extends React.Component {
   }
 
   render() {
-    // if the user is not an admin then do not display the page
-    if (UserKeys.getCurrUserAdminStatus() == 'false' || !UserKeys.getCurrUserAdminStatus()) {
-      return (
-        <div id='notAuthorized'>Page not found, you must be logged in as an Admin to view this page.
-        </div>
-      )
-    }
     return (
       <div>
         <HeadContainer bgId={"dashboard"}>
