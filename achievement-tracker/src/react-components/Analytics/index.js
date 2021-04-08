@@ -159,16 +159,42 @@ class Analytics extends React.Component {
         this.updateAchievements()
     }
 
-    async setMemberLength() {
+    async setMemberAge() {
         let joined
         await fetch(`/users/joindate/${this.state.username}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
-        // joined is now a string representing the join date of the member, manipulate it below and set the state
+        let joinedDate = new Date(2018, 10, 23, 17, 35, 46)
+        let today = new Date()
+        let ageSeconds = (today.getTime() - joinedDate.getTime()) /1000
+        let age
+        // if age of account is less than 1 day, report age in hours and minutes
+        if (ageSeconds < 86400) {
+            let ageHours = Math.floor(ageSeconds/3600)
+            let ageMinutes = Math.floor(ageSeconds/60 - ageHours*60)
+            // display plural 'hours' if age > 2h
+            age = `${ageHours} hour${ageHours > 1 ? "s":""} ${ageMinutes} minute${ageMinutes > 1 ? "s":""}`
+        // if age is greater than 1 day but under 1 month, report age in days
+        } else if (ageSeconds/86400 < 30) {
+            // display plural 'days' if age > 2 days
+            age = `${Math.floor(ageSeconds/86400)} day${ageSeconds > 86400*2 ? "s":""}`
+        // if age is greater than 1 month but under 1 year, report age in months
+        } else if (ageSeconds/86400 < 365) {
+            // display plural 'months' if age > 2 months
+            let ageMonths = Math.floor((ageSeconds/86400)/30)
+            let ageDays = Math.floor(ageSeconds/86400 - ageMonths*30)
+            age = `${Math.floor((ageSeconds/86400)/30)} month${ageSeconds > 86400*60 ? "s":""} day${ageDays > 1 ? "s":""}`
+        // if age is greater than 1 year, report age in years and months
+        } else {
+            let ageYears = Math.floor((ageSeconds/86400)/365)
+            let ageMonths = Math.floor((ageSeconds/86400 - ageYears*365)/30)
+            age = `${ageYears} year${ageYears > 1 ? "s":""} ${ageMonths} month${ageMonths > 1 ? "s":""}`
+        }
+        this.setState({ joinDate: "Member for " + age})
     }
 
     componentDidMount() {
-        this.setMemberLength()
+        this.setMemberAge()
         getGameStats()
             .then(res => { this.updateStats(res) })
     }
@@ -201,7 +227,7 @@ class Analytics extends React.Component {
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
                                     <p> {this.state.username} </p>
-                                    <span>{this.state.joinDate}</span>
+                                    <span> {this.state.joinDate} </span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
