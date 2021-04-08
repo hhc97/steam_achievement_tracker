@@ -33,7 +33,8 @@ class Analytics extends React.Component {
             averagePlaytime: 0,
             totalGames: 0,
             showLoading: true,
-            sortAscending: false
+            sortAscending: false,
+            joinDate: ''
         }
     }
 
@@ -158,11 +159,16 @@ class Analytics extends React.Component {
         this.updateAchievements()
     }
 
+    async setMemberLength() {
+        await fetch(`/users/joindate/${this.state.username}`)
+            .then(res => { return res.json() })
+            .then(json => { this.setState({ joinDate: json.time }) })
+    }
+
     componentDidMount() {
+        this.setMemberLength()
         getGameStats()
-            .then(res => {
-                this.updateStats(res)
-            })
+            .then(res => { this.updateStats(res) })
     }
 
     render() {
@@ -193,7 +199,7 @@ class Analytics extends React.Component {
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
                                     <p> {this.state.username} </p>
-                                    <span>Member for 5 months</span>
+                                    <span>{this.state.joinDate}</span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
