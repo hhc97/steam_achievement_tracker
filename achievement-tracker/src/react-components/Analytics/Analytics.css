@@ -140,15 +140,6 @@ body {
     margin-top: 5%;
 }
 
-#TableSection p{
-    width: fit-content;
-    font-size: 24pt;
-    font-weight: 700;
-    font-style: italic;
-    text-align: left;
-    border-bottom: 3px solid currentColor;
-}
-
 #StatsTable {
     background-color: ghostwhite;
     color: black;
@@ -162,6 +153,22 @@ body {
     background-color: #292929;
     color: ghostwhite;
     border-top: 2px #292929;
+}
+
+#StatsTitle p{
+        width: fit-content;
+        font-size: 24pt;
+        font-weight: 700;
+        font-style: italic;
+        text-align: left;
+        border-bottom: 3px solid currentColor;
+        float: left;
+        display: inline;
+}
+
+#loadingIcon {
+    float: right;
+    display: inline;
 }
 
 #tableID {
