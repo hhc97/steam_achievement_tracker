@@ -32,11 +32,18 @@ class Analytics extends React.Component {
             totalPlaytime: 0,
             averagePlaytime: 0,
             totalGames: 0,
-            showLoading: true
+            showLoading: true,
+            sortAscending: false
         }
     }
 
     onSortDown(column) {
+        if (this.state.sortAscending) {
+            this.setState({ sortAscending: false })
+            this.onSortUp(column)
+            return
+        }
+        this.setState({ sortAscending: true })
         let stats = this.state.statsShown
         stats.sort((a, b) => {
             if (typeof (a[column]) !== typeof (b[column])) {
