@@ -222,7 +222,7 @@ body {
     width: 15px;
 }
 
-.sortDown {
+.sortButton {
     float: right;
     height: 20px;
     width: 15px;
@@ -231,11 +231,3 @@ body {
     vertical-align: middle;
 }
 
-.sortUp {
-    float: left;
-    height: 20px;
-    width: 15px;
-    margin-top: 3px;
-    padding: 0px;
-    vertical-align: middle;
-}
