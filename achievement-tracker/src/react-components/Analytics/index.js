@@ -3,13 +3,15 @@ import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../logo.svg'
-import loadingIcon from "./../Dashboard/Static/loading.jpg"
+import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 
 import "./Analytics.css"
+
+const prettyMilliseconds = require('pretty-ms');
 
 // All of the statistics listed on this page, both in the banner and in the below table, are hardcoded sample values.
 // In phase 2, we will use API calls to populate this part of the user's profile with the relevant statistics we pull.
@@ -32,11 +34,19 @@ class Analytics extends React.Component {
             totalPlaytime: 0,
             averagePlaytime: 0,
             totalGames: 0,
-            showLoading: true
+            showLoading: true,
+            sortAscending: false,
+            joinDate: ''
         }
     }
 
     onSortDown(column) {
+        if (this.state.sortAscending) {
+            this.setState({ sortAscending: false })
+            this.onSortUp(column)
+            return
+        }
+        this.setState({ sortAscending: true })
         let stats = this.state.statsShown
         stats.sort((a, b) => {
             if (typeof (a[column]) !== typeof (b[column])) {
@@ -151,11 +161,24 @@ class Analytics extends React.Component {
         this.updateAchievements()
     }
 
+    // sets the user membership length to a human readable string
+    async setMemberAge() {
+        let joined
+        await fetch(`/users/joindate/${this.state.username}`)
+            .then(res => { return res.json() })
+            .then(json => { joined = json.time })
+        const now = new Date()
+        const joinedDate = new Date(joined)
+        const age_ms = now.getTime() - joinedDate.getTime()
+        const ageString = prettyMilliseconds(age_ms) + '  '
+        const stopPoint = ageString.split(' ', 2).join(' ').length
+        this.setState({ joinDate: 'Member for ' + ageString.slice(0, stopPoint) })
+    }
+
     componentDidMount() {
+        this.setMemberAge()
         getGameStats()
-            .then(res => {
-                this.updateStats(res)
-            })
+            .then(res => { this.updateStats(res) })
     }
 
     render() {
@@ -186,7 +209,7 @@ class Analytics extends React.Component {
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
                                     <p> {this.state.username} </p>
-                                    <span>Member for 5 months</span>
+                                    <span> {this.state.joinDate} </span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
@@ -213,7 +236,7 @@ class Analytics extends React.Component {
                         <div className="StatsRow" id="StatsRow2">
                             <div className="StatBoxLeft">
                                 <p>Average Completion</p>
-                                <span> {(Math.round(this.state.averageCompletion * 100) / 100).toFixed(2)} </span>
+                                <span> {(Math.round(this.state.averageCompletion * 100) / 100).toFixed(2)} % </span>
                             </div>
                             <div className="StatBoxCenter">
                                 <p>Average Playtime</p>
@@ -229,7 +252,7 @@ class Analytics extends React.Component {
                     <div id="TableSection">
                         <div id="StatsTitle">
                             <p>Lifetime Stats</p>
-                            {!(this.state.showLoading) || <div id="loadingIcon">
+                            {!(this.state.showLoading) || <div id="loadingIcon2">
                                 <img src={loadingIcon} />
                             </div>}
                         </div>
@@ -238,38 +261,38 @@ class Analytics extends React.Component {
                                 <tr>
                                     <th id="tableID" className="tableHeader">ID
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("id")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("id")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("id")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableTitle" className="tableHeader">Title
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("title")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("title")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("title")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
-                                    <th id="tableCompletion" className="tableHeader">Completion%
+                                    <th id="tableCompletion" className="tableHeader">Completion %
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("completion")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("completion")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("completion")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableUnlocked" className="tableHeader">Unlocked
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("unlocked")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("unlocked")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("unlocked")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableTotal" className="tableHeader">Total
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("total")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("total")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("total")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tablePlaytime" className="tableHeader">Playtime
                                         <div className="sort">
-                                            <button className="sortUp" onClick={() => this.onSortUp("playtime")}><span>▲</span></button>
-                                            <button className="sortDown" onClick={() => this.onSortDown("playtime")}><span>▼</span></button>
+                                            <button className="sortButton" onClick={() => this.onSortDown("playtime")}>
+                                                <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                 </tr>

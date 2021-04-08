@@ -51,6 +51,11 @@ async function getUser(req, res, next) {
     next()
 }
 
+// route to get a users creation time
+router.get('/users/joindate/:username', mongoChecker, getUser, async (req, res) => {
+    res.json({ time: req.user.signUpTime })
+})
+
 // route to get a user by their username, useful for checking if a username exists
 router.get('/usernames/:username', mongoChecker, getUser, async (req, res) => {
     // if we reach here, then our middleware found a user, so send a 200

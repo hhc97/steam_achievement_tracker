@@ -140,15 +140,6 @@ body {
     margin-top: 5%;
 }
 
-#TableSection p{
-    width: fit-content;
-    font-size: 24pt;
-    font-weight: 700;
-    font-style: italic;
-    text-align: left;
-    border-bottom: 3px solid currentColor;
-}
-
 #StatsTable {
     background-color: ghostwhite;
     color: black;
@@ -162,6 +153,37 @@ body {
     background-color: #292929;
     color: ghostwhite;
     border-top: 2px #292929;
+}
+
+#StatsTitle {
+    height: 50px;
+}
+
+#StatsTitle p{
+    width: fit-content;
+    font-size: 24pt;
+    font-weight: 700;
+    font-style: italic;
+    text-align: left;
+    border-bottom: 3px solid currentColor;
+    float: left;
+    display: inline;
+}
+
+#loadingIcon2 {
+    height: 35px;
+    width: auto;
+    float: left;
+    display: inline;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+#loadingIcon2 img {
+    height: 100%;
+    width: auto;
+    vertical-align: bottom;
+    animation: rotation 5s infinite linear;
 }
 
 #tableID {
@@ -215,20 +237,22 @@ body {
     width: 15px;
 }
 
-.sortDown {
+.sortButton {
     float: right;
-    height: 20px;
-    width: 15px;
+    height: 25px;
+    width: 22px;
     margin-top: 3px;
     padding: 0px;
     vertical-align: middle;
 }
 
-.sortUp {
-    float: left;
-    height: 20px;
-    width: 15px;
-    margin-top: 3px;
-    padding: 0px;
-    vertical-align: middle;
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
 }
+

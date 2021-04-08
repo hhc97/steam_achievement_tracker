@@ -3,7 +3,7 @@ import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../Heade
 import logo from './../../logo.svg'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import settingLogo from "./../Dashboard/Static/settingLogo.png"
-import loadingIcon from "./../Dashboard/Static/loading.jpg"
+import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 import { PersonalPic, BannerContainer, BannerLink, Friend, FriendList } from '../PersonalBanner'
 import { AchievementContainer, Game } from '../Achievement'
 import ChatBox from '../ChatBox';
