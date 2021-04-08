@@ -169,8 +169,9 @@ class Analytics extends React.Component {
         const now = new Date()
         const joinedDate = new Date(joined)
         const age_ms = now.getTime() - joinedDate.getTime()
-        const ageString = prettyMilliseconds(age_ms)
-        this.setState({ joinDate: 'Member for ' + ageString.slice(0, ageString.lastIndexOf(' ')) })
+        const ageString = prettyMilliseconds(age_ms) + '  '
+        const stopPoint = ageString.split(' ', 2).join(' ').length
+        this.setState({ joinDate: 'Member for ' + ageString.slice(0, stopPoint) })
         // manual calculation -- replaced with package
         // let ageSeconds = (today.getTime() - joinedDate.getTime()) /1000
         // let age
