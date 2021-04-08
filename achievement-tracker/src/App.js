@@ -29,6 +29,19 @@ class App extends React.Component {
   render() {
     const { currentUser } = this.state;
 
+    // if the current user is an admin, then any route takes them to the admin dashboard
+    if (currentUser && currentUser.toLowerCase().startsWith('admin')) {
+      return (
+        <div className="App">
+          <BrowserRouter>
+            <Switch>
+              <Route exact path='/*' render={props => (<Admin {...props} app={this} />)} />
+            </Switch>
+          </BrowserRouter>
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -78,17 +91,6 @@ class App extends React.Component {
             {/* static routes available to public */}
             <Route exact path='/ReviewForum' render={props => (<ReviewForum {...props} app={this} />)} />
             <Route exact path='/SteamInfo' render={() => (<SteamInfo />)} />
-
-            {/* admin route can only be accessed if current user is an admin */}
-            <Route
-              exact path="/Admin"
-              render={props => (
-                <div className="App">
-                  {(currentUser && currentUser.toLowerCase().startsWith('admin')) ?
-                    <Admin {...props} app={this} /> : <Home />}
-                </div>
-              )}
-            />
 
             {/* any other route defaults to dashboard if logged in and homepage if not (404 route) */}
             <Route
