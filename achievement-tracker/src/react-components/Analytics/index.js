@@ -160,9 +160,11 @@ class Analytics extends React.Component {
     }
 
     async setMemberLength() {
+        let joined
         await fetch(`/users/joindate/${this.state.username}`)
             .then(res => { return res.json() })
-            .then(json => { this.setState({ joinDate: json.time }) })
+            .then(json => { joined = json.time })
+        // joined is now a string representing the join date of the member, manipulate it below and set the state
     }
 
     componentDidMount() {
