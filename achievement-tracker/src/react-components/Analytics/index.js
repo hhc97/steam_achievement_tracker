@@ -164,7 +164,7 @@ class Analytics extends React.Component {
         await fetch(`/users/joindate/${this.state.username}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
-        let joinedDate = new Date(2018, 10, 23, 17, 35, 46)
+        let joinedDate = new Date(joined)
         let today = new Date()
         let ageSeconds = (today.getTime() - joinedDate.getTime()) /1000
         let age
