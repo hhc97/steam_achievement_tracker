@@ -53,7 +53,7 @@ async function getUser(req, res, next) {
 
 // route to get a users creation time
 router.get('/users/joindate/:username', mongoChecker, getUser, async (req, res) => {
-    res.send(req.user.signUpTime)
+    res.json({ time: req.user.signUpTime })
 })
 
 // route to get a user by their username, useful for checking if a username exists
