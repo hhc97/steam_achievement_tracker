@@ -245,37 +245,37 @@ class Analytics extends React.Component {
                                 <tr>
                                     <th id="tableID" className="tableHeader">ID
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("id")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("id")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableTitle" className="tableHeader">Title
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("title")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("title")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableCompletion" className="tableHeader">Completion%
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("completion")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("completion")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableUnlocked" className="tableHeader">Unlocked
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("unlocked")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("unlocked")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tableTotal" className="tableHeader">Total
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("total")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("total")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
                                     <th id="tablePlaytime" className="tableHeader">Playtime
                                         <div className="sort">
-                                            <button className="sortDown" onClick={() => this.onSortDown("playtime")}>
+                                            <button className="sortButton" onClick={() => this.onSortDown("playtime")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
