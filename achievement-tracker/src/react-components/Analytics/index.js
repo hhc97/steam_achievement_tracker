@@ -3,7 +3,7 @@ import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../logo.svg'
-import loadingIcon from "./../Dashboard/Static/loading.jpg"
+import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { logout } from '../../actions/reactAuth'
@@ -252,7 +252,7 @@ class Analytics extends React.Component {
                     <div id="TableSection">
                         <div id="StatsTitle">
                             <p>Lifetime Stats</p>
-                            {!(this.state.showLoading) || <div id="loadingIcon">
+                            {!(this.state.showLoading) || <div id="loadingIcon2">
                                 <img src={loadingIcon} />
                             </div>}
                         </div>
