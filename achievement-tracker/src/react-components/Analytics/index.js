@@ -220,7 +220,7 @@ class Analytics extends React.Component {
                         <div className="StatsRow" id="StatsRow2">
                             <div className="StatBoxLeft">
                                 <p>Average Completion</p>
-                                <span> {(Math.round(this.state.averageCompletion * 100) / 100).toFixed(2)} </span>
+                                <span> {(Math.round(this.state.averageCompletion * 100) / 100).toFixed(2)} % </span>
                             </div>
                             <div className="StatBoxCenter">
                                 <p>Average Playtime</p>
@@ -255,7 +255,7 @@ class Analytics extends React.Component {
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
                                         </div>
                                     </th>
-                                    <th id="tableCompletion" className="tableHeader">Completion%
+                                    <th id="tableCompletion" className="tableHeader">Completion %
                                         <div className="sort">
                                             <button className="sortButton" onClick={() => this.onSortDown("completion")}>
                                                 <span>{this.state.sortAscending ? '▲' : '▼'}</span></button>
