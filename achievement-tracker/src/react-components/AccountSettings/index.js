@@ -5,6 +5,8 @@ import sampleProfilePic from "./imgs/sampleProfilePic.jpg"
 import logo from './../../logo.svg'
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { logout } from '../../actions/reactAuth'
+
 import "./style.css"
 
 class AccountSettings extends React.Component {
