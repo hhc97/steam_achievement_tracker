@@ -5,52 +5,72 @@ import AdminSearchBar from "./../AdminSearchBar";
 import UserBar from "./../UserBar";
 import ReviewBar from "./../ReviewBar";
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import { getReviewsOnAdmin, updateReview, deleteReviewOnAdmin, updateUsernameReputation } from '../../actions/review'
+import { deleteUserOnAdmin, getUsersOnAdmin } from "../../actions/user"
+import { logout } from '../../actions/reactAuth'
 import logo from './../../logo.svg'
 import "./styles.css"
+import { deleteVoteRecordByUser } from "../../actions/voteRecord";
 
 /*
 ** Hardcoded Data
 */
 
-const userData = [
-  {
-    username: "John Smith",
-    reputation: 3
-  },
-  {
-    username: "Diluc Ragnvindr",
-    reputation: 7
-  }
-]
-const reviewData = [
-  {
-    id: 1,
-    title: "Hollow Knight Review",
-    content: "BEST GAME EVER",
-    upvotes: 21,
-    downvotes: 4,
-    author: "John Smith",
-    reputation: 3
-  },
-  {
-    id: 2,
-    title: "Some personal thoughts on Northgard...",
-    content: "It's more of a casual area-control boardgame than anything, so much so that they made an actual boardgame out of it and it plays the same. Northgard has nice aesthetics but it's not really a city or an empire builder on the likes of AoE. So, my take on a few reviews here is that people who never played AoE are comparing this game to it without any context. Extremely light resource management, you can't chose where to plop down buildings as you see fit and army management is non-existent. Saddly, it's a toddler's RTS.",
-    upvotes: 3,
-    downvotes: 0,
-    author: "Rentt Vivie",
-    reputation: 3
-  }
-]
+// const userData = [
+//   {
+//     username: "John Smith",
+//     reputation: 3
+//   },
+//   {
+//     username: "Diluc Ragnvindr",
+//     reputation: 7
+//   }
+// ]
+// const reviewData = [
+//   {
+//     id: 1,
+//     title: "Hollow Knight Review",
+//     content: "BEST GAME EVER",
+//     upvotes: 21,
+//     downvotes: 4,
+//     author: "John Smith",
+//     reputation: 3
+//   },
+//   {
+//     id: 2,
+//     title: "Some personal thoughts on Northgard...",
+//     content: "It's more of a casual area-control boardgame than anything, so much so that they made an actual boardgame out of it and it plays the same. Northgard has nice aesthetics but it's not really a city or an empire builder on the likes of AoE. So, my take on a few reviews here is that people who never played AoE are comparing this game to it without any context. Extremely light resource management, you can't chose where to plop down buildings as you see fit and army management is non-existent. Saddly, it's a toddler's RTS.",
+//     upvotes: 3,
+//     downvotes: 0,
+//     author: "Rentt Vivie",
+//     reputation: 3
+//   }
+// ]
+
+const log = console.log
 
 class Admin extends React.Component {
-  state = {
-    userSearch: "",
-    reviewSearch: "",
-    users: userData,
-    usersOnPage: userData,
-    reviews: reviewData,
-    reviewsOnPage: reviewData
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      userSearch: "",
+      reviewSearch: "",
+      users: [],
+      usersOnPage: [],
+      reviews: [],
+      reviewsOnPage: []
+    }
+
+    this.deleteUser = this.deleteUser.bind(this)
+    this.deleteReview = this.deleteReview.bind(this)
+    this.refreshUsers = this.refreshUsers.bind(this)
+    this.refreshReviews = this.refreshReviews.bind(this)
+  }
+
+  componentDidMount() {
+    getUsersOnAdmin(this)
+    getReviewsOnAdmin(this)
   }
 
   handleUserSearchChange = event => {
@@ -61,26 +81,12 @@ class Admin extends React.Component {
   }
 
   searchUser = () => {
-    console.log("Search!")
-
     const userList = this.state.users.filter(user => {
       return user.username.includes(this.state.userSearch)
     })
 
     this.setState({
       usersOnPage: userList
-    })
-  }
-
-  searchReview = () => {
-    console.log("Search!")
-
-    const reviewList = this.state.reviews.filter(review => {
-      return review.title.includes(this.state.reviewSearch)
-    })
-
-    this.setState({
-      reviewsOnPage: reviewList
     })
   }
 
@@ -91,33 +97,69 @@ class Admin extends React.Component {
     })
   }
 
-  handleReviewSearchButton = event => {
-    console.log("Search Review")
-  }
+  searchReview = () => {
+    const reviewList = this.state.reviews.filter(review => {
+      return review.title.includes(this.state.reviewSearch)
+    })
 
-  constructor(props) {
-    super(props)
-    this.deleteUser = this.deleteUser.bind(this)
-    this.deleteReview = this.deleteReview.bind(this)
+    this.setState({
+      reviewsOnPage: reviewList
+    })
   }
 
   deleteUser = username => {
-    console.log("Delete User")
-
     const userList = this.state.users.filter(user => user.username !== username)
     this.setState({
       users: userList,
       usersOnPage: userList
     })
+
+    // Delete this user in database
+    const user = this.state.users.filter(user => user.username === username)[0]
+    updateUsernameReputation(username, user.reputation, true)
+    deleteUserOnAdmin(user)
+    deleteVoteRecordByUser(username)
+
   }
 
-  deleteReview = id => {
-    console.log("Delete Review")
-
-    const reviewList = this.state.reviews.filter(review => review.id !== id)
+  deleteReview = reviewId => {
+    const reviewList = this.state.reviews.filter(review => review.id !== reviewId)
     this.setState({
       reviews: reviewList,
       reviewsOnPage: reviewList
+    })
+
+    // Delete this review in database
+    deleteReviewOnAdmin(this.state.reviews.filter(review => review.id === reviewId)[0])
+  }
+
+  cancelReport = reviewId => {
+    const reviewList = this.state.reviews.map(review => {
+      if (review.id === reviewId) {
+        review.reported = false
+      }
+      return review
+    })
+    this.setState({
+      reviews: reviewList,
+      reviewsOnPage: reviewList
+    })
+
+    // Update review in database
+    updateReview(this.state.reviews.filter(review => review.id === reviewId)[0])
+  }
+
+  refreshUsers = () => {
+    this.setState({
+        usersOnPage: this.state.users,
+        userSearch: ""
+    })
+  }
+
+  refreshReviews = () => {
+    this.setState({
+        reviewsOnPage: this.state.reviews,
+        reviewSearch: ""
     })
   }
 
@@ -128,7 +170,7 @@ class Admin extends React.Component {
           <HeaderNavBar>
             <HeaderImage to='/' src={logo} />
             <div className='group'>
-              <HeaderButton path='/'>Log Out</HeaderButton>
+              <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
             </div>
           </HeaderNavBar>
         </HeadContainer>
@@ -139,6 +181,7 @@ class Admin extends React.Component {
               searchContent={this.state.userSearch}
               handleChange={this.handleUserSearchChange}
               enterButton={this.searchUser}
+              refreshButton={this.refreshUsers}
             />
 
             {this.state.usersOnPage.map(user => (
@@ -156,6 +199,7 @@ class Admin extends React.Component {
               searchContent={this.state.reviewSearch}
               handleChange={this.handleReviewSearchChange}
               enterButton={this.searchReview}
+              refreshButton={this.refreshReviews}
             />
 
             {this.state.reviewsOnPage.map(review => (
@@ -166,7 +210,9 @@ class Admin extends React.Component {
                 content={review.content}
                 author={review.author}
                 reputation={review.reputation}
+                reported={review.reported}
                 deleteReview={this.deleteReview}
+                cancelReport={this.cancelReport}
               />
             ))}
           </div>

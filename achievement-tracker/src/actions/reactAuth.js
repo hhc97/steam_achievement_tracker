@@ -47,6 +47,7 @@ export const login = (loginParams, app) => {
             if (json.currentUser !== undefined) {
                 app.setState({ currentUser: json.currentUser });
             }
+            localStorage.setItem('currentUser', json.currentUser)
         })
         .catch(error => {
             console.log(error);
@@ -63,6 +64,7 @@ export const logout = (app) => {
                 currentUser: null,
                 message: { type: "", body: "" }
             });
+            localStorage.clear()
         })
         .catch(error => {
             console.log(error);

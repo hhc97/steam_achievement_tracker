@@ -8,6 +8,8 @@ class ReviewBar extends React.Component {
       content,
       author,
       reputation,
+      reported,
+      cancelReport,
       deleteReview
     } = this.props;
 
@@ -19,11 +21,21 @@ class ReviewBar extends React.Component {
           <span><strong>Author: </strong>{author}</span>
           <span><strong>Reputation: </strong>{reputation}</span>
           <button type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-danger"
                   onClick={() => deleteReview(id)}>
-              Delete
-            </button>
+              Delete Review
+          </button>
+          { 
+            reported ? 
+            <button type="button"
+                    className="btn btn-warning"
+                    onClick={() => cancelReport(id)}>
+              Cancel Report
+            </button> : 
+            <span></span>
+          }
         </div>
+
       </div>
     )
   }

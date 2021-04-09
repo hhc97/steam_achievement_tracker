@@ -67,6 +67,7 @@ app.use(require('./routes/reputation'))
 
 app.use(require('./routes/review'))
 app.use(require('./routes/voteRecord'))
+app.use(require('./routes/user'))
 
 app.use(require('./routes/profilePic'))
 

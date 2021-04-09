@@ -4,6 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css"
 
 class Review extends React.Component {
+  state = {
+    isCollapsed: true
+  }
+  
+  setIsCollapsed = () => {
+    this.setState({
+      isCollapsed: !this.state.isCollapsed
+    })
+  }
+
   render() {
     const {
       id,
@@ -21,7 +31,21 @@ class Review extends React.Component {
     return (
       <div className="review">
         <h2>{title}</h2>
-        <p>{content}</p>
+
+        <button
+          className="collapse-button"
+          onClick={this.setIsCollapsed}
+        >
+          <strong>
+            {this.state.isCollapsed ? "SHOW" : "HIDE"} CONTENT
+          </strong>
+        </button>
+        <div
+          className={this.state.isCollapsed ? "collapsed-content" : "expanded-content"}
+        >
+          <p>{content}</p>
+        </div>
+
         <div className="review-info-bar">
           <span>
             <button type="button"
