@@ -51,12 +51,8 @@ body, html {
     margin-top: 10px;
     display: block;
     margin-bottom: 10px;
-    background-color: rgb(30, 150, 150);
 }
 
-.SignUpButton:hover{
-    background-color: rgb(30, 150, 150);
-}
 
 .imgValidityCheck {
     height: 25px;
