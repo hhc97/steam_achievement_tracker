@@ -37,7 +37,7 @@ class Review extends React.Component {
         <div
           className={this.state.isCollapsed ? "collapsed-content" : "expanded-content"}
         >
-          <p>{content}</p>
+          <p className="review-content">{content}</p>
         </div>
         {
           content.length < 1000 ?
