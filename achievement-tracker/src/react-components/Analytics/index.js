@@ -337,8 +337,8 @@ class Analytics extends React.Component {
                             </div>}
                         </div>
                         <div id="TotalStats">
-                            <span> Total Games Attempted: {this.state.gamesAttempted} </span> <br></br>
-                            <span> Total Games Supporting Achievements: {this.state.totalGames} (from a total of {this.state.gamesOwned} games owned) </span>
+                            <p> Total Games Attempted: {this.state.gamesAttempted} </p>
+                            <p> Total Games Supporting Achievements: {this.state.totalGames} (from a total of {this.state.gamesOwned} games owned) </p>
                         </div>
                         <table id="StatsTable">
                             <thead >
