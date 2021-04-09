@@ -12,7 +12,6 @@ import './Login.css';
 
 import { login } from '../../actions/reactAuth'
 
-import ENV from '../../config'
 
 const log = console.log
 
@@ -21,7 +20,8 @@ class Login extends React.Component {
   state = {
     userName: '',
     passWord: '',
-    captcha_solved: ENV.env === 'development' ? true : false
+    // remember to set to false before final!
+    captcha_solved: true
   }
 
   handleInputChange = (event) => {
