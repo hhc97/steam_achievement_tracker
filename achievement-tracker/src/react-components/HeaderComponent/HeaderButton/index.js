@@ -11,7 +11,6 @@ class HeaderButton extends React.Component {
         if (this.props.children == "Log Out"){
             userKey.logOut()
             this.props.logoutFunc()
-            console.log(localStorage.getItem("user"))
         }
         this.props.history.push(this.props.path)
     }
