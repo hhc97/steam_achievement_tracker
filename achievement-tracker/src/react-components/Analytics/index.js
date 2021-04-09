@@ -5,7 +5,7 @@ import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../steamIcon2.png'
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
-import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import { HeaderButton, CurrentHeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 import { getUserReviews } from '../../actions/review'
@@ -270,7 +270,7 @@ class Analytics extends React.Component {
                             <div className='group'>
                                 <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
-                                <HeaderButton path='/Analytics'>Analytics</HeaderButton>
+                                <CurrentHeaderButton path='/Analytics'>Analytics</CurrentHeaderButton>
                                 <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
                                 <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                             </div>
