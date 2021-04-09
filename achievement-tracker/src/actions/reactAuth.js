@@ -57,8 +57,8 @@ export const login = (loginParams, app) => {
 export const changePassword = (newPassword) => {
     // Create our request constructor with all the parameters we need
     const request = new Request(`${API_HOST}/users/changepassword`, {
-        method: "patch",
-        body: JSON.stringify({ newPassword: newPassword }),
+        method: "post",
+        body: JSON.stringify({ "newPassword": newPassword }),
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"

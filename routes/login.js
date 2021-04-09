@@ -67,7 +67,8 @@ async function getLoggedInUser(req, res, next) {
 }
 
 // route to change a users password
-router.patch('/users/changepassword', mongoChecker, getLoggedInUser, async (req, res) => {
+// using post because patch is fucking retarded
+router.post('/users/changepassword', mongoChecker, getLoggedInUser, async (req, res) => {
     let user = req.user
     try {
         user.password = req.body.newPassword
