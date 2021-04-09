@@ -5,7 +5,7 @@ import sampleProfilePic from "./imgs/sampleProfilePic.jpg"
 import logo from './../../steamIcon2.png'
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { logout } from '../../actions/reactAuth'
+import { logout, changePassword } from '../../actions/reactAuth'
 
 import "./style.css"
 

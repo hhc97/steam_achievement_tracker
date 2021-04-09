@@ -51,6 +51,33 @@ async function getUser(req, res, next) {
     next()
 }
 
+// middleware for getting the current logged in user
+async function getLoggedInUser(req, res, next) {
+    let usr
+    try {
+        usr = await User.findOne({ username: req.session.username })
+        if (usr == null) {
+            return res.status(404).json({ message: 'Cannot find user' })
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+    req.user = usr
+    next()
+}
+
+// route to change a users password
+router.patch('/users/changepassword', mongoChecker, getLoggedInUser, async (req, res) => {
+    let user = req.user
+    try {
+        user.password = req.body.newPassword
+        await user.save()
+        res.status(201).json({ user: user })
+    } catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
 // route to get a users creation time
 router.get('/users/joindate/:username', mongoChecker, getUser, async (req, res) => {
     res.json({ time: req.user.signUpTime })
