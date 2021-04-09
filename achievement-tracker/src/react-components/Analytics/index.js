@@ -9,6 +9,7 @@ import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../Heade
 import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 import { getUserReviews } from '../../actions/review'
+import { getReputation, updateReputation } from '../../actions/reputation'
 
 import "./Analytics.css"
 
@@ -23,10 +24,10 @@ class Analytics extends React.Component {
         const stats = [
             { id: 0, title: "Loading Game Info...", unlocked: 0, total: 0, playtime: 0, completion: NaN }
         ]
-        const username = this.props.app.state.currentUser
+        const userName = this.props.app.state.currentUser
 
         this.state = {
-            username: username,
+            userName: userName,
             stats: stats,
             statsShown: [],
             userReviews: [],
@@ -80,6 +81,56 @@ class Analytics extends React.Component {
         this.setState({
             stats: stats
         })
+    }
+
+    calculateReputation() {
+        const completion = this.state.averageCompletion
+        const achievements = this.state.totalAchievements
+        const playtime = this.state.totalPlaytime
+        const reviewScore = this.state.reviewScore
+        const gamesOwned = this.state.totalGames
+        let completionComponent
+        let achievementMultiplier
+        let playtimeComponent
+        let reviewComponent
+        let gameComponent
+        if (completion > 90) {
+            completionComponent = 3
+        } else {
+            completionComponent = completion/30
+        }
+
+        if (achievements > 2000) {
+            achievementMultiplier = 1
+        } else {
+            achievementMultiplier = achievements/2000
+        }
+
+        if (playtime > 5000) {
+            playtimeComponent = 2
+        } else {
+            playtimeComponent = playtime/2500
+        }
+
+        if (reviewScore > 100) {
+            reviewComponent = 3
+        } else {
+            reviewComponent = reviewScore/30
+        }
+
+        if (gamesOwned > 100) {
+            gameComponent = 2
+        } else {
+            gameComponent = gamesOwned/50
+        }
+        const reputation = Math.floor(achievementMultiplier*completionComponent
+                            + playtimeComponent
+                            + reviewComponent
+                            + gameComponent)
+        console.log(reputation)
+        this.setState({ reputation: reputation })
+        updateReputation(this, reputation)
+        return reputation
     }
 
     extractStats(data) {
@@ -144,6 +195,7 @@ class Analytics extends React.Component {
             }
         }
         this.setState({ showLoading: false })
+        this.calculateReputation()
     }
 
     updateStats(data) {
@@ -182,7 +234,7 @@ class Analytics extends React.Component {
     // sets the user membership length to a human readable string
     async setMemberAge() {
         let joined
-        await fetch(`/users/joindate/${this.state.username}`)
+        await fetch(`/users/joindate/${this.state.userName}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
         const now = new Date()
@@ -197,8 +249,9 @@ class Analytics extends React.Component {
         this.setMemberAge()
         getGameStats()
             .then(res => { this.updateStats(res) })
-        await getUserReviews(this, this.state.username)
+        await getUserReviews(this, this.state.userName)
         .then(res => { this.getReviewStats(res) })
+        getReputation(this)
     }
 
     render() {
@@ -230,13 +283,13 @@ class Analytics extends React.Component {
                             <div id="StatsUser">
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
-                                    <p> {this.state.username} </p>
+                                    <p> {this.state.userName} </p>
                                     <span> {this.state.joinDate} </span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
                                 <p>Reputation Level:</p>
-                                <span> 3 </span>
+                                <span> {this.state.reputation} </span>
                             </div>
                         </div>
 
