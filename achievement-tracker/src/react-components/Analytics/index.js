@@ -3,7 +3,6 @@ import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../steamIcon2.png'
-import logo from './../../logo.svg'
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
@@ -128,7 +127,6 @@ class Analytics extends React.Component {
             + playtimeComponent
             + reviewComponent
             + gameComponent
-        console.log(rawReputation)
         const reputation = Math.floor(rawReputation)
         this.setState({ reputation: reputation })
         updateReputation(this, reputation)
@@ -221,7 +219,6 @@ class Analytics extends React.Component {
 
     getReviewStats(data) {
         const reviews = data
-        console.log(reviews)
         let numReviews = reviews.length
         let score = 0
         for (let i = 0; i < reviews.length; i++) {
@@ -237,7 +234,7 @@ class Analytics extends React.Component {
     // sets the user membership length to a human readable string
     async setMemberAge() {
         let joined
-        await fetch(`/users/joindate/${this.state.username}`)
+        await fetch(`/users/joindate/${this.state.userName}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
         const now = new Date()
