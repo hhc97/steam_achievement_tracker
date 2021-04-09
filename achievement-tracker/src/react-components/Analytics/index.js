@@ -294,7 +294,12 @@ class Analytics extends React.Component {
                             </div>
                             <div id="StatsReputation">
                                 <p>Reputation Level:</p>
-                                <span> {this.state.reputation} </span>
+                                <div id="ReputationContainer">
+                                    {!(this.state.showLoading) || <div id="loadingIcon1">
+                                    <img src={loadingIcon} />
+                                    </div>}
+                                    <span> {this.state.reputation} </span>
+                                </div>
                             </div>
                         </div>
 
