@@ -78,4 +78,20 @@ router.delete('/api/voteRecords/:username', mongoChecker, async (req, res) => {
 	}
 })
 
+router.delete('/api/voteRecords/:username/:reviewId', mongoChecker, async (req, res) => {
+	const reviewId = req.params.reviewId
+
+	try {
+		const voteRecord = await VoteRecord.deleteMany({reviewId: reviewId})
+		if (!voteRecord) {
+			res.status(404).send()
+		} else {   
+			res.send(voteRecord)
+		}
+	} catch(error) {
+		log(error)
+		res.status(500).send()
+	}
+})
+
 module.exports = router;

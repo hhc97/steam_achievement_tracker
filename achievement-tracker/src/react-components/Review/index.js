@@ -3,15 +3,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./styles.css"
 
+const log = console.log
+
 class Review extends React.Component {
   state = {
-    isCollapsed: true
+    isCollapsed: this.props.content.length > 1000 ? true : false
   }
   
   setIsCollapsed = () => {
     this.setState({
       isCollapsed: !this.state.isCollapsed
     })
+    log(this.props.content.length)
   }
 
   render() {
@@ -37,7 +40,7 @@ class Review extends React.Component {
           onClick={this.setIsCollapsed}
         >
           <strong>
-            {this.state.isCollapsed ? "SHOW" : "HIDE"} CONTENT
+            {this.state.isCollapsed ? "HIDE" : "SHOW"} CONTENT
           </strong>
         </button>
         <div
