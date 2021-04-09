@@ -51,6 +51,7 @@ class AccountSettings extends React.Component {
                 const newPassword = document.getElementById(input).value
                 console.log(newPassword)
                 changePassword(newPassword)
+                this.setState({ passwordHidden: false })
             }
             let button = document.getElementById(input).parentElement.lastChild
             button.innerHTML = "Edit"
@@ -129,7 +130,7 @@ class AccountSettings extends React.Component {
                         <p>Username: <span> {this.state.userName} </span></p>
                     </div>
                     <div className="TextInputButton">
-                        <p> Password: <span> {this.state.passwordHidden ? "*".repeat(this.state.passwordInput.length) : this.state.passwordInput} </span></p>
+                        <p> Password: <span> {this.state.passwordHidden ? "*".repeat(8) : this.state.passwordInput} </span></p>
                         <input className="hide" type="text" id="passwordInput"></input>
                         <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("passwordInput") }}>
                             Edit

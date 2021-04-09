@@ -16,18 +16,6 @@ const PendingFriendSchema = new mongoose.Schema({
     accepted: Boolean
 })
 
-// const ImageSchema = new mongoose.Schema({
-//     imageName: {
-//         type: String,
-//         default: "none",
-//         required: true
-//     },
-//     imageData: {
-//         type: String,
-//         required: true
-//     }
-// })
-
 // the schema for a user
 const UserSchema = new mongoose.Schema({
     username: {
