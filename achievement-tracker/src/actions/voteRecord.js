@@ -91,3 +91,27 @@ export const deleteVoteRecordByUser = (username) => {
       log(error)
   })
 }
+
+export const deleteVoteRecordByReview = (username, reviewId) => {
+  const url = `/api/voteRecords/${username}/${reviewId}`
+
+  const request = new Request(url, {
+    method: 'delete',
+    body: JSON.stringify({}),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  fetch(request)
+  .then(function (res) {
+      if (res.status === 200) {
+          log(`All vote records of this review deleted`)
+      } else {
+          log("Error: Cannot delete vote records")
+      }
+  }).catch((error) => {
+      log(error)
+  })
+}

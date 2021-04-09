@@ -10,7 +10,7 @@ import { deleteUserOnAdmin, getUsersOnAdmin } from "../../actions/user"
 import { logout } from '../../actions/reactAuth'
 import logo from './../../steamIcon2.png'
 import "./styles.css"
-import { deleteVoteRecordByUser } from "../../actions/voteRecord";
+import { deleteVoteRecordByReview, deleteVoteRecordByUser } from "../../actions/voteRecord";
 
 
 const log = console.log
@@ -96,7 +96,9 @@ class Admin extends React.Component {
     })
 
     // Delete this review in database
-    deleteReviewOnAdmin(this.state.reviews.filter(review => review.id === reviewId)[0])
+    const review = this.state.reviews.filter(review => review.id === reviewId)[0]
+    deleteReviewOnAdmin(review)
+    deleteVoteRecordByReview(review.author, reviewId)
   }
 
   cancelReport = reviewId => {

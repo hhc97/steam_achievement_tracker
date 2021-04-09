@@ -1,8 +1,34 @@
 # Steam Achievement Tracker - Team29
 
-Deployed at [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/)
 
-## Quick navigation
+## Quick navigation - phase 2
+- [In depth tutorial of our web app](#using-our-web-application)
+- [Overview of routes](#overview-of-routes)
+
+## Using our web application
+1. Our web application can be accessed at -> [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/)  
+
+## Overview of routes
+- chat
+    1. pass
+- friend
+    1. pass
+- login
+    1. pass
+- profilePic
+    1. pass
+- reputation
+    1. pass
+- review
+    1. pass
+- steam
+    1. pass
+- user
+    1. pass
+- voteRecord
+    1. pass
+
+## Quick navigation - phase 1
 - [Launching the website](#starting-the-app)
 - [App walkthrough](#app-walkthrough)
 - [Logging in](#login-and-sign-up-pages)

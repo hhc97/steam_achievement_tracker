@@ -105,7 +105,7 @@ class ReviewForum extends React.Component {
 
     downvoteAction = reviewId => {
         const user = this.state.currentUser
-        if (!user) {
+        if (user === null) {
             alert("You have to login before you vote.")
             return
         }
@@ -121,6 +121,11 @@ class ReviewForum extends React.Component {
                 vote: "none"
             }
             addVoteRecord(voteRecord)
+            const newVoteRecords = this.state.voteRecords
+            newVoteRecords.push(voteRecord)
+            this.setState({
+                voteRecords: newVoteRecords
+            })
         } else {
             voteRecord = voteRecordSearch[0]
         }
@@ -309,7 +314,8 @@ class ReviewForum extends React.Component {
             upvotes: 0,
             downvotes: 0,
             author: this.state.currentUser,
-            reputation: 1
+            reputation: 1,
+            reported: false
         }
         reviewList.push(newReview)
         this.setState({
@@ -353,7 +359,7 @@ class ReviewForum extends React.Component {
                             <CurrentHeaderButton path='/reviewForum'>Forum</CurrentHeaderButton>
                             {
                                 this.state.currentUser !== null ?
-                                <HeaderButton path='/Dashboard'>{this.state.currentUser}</HeaderButton> :
+                                <HeaderButton path='/Dashboard'>Dashboard</HeaderButton> :
                                 <HeaderButton path='/Login'>Log In</HeaderButton>
                             }
                         </div>
