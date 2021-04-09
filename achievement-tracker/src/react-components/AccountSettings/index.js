@@ -10,11 +10,17 @@ import { logout } from '../../actions/reactAuth'
 import "./style.css"
 
 class AccountSettings extends React.Component {
-    state = {
-        steamInput: "PolarisTM",
-        ubisoftInput: "Polaris04",
-        playstationInput: "Dancin9D0nZ",
-        xboxInput: "N/A"
+    constructor(props) {
+        super(props)
+
+        const username = this.props.app.state.currentUser
+
+        this.state = {
+            steamInput: "PolarisTM",
+            ubisoftInput: "Polaris04",
+            playstationInput: "Dancin9D0nZ",
+            xboxInput: "N/A"
+        }
     }
 
     editAction = input => {
