@@ -210,7 +210,9 @@ class Analytics extends React.Component {
                         <HeaderNavBar>
                             <HeaderImage to="/dashboard" src={logo}></HeaderImage>
                             <div className='group'>
+                                <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
+                                <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                                 <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
                                 <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                             </div>
