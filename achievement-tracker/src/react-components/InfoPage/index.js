@@ -58,8 +58,8 @@ class SteamInfo extends React.Component {
                                     </div>
                                     <li> Locate the URL of the Profile page that you are currently on. If using a browser, you should
                                     see the URL in the location bar of your browser window. If using the Steam desktop client,
-                                        the URL of the page should appear below the client window's header in green text by default <a href="#Notes"> <sup> [ * ] </sup> </a>
-                                        (indicated in the example image below): </li>
+                                        the URL of the page should appear below the client window's header in green text by default 
+                                        <a href="#Notes"> <sup> [ * ] </sup> </a> (indicated in the example image below): </li>
                                     <div className="methodImage">
                                         <img src={method1_2} />
                                     </div>
@@ -72,6 +72,9 @@ class SteamInfo extends React.Component {
                                         you may have overwritten that part of your profile through customization. Don't worry, try the
                                         steps in <a href="#Method2"> Method 2 </a> below.
                                     </li>
+                                    <li> IMPORTANT: Before creating your account, please make sure your Steam details are set to Public, so that we can
+                                        use your data to populate your profile properly. You can visit the <a href="#Addendum"> Addendum </a> below,
+                                        for more information on how to do this. </li>
                                     <li> Once you have located your Steam ID, copy the entire number and return to the AchievementTracker's
                                         Sign Up page to resume your account creation process. </li>
                                     <li> Enter your ID in the relevant input field, with the description "Enter Steam ID". Fill out the other
@@ -117,8 +120,11 @@ class SteamInfo extends React.Component {
                                     <div className="methodImage">
                                         <img src={method2_3} />
                                     </div>
-                                    <li> Now that you have located your Steam ID, copy the entire number and return to the AchievementTracker's
-                                        Sign Up page to resume your account creation process. </li>
+                                    <li> IMPORTANT: Before creating your account, please make sure your Steam details are set to Public, so that we can
+                                        use your data to populate your profile properly. You can visit the <a href="#Addendum"> Addendum </a> below,
+                                        for more information on how to do this. </li>
+                                    <li> Now that you have set your profile data to Public and have successfully located your Steam ID, copy the entire
+                                        number and return to the AchievementTracker's Sign Up page to resume your account creation process. </li>
                                     <li> Enter your ID in the relevant input field, and fill out the other input fields as required to Sign Up. </li>
                                     <li> Congratulations! You have officially signed up for an AchievementTracker account! We hope you enjoy
                                         the services we have to offer. </li>
@@ -144,7 +150,7 @@ class SteamInfo extends React.Component {
                                         <img src={addendum_1} />
                                     </div>
                                     <li> Make sure the "My Basic Details", "My Profile", "Game Details", and "Friends List" elements are all set to "Public", 
-                                        and uncheck the "Always keep my total playtime private" option as well, if applicable (all shown in below example). </li>
+                                        and uncheck the "Always keep my total playtime private" option as well, if applicable (all shown in below example): </li>
                                     <div className="methodImage">
                                         <img src={addendum_2} />
                                     </div>
