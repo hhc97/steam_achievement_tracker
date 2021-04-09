@@ -4,10 +4,27 @@ import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../Heade
 import sampleProfilePic from "./imgs/sampleProfilePic.jpg"
 import logo from './../../logo.svg'
 import "bootstrap/dist/css/bootstrap.min.css";
+import { storeImage, getImage } from '../../actions/profilePic'
 
 import "./style.css"
 
 class AccountSettings extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            image: "",
+            uploadImage: "",
+            userName: this.props.app.state.currentUser
+        }
+
+        this.handleSumbitImage = this.handleSumbitImage.bind(this)
+    }
+
+    async componentDidMount(){
+        await getImage(this.state.userName, this)
+    }
+
     state = {
         steamInput: "PolarisTM",
         ubisoftInput: "Polaris04",
@@ -26,12 +43,25 @@ class AccountSettings extends React.Component {
         }
     }
 
-    handleselectedFile = event => {
+    _handleReaderLoaded = (readerEvent) => {
+        const binaryString = readerEvent.target.result
         this.setState({
-            selectedFile: event.target.files[0],
-            loaded: 0,
+            uploadImage: btoa(binaryString)
         })
-        console.log(event.target.files)
+    }
+
+    handleSumbitImage = (e) => {
+        e.preventDefault()
+        storeImage(this)
+    }
+
+    handleselectedFile = (e) => {
+        const file = e.target.files[0]
+        if (file){
+            const reader = new FileReader()
+            reader.onload = this._handleReaderLoaded.bind(this)
+            reader.readAsBinaryString(file)
+        }
     }
 
     render() {
@@ -57,7 +87,10 @@ class AccountSettings extends React.Component {
                     <h2> Profile Picture </h2>
                     <div id="ProfilePicSection">
                         <div id="ProfilePicDisplay">
-                            <img id="CurrentProfilePic" src={sampleProfilePic} />
+                            {this.state.image === "" ? 
+                                <img id="CurrentProfilePic" src={sampleProfilePic} /> :
+                                <img id="CurrentProfilePic" src={"data:image/png;base64," + this.state.image} />
+                            }
                             <div id="ProfilePicCaption">
                                 <span> Current Picture ▲ </span>
                             </div>
@@ -65,7 +98,10 @@ class AccountSettings extends React.Component {
                         {/* Saving the profile picture to your profile is currently non functional as we need the backend to store the image the user uploads */}
                         <div id="UploadProfilePic">
                             <span> Upload a new image: </span>
-                            <input type="file" name="" onChange={this.handleselectedFile} />
+                            <form onChange={this.handleselectedFile} onSubmit={this.handleSumbitImage}>
+                                <input  type="file" name="image" accept= ".jpeg, .png, .jpg" />
+                                <input type="submit"/>
+                            </form>
                         </div>
                     </div>
                 </div>

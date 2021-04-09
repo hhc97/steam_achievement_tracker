@@ -64,9 +64,7 @@ class ChatBox extends React.Component {
         const elem = e.target
         elem.style.height = "1px"
         const toBeAddHeight = (elem.scrollHeight) + "px";
-        if (parseInt(toBeAddHeight.substring(0, toBeAddHeight.length - 2)) <= 110) {
-            elem.style.height = toBeAddHeight
-        }
+        elem.style.height = toBeAddHeight
     }
 
     onEnterPress = (e) => {

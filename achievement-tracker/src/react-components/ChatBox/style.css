@@ -111,7 +111,8 @@
 }
 
 .text{
-    color: black
+    color: black;
+    text-align: left;
 }
 
 .chatMessageTime-my-message{
@@ -145,7 +146,8 @@
     outline: none;
     resize: none;
     min-height: 30px;
-    overflow: hidden;
+    max-height: 110px;
+    overflow: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     padding-left: 10px;
