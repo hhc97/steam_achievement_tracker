@@ -126,7 +126,7 @@ class SteamInfo extends React.Component {
                             </div>
                         </div>
                         <div id="Addendum">
-                            <h2> Method 2: Legacy or Veteran Accounts </h2>
+                            <h2> Addendum: Setting your Profile Details to Public </h2>
                             <div className="methodDescription">
                                 <p> This section describes how to set your game details to Public, so that we can access your data and present the
                                     relevant visualizations for you. </p>
