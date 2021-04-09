@@ -3,7 +3,7 @@ import { uid } from "react-uid";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import ForumSearchBar from "../ForumSearchBar"
 import Review from "../Review"
 import ReviewSubmit from "../ReviewSubmit"

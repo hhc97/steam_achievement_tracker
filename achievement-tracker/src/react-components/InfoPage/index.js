@@ -2,7 +2,7 @@ import React from "react";
 import { HeaderButton, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { HeaderContainer } from '../../Containers'
 import './InfoPage.css'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import method1_1 from './imgs/method1_1.png'
 import method1_2 from './imgs/method1_2.png'
 import method1_3 from './imgs/method1_3.png'

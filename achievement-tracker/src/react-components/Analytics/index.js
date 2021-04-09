@@ -2,7 +2,7 @@ import React from "react"
 import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'

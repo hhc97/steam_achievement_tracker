@@ -2,7 +2,7 @@ import React from "react"
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 
 import sampleProfilePic from "./imgs/sampleProfilePic.jpg"
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { logout } from '../../actions/reactAuth'

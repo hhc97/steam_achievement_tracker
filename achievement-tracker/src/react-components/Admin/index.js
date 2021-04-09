@@ -5,7 +5,7 @@ import AdminSearchBar from "./../AdminSearchBar";
 import UserBar from "./../UserBar";
 import ReviewBar from "./../ReviewBar";
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import "./styles.css"
 
 /*
