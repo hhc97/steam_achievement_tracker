@@ -9,7 +9,7 @@ import method2_1 from './imgs/method2_1.png'
 import method2_2 from './imgs/method2_2.png'
 import method2_3 from './imgs/method2_3.png'
 import addendum_1 from './imgs/addendum_1.png'
-// import addendum_2 from './imgs/addendum_2.png'
+import addendum_2 from './imgs/addendum_2.png'
 import notes1 from './imgs/notes1.png'
 import notes2 from './imgs/notes2.png'
 
@@ -139,15 +139,17 @@ class SteamInfo extends React.Component {
                                         <img src={method2_1} />
                                     </div>
                                     <li> Click on the "Privacy Settings" tab on the left side of the page. This should present you with a list of your
-                                        account details, each of which you can customize the privacy level of. </li>
+                                        account details, each of which you can customize the privacy level of (indicated in the example below): </li>
                                     <div className="methodImage">
                                         <img src={addendum_1} />
                                     </div>
-                                    <li> Make sure the "My Profile", "Game Details", "Friends List" elements are all set to "Public", and uncheck the 
-                                        "Always keep my total playtime private" option as well, if applicable. </li>
+                                    <li> Make sure the "My Basic Details", "My Profile", "Game Details", and "Friends List" elements are all set to "Public", 
+                                        and uncheck the "Always keep my total playtime private" option as well, if applicable (all shown in below example). </li>
                                     <div className="methodImage">
-                                        {/* <img src={addendum_2} /> */}
+                                        <img src={addendum_2} />
                                     </div>
+                                    <li> Once you have completed all the above steps, you can continue your account creation process through AchievementTracker's 
+                                        Sign Up page. </li>
                                 </ol>
                             </div>
                         </div>
