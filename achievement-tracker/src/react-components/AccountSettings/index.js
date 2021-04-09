@@ -17,7 +17,8 @@ class AccountSettings extends React.Component {
 
         this.state = {
             userName: userName,
-            password: "sdfhgdhkfgjdg",
+            password: "",
+            passwordHidden: true,
             steamInput: "PolarisTM",
             ubisoftInput: "Polaris04",
             playstationInput: "Dancin9D0nZ",
@@ -87,7 +88,11 @@ class AccountSettings extends React.Component {
                         <p>Username: <span> {this.state.userName} </span></p>
                     </div>
                     <div className="TextInputButton">
-                        <p> Password: <span> {"*".repeat(this.state.password.length)} </span></p>
+                        <p> Password: <span> {this.state.passwordHidden ? "*".repeat(this.state.password.length) : this.state.password} </span></p>
+                        <input className="hide" type="text" id="passwordInput"></input>
+                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("passwordInput") }}>
+                            Edit
+                        </button>
                     </div>
                 </div>
                 <div id="ExternalLinksSection">
