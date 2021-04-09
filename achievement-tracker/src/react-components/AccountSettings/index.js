@@ -28,12 +28,25 @@ class AccountSettings extends React.Component {
 
     editAction = input => {
         if (document.getElementById(input).className === "hide") {
-            document.getElementById(input).className = "show";
+            document.getElementById(input).className = "show"
+            let button = document.getElementById(input).parentElement.lastChild
+            button.innerHTML = "Save"
+            button.style.backgroundColor = "#007bff"
+            button.style.borderColor = "#007bff"
         } else {
             document.getElementById(input).className = "hide"
             this.setState({
                 [input]: document.getElementById(input).value
             })
+            if (input === "passwordInput") {
+                const newPassword = document.getElementById(input).value
+                console.log(newPassword)
+                changePassword(newPassword)
+            }
+            let button = document.getElementById(input).parentElement.lastChild
+            button.innerHTML = "Edit"
+            button.style.backgroundColor = "#6c757d"
+            button.style.borderColor = "#6c757d"
         }
     }
 
