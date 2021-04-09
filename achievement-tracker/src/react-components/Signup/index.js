@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import checkmark from './imgs/checkmark.jpg'
 import cross from './imgs/cross.jpg'
 import help from './imgs/help.png'

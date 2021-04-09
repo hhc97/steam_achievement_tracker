@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import { Redirect } from 'react-router-dom'
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.css';

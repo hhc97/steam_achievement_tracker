@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import { logout } from '../../actions/reactAuth'
 import { PersonalPic, BannerContainer, BannerLink } from '../PersonalBanner'

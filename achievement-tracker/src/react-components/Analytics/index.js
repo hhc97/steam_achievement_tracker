@@ -2,12 +2,14 @@ import React from "react"
 import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
-import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import { HeaderButton, CurrentHeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
+import { getUserReviews } from '../../actions/review'
+import { getReputation, updateReputation } from '../../actions/reputation'
 
 import "./Analytics.css"
 
@@ -22,18 +24,23 @@ class Analytics extends React.Component {
         const stats = [
             { id: 0, title: "Loading Game Info...", unlocked: 0, total: 0, playtime: 0, completion: NaN }
         ]
-        const username = this.props.app.state.currentUser
+        const userName = this.props.app.state.currentUser
 
         this.state = {
-            username: username,
+            userName: userName,
             stats: stats,
             statsShown: [],
+            userReviews: [],
+            numReviews: 0,
+            reviewScore: 0,
             reputation: 1,
             totalAchievements: 0,
             averageCompletion: 0,
             totalPlaytime: 0,
             averagePlaytime: 0,
+            gamesOwned: 0,
             totalGames: 0,
+            gamesAttempted: 0,
             showLoading: true,
             sortAscending: false,
             joinDate: ''
@@ -78,6 +85,56 @@ class Analytics extends React.Component {
         })
     }
 
+    calculateReputation() {
+        const completion = this.state.averageCompletion
+        const achievements = this.state.totalAchievements
+        const playtime = this.state.totalPlaytime
+        const reviewScore = this.state.reviewScore
+        const gamesOwned = this.state.totalGames
+        let completionComponent
+        let achievementMultiplier
+        let playtimeComponent
+        let reviewComponent
+        let gameComponent
+        if (completion > 90) {
+            completionComponent = 3
+        } else {
+            completionComponent = completion / 30
+        }
+
+        if (achievements > 2000) {
+            achievementMultiplier = 1
+        } else {
+            achievementMultiplier = achievements / 2000
+        }
+
+        if (playtime > 5000) {
+            playtimeComponent = 2
+        } else {
+            playtimeComponent = playtime / 2500
+        }
+
+        if (reviewScore > 100) {
+            reviewComponent = 3
+        } else {
+            reviewComponent = reviewScore / 30
+        }
+
+        if (gamesOwned > 100) {
+            gameComponent = 2
+        } else {
+            gameComponent = gamesOwned / 50
+        }
+        const rawReputation = achievementMultiplier * completionComponent
+            + playtimeComponent
+            + reviewComponent
+            + gameComponent
+        const reputation = Math.floor(rawReputation)
+        this.setState({ reputation: reputation })
+        updateReputation(this, reputation)
+        return reputation
+    }
+
     extractStats(data) {
         let completion = -1
         if (data.achievements === undefined) {
@@ -110,6 +167,7 @@ class Analytics extends React.Component {
                 numGames++
             }
         }
+        this.setState({ gamesAttempted : numGames })
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
         this.setState({ totalPlaytime: totalPlaytime })
@@ -139,7 +197,9 @@ class Analytics extends React.Component {
                 this.updateBannerStats()
             }
         }
+        this.setState({ totalGames: gameList.length })
         this.setState({ showLoading: false })
+        this.calculateReputation()
     }
 
     updateStats(data) {
@@ -157,14 +217,29 @@ class Analytics extends React.Component {
             gameList.push(gameEntry)
             this.setState({ stats: gameList })
         }
+        this.setState({ gamesOwned: gameList.length })
         this.setState({ stats: gameList })
         this.updateAchievements()
     }
 
+    getReviewStats(data) {
+        const reviews = data
+        let numReviews = reviews.length
+        let score = 0
+        for (let i = 0; i < reviews.length; i++) {
+            score += reviews[i].upvotes
+            score -= reviews[i].downvotes
+        }
+        this.setState({ userReviews: reviews })
+        this.setState({ numReviews: numReviews })
+        this.setState({ reviewScore: score })
+    }
+
+
     // sets the user membership length to a human readable string
     async setMemberAge() {
         let joined
-        await fetch(`/users/joindate/${this.state.username}`)
+        await fetch(`/users/joindate/${this.state.userName}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
         const now = new Date()
@@ -175,10 +250,13 @@ class Analytics extends React.Component {
         this.setState({ joinDate: 'Member for ' + ageString.slice(0, stopPoint) })
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setMemberAge()
         getGameStats()
             .then(res => { this.updateStats(res) })
+        await getUserReviews(this, this.state.userName)
+            .then(res => { this.getReviewStats(res) })
+        getReputation(this)
     }
 
     render() {
@@ -190,7 +268,9 @@ class Analytics extends React.Component {
                         <HeaderNavBar>
                             <HeaderImage to="/dashboard" src={logo}></HeaderImage>
                             <div className='group'>
+                                <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
+                                <CurrentHeaderButton path='/Analytics'>Analytics</CurrentHeaderButton>
                                 <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
                                 <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                             </div>
@@ -208,13 +288,18 @@ class Analytics extends React.Component {
                             <div id="StatsUser">
                                 <img id="StatsProfilePic" src={sampleProfilePic}></img>
                                 <div id="StatsUserCaption">
-                                    <p> {this.state.username} </p>
+                                    <p> {this.state.userName} </p>
                                     <span> {this.state.joinDate} </span>
                                 </div>
                             </div>
                             <div id="StatsReputation">
                                 <p>Reputation Level:</p>
-                                <span> 3 </span>
+                                <div id="ReputationContainer">
+                                    {!(this.state.showLoading) || <div id="loadingIcon1">
+                                    <img src={loadingIcon} />
+                                    </div>}
+                                    <span> {this.state.reputation} </span>
+                                </div>
                             </div>
                         </div>
 
@@ -229,7 +314,7 @@ class Analytics extends React.Component {
                             </div>
                             <div className="StatBoxRight">
                                 <p>Reviews Posted</p>
-                                <span> 42 </span>
+                                <span> {this.state.numReviews} </span>
                             </div>
                         </div>
 
@@ -244,7 +329,7 @@ class Analytics extends React.Component {
                             </div>
                             <div className="StatBoxRight">
                                 <p>Review Score</p>
-                                <span> 762 </span>
+                                <span> {this.state.reviewScore} </span>
                             </div>
                         </div>
                     </div>
@@ -255,6 +340,10 @@ class Analytics extends React.Component {
                             {!(this.state.showLoading) || <div id="loadingIcon2">
                                 <img src={loadingIcon} />
                             </div>}
+                        </div>
+                        <div id="TotalStats">
+                            <p> Total Games Attempted: {this.state.gamesAttempted} </p>
+                            <p> Total Games Supporting Achievements: {this.state.totalGames} (from a total of {this.state.gamesOwned} games owned) </p>
                         </div>
                         <table id="StatsTable">
                             <thead >

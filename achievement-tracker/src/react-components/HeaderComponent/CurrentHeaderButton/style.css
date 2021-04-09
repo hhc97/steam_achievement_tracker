@@ -1,0 +1,13 @@
+.currentHeaderButton{
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    border: 0;
+    font-size: 20px;
+    cursor: pointer;
+    margin:10px;
+    text-decoration: underline;
+    font-weight: bold;
+    background-color: transparent;
+}

@@ -8,44 +8,10 @@ import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../Heade
 import { getReviewsOnAdmin, updateReview, deleteReviewOnAdmin, updateUsernameReputation } from '../../actions/review'
 import { deleteUserOnAdmin, getUsersOnAdmin } from "../../actions/user"
 import { logout } from '../../actions/reactAuth'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import "./styles.css"
 import { deleteVoteRecordByUser } from "../../actions/voteRecord";
 
-/*
-** Hardcoded Data
-*/
-
-// const userData = [
-//   {
-//     username: "John Smith",
-//     reputation: 3
-//   },
-//   {
-//     username: "Diluc Ragnvindr",
-//     reputation: 7
-//   }
-// ]
-// const reviewData = [
-//   {
-//     id: 1,
-//     title: "Hollow Knight Review",
-//     content: "BEST GAME EVER",
-//     upvotes: 21,
-//     downvotes: 4,
-//     author: "John Smith",
-//     reputation: 3
-//   },
-//   {
-//     id: 2,
-//     title: "Some personal thoughts on Northgard...",
-//     content: "It's more of a casual area-control boardgame than anything, so much so that they made an actual boardgame out of it and it plays the same. Northgard has nice aesthetics but it's not really a city or an empire builder on the likes of AoE. So, my take on a few reviews here is that people who never played AoE are comparing this game to it without any context. Extremely light resource management, you can't chose where to plop down buildings as you see fit and army management is non-existent. Saddly, it's a toddler's RTS.",
-//     upvotes: 3,
-//     downvotes: 0,
-//     author: "Rentt Vivie",
-//     reputation: 3
-//   }
-// ]
 
 const log = console.log
 
@@ -151,15 +117,15 @@ class Admin extends React.Component {
 
   refreshUsers = () => {
     this.setState({
-        usersOnPage: this.state.users,
-        userSearch: ""
+      usersOnPage: this.state.users,
+      userSearch: ""
     })
   }
 
   refreshReviews = () => {
     this.setState({
-        reviewsOnPage: this.state.reviews,
-        reviewSearch: ""
+      reviewsOnPage: this.state.reviews,
+      reviewSearch: ""
     })
   }
 

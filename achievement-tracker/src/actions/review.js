@@ -79,7 +79,7 @@ export const getReviewsOnAdmin = (adminPage) => {
 export const getUserReviews = (page, username) => {
   const url = '/api/reviews'
 
-  fetch(url)
+  return fetch(url)
     .then((res) => {
       if (res.status === 200) {
         return res.json()
@@ -88,11 +88,14 @@ export const getUserReviews = (page, username) => {
       }
     })
     .then((json) => {
-      page.setState({
-        userReviews: json.reviews.filter((review) => {
-          return review.author === username
-        })
-      })
+      // page.setState({
+      //   userReviews: json.reviews.filter((review) => {
+      //     return review.author === username
+      //   })
+      // })
+      return json.reviews.filter((review) => {
+            return review.author === username
+          })
     })
     .catch((error) => {
       log(error)
