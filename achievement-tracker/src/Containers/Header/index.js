@@ -1,6 +1,6 @@
 import React from 'react'
 import {HeaderButton, HeaderImage, HeadContainer, HeaderNavBar} from '../../react-components/HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import './style.css'
 
 class HeaderContainer extends React.Component{

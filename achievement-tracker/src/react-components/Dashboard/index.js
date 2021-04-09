@@ -1,6 +1,6 @@
 import React from "react";
-import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import { CurrentHeaderButton, HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import logo from './../../steamIcon2.png'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import settingLogo from "./../Dashboard/Static/settingLogo.png"
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
@@ -11,6 +11,7 @@ import ProgressBar from '../Achievement/ProgressBar'
 import { withRouter } from 'react-router-dom'
 import { logout } from '../../actions/reactAuth'
 import { getFriend, addFriends, deleteFriend, acceptFriend, declineFriend } from '../../actions/friend'
+import { getImage } from '../../actions/profilePic'
 import './style.css'
 import { getReputation } from "../../actions/reputation";
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
@@ -33,6 +34,7 @@ class DashBoard extends React.Component {
         this.state = {
             friendList: friendList,
             game: game,
+            image: "",
             showChat: false,
             chatName: "",
             addFriendName: addFriendName,
@@ -116,6 +118,7 @@ class DashBoard extends React.Component {
             .then(res => {
                 this.updateGames(res)
             })
+        getImage(this.state.userName, this)
     }
 
     showChatBox(e) {
@@ -258,6 +261,7 @@ class DashBoard extends React.Component {
                         <HeaderImage to='/dashboard' src={logo} />
                         <div className='group'>
                             {/* {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)} */}
+                            <CurrentHeaderButton path="/Dashboard"> Dashboard </CurrentHeaderButton>
                             <HeaderButton path='/reviewForum'>Forum</HeaderButton>
                             <HeaderButton path='/Analytics'>Analytics</HeaderButton>
                             <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
@@ -271,7 +275,10 @@ class DashBoard extends React.Component {
                             <div className="bannerUserInfo">
                                 <div id="bannerUserName">User Name: {this.state.userName}</div>
                             </div>
-                            <PersonalPic src={profilePic} />
+                            {this.state.image === "" ?
+                                <PersonalPic src={profilePic} /> :
+                                <PersonalPic src={"data:image/png;base64," + this.state.image} />
+                            }
                             <span className="bannerReputation">Reputation: {this.state.reputation}</span>
                             <div className="bannerLeftLinkGroup">
                                 <BannerLink path="https://discord.com">Discord</BannerLink>

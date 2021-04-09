@@ -91,6 +91,18 @@ body {
     font-style: italic;
 }
 
+#ReputationContainer {
+    width: 150px;
+    height: 45px;
+}
+
+#ReputationContainer img {
+    float: left;
+    height: 50px;
+    width: auto;
+    animation: rotation 5s infinite linear;
+}
+
 .StatsRow{
     margin-top: 20px;
 }
@@ -168,6 +180,18 @@ body {
     border-bottom: 3px solid currentColor;
     float: left;
     display: inline;
+}
+
+#TotalStats {
+    margin-top: 20px;
+    text-align: left;
+    width: 800px;
+}
+
+#TotalStats p {
+    display: block;
+    text-align: left;
+    font-size: 16px;
 }
 
 #loadingIcon2 {

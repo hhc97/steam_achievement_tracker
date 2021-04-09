@@ -15,4 +15,7 @@
 
 .user-bar button {
   float: right;
+  padding: 5px;
+  margin: 5px;
+  font-size: 12px;
 }

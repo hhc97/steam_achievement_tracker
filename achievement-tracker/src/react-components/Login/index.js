@@ -5,12 +5,13 @@ import Button from 'react-bootstrap/Button'
 import { Redirect } from 'react-router-dom'
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Login.css';
 
 import { login } from '../../actions/reactAuth'
+
 
 const log = console.log
 
@@ -19,7 +20,8 @@ class Login extends React.Component {
   state = {
     userName: '',
     passWord: '',
-    captcha_solved: false
+    // remember to set to false before final!
+    captcha_solved: true
   }
 
   handleInputChange = (event) => {
@@ -109,12 +111,7 @@ class Login extends React.Component {
               className='loginCaptcha'
               sitekey="6LckfXMaAAAAAFQXopzO5R-TmD-4VQlwcRIx7YWy"
               onChange={this.handleCaptchaSolve} />
-
-            <Button className='loginCaptcha'
-              variant="warning"
-              onClick={this.handleCaptchaSolve}>Bypass verify (for testing)</Button>
           </div>
-
         </div>
       </div>
     )

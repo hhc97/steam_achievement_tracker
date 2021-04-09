@@ -1,14 +1,15 @@
 import React from "react";
-import { HeaderButton, HeaderNavBar, HeaderImage } from '../HeaderComponent'
-import { HeaderContainer } from '../../Containers'
+import { CurrentHeaderButton, HeaderButton, HeaderNavBar, HeaderImage, HeadContainer } from '../HeaderComponent'
 import './InfoPage.css'
-import logo from './../../logo.svg'
+import logo from './../../steamIcon2.png'
 import method1_1 from './imgs/method1_1.png'
 import method1_2 from './imgs/method1_2.png'
 import method1_3 from './imgs/method1_3.png'
 import method2_1 from './imgs/method2_1.png'
 import method2_2 from './imgs/method2_2.png'
 import method2_3 from './imgs/method2_3.png'
+import addendum_1 from './imgs/addendum_1.png'
+import addendum_2 from './imgs/addendum_2.png'
 import notes1 from './imgs/notes1.png'
 import notes2 from './imgs/notes2.png'
 
@@ -17,16 +18,15 @@ class SteamInfo extends React.Component {
     render() {
         return (
             <div id="SteamInfo">
-                <HeaderContainer bgId={"dashboard"}>
+                <HeadContainer bgId={"dashboard"}>
                     <HeaderNavBar>
                         <HeaderImage to="/dashboard" src={logo}></HeaderImage>
                         <div className='group'>
-                            <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
-                            <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                            <HeaderButton path='/'>Log Out</HeaderButton>
+                            <CurrentHeaderButton path='/SteamInfo'>Info</CurrentHeaderButton>
+                            <HeaderButton path='/'>Home</HeaderButton>
                         </div>
                     </HeaderNavBar>
-                </HeaderContainer>
+                </HeadContainer>
                 <div id="InfoPage">
                     <div id="InfoTitle">
                         <h1> How do I find my Steam ID? </h1>
@@ -58,8 +58,8 @@ class SteamInfo extends React.Component {
                                     </div>
                                     <li> Locate the URL of the Profile page that you are currently on. If using a browser, you should
                                     see the URL in the location bar of your browser window. If using the Steam desktop client,
-                                        the URL of the page should appear below the client window's header in green text by default <a href="#Notes"> <sup> [ * ] </sup> </a>
-                                        (indicated in the example image below): </li>
+                                        the URL of the page should appear below the client window's header in green text by default 
+                                        <a href="#Notes"> <sup> [ * ] </sup> </a> (indicated in the example image below): </li>
                                     <div className="methodImage">
                                         <img src={method1_2} />
                                     </div>
@@ -72,6 +72,9 @@ class SteamInfo extends React.Component {
                                         you may have overwritten that part of your profile through customization. Don't worry, try the
                                         steps in <a href="#Method2"> Method 2 </a> below.
                                     </li>
+                                    <li> IMPORTANT: Before creating your account, please make sure your Steam details are set to Public, so that we can
+                                        use your data to populate your profile properly. You can visit the <a href="#Addendum"> Addendum </a> below,
+                                        for more information on how to do this. </li>
                                     <li> Once you have located your Steam ID, copy the entire number and return to the AchievementTracker's
                                         Sign Up page to resume your account creation process. </li>
                                     <li> Enter your ID in the relevant input field, with the description "Enter Steam ID". Fill out the other
@@ -113,15 +116,46 @@ class SteamInfo extends React.Component {
                                     once you have successfully signed up for an AchievementTracker account. If you wish, you can save your
                                         Custom URL in a different location to easily reapply it later.) </li>
                                     <li> Now that you have cleared the Custom URL, your Steam ID should be revealed in the note below the input field.
-                                        It is a 17-digit number, which for most users starts with the digits "7656" (indicated in the example below): </li>
+                                        It is a 17-digit number, which for most users starts with the 4 digits "7656" (indicated in the example below): </li>
                                     <div className="methodImage">
                                         <img src={method2_3} />
                                     </div>
-                                    <li> Now that you have located your Steam ID, copy the entire number and return to the AchievementTracker's
-                                        Sign Up page to resume your account creation process. </li>
+                                    <li> IMPORTANT: Before creating your account, please make sure your Steam details are set to Public, so that we can
+                                        use your data to populate your profile properly. You can visit the <a href="#Addendum"> Addendum </a> below,
+                                        for more information on how to do this. </li>
+                                    <li> Now that you have set your profile data to Public and have successfully located your Steam ID, copy the entire
+                                        number and return to the AchievementTracker's Sign Up page to resume your account creation process. </li>
                                     <li> Enter your ID in the relevant input field, and fill out the other input fields as required to Sign Up. </li>
                                     <li> Congratulations! You have officially signed up for an AchievementTracker account! We hope you enjoy
                                         the services we have to offer. </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div id="Addendum">
+                            <h2> Addendum: Setting your Profile Details to Public </h2>
+                            <div className="methodDescription">
+                                <p> This section describes how to set your game details to Public, so that we can access your data and present the
+                                    relevant visualizations for you. </p>
+                            </div>
+                            <div className="methodSteps">
+                                <ol>
+                                    <li> Navigate to your personal Profile page. </li>
+                                    <li> Click the "Edit Profile" button on the right side of your Profile banner (indicated in the example below): </li>
+                                    <div className="methodImage">
+                                        <img src={method2_1} />
+                                    </div>
+                                    <li> Click on the "Privacy Settings" tab on the left side of the page. This should present you with a list of your
+                                        account details, each of which you can customize the privacy level of (indicated in the example below): </li>
+                                    <div className="methodImage">
+                                        <img src={addendum_1} />
+                                    </div>
+                                    <li> Make sure the "My Basic Details", "My Profile", "Game Details", and "Friends List" elements are all set to "Public", 
+                                        and uncheck the "Always keep my total playtime private" option as well, if applicable (all shown in below example): </li>
+                                    <div className="methodImage">
+                                        <img src={addendum_2} />
+                                    </div>
+                                    <li> Once you have completed all the above steps, you can continue your account creation process through AchievementTracker's 
+                                        Sign Up page. </li>
                                 </ol>
                             </div>
                         </div>

@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import { CurrentHeaderButton, HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import logo from './../../steamIcon2.png'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import { logout } from '../../actions/reactAuth'
 import { PersonalPic, BannerContainer, BannerLink } from '../PersonalBanner'
 import { AchievementContainer, Game } from '../Achievement'
 import './style.css';
+import { getImage } from '../../actions/profilePic'
 import { getAchievementStats, getGameSchema } from '../../actions/steamHelpers'
 const dateFormat = require('dateformat');
 
@@ -40,7 +41,8 @@ class GameAchievements extends React.Component {
       userName: userName,
       reputation: reputation,
       gameId: gameId,
-      achievementsList: achievementsList
+      achievementsList: achievementsList,
+      image: ""
     }
     this.onChangeGameSearch = this.onChangeGameSearch.bind(this)
     this.onSubmitGameSearch = this.onSubmitGameSearch.bind(this)
@@ -51,6 +53,7 @@ class GameAchievements extends React.Component {
     if (this.props.location.state !== undefined) {
       this.getStats(this.state.gameId)
     }
+    getImage(this.state.userName, this)
   }
 
   async getStats(id) {
@@ -92,7 +95,7 @@ class GameAchievements extends React.Component {
             <HeaderImage to='/dashboard' src={logo} />
             <div className='group'>
               {/* {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)} */}
-              <HeaderButton path='/dashboard'>Dashboard</HeaderButton>
+              <CurrentHeaderButton path='/Dashboard'>Dashboard</CurrentHeaderButton>
               <HeaderButton path='/reviewForum'>Forum</HeaderButton>
               <HeaderButton path='/Analytics'>Analytics</HeaderButton>
               <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
@@ -106,7 +109,10 @@ class GameAchievements extends React.Component {
               <div className="bannerUserInfo">
                 <div id="bannerUserName">User Name: {this.state.userName}</div>
               </div>
-              <PersonalPic src={profilePic} />
+              {this.state.image === "" ?
+                                <PersonalPic src={profilePic} /> :
+                                <PersonalPic src={"data:image/png;base64," + this.state.image} />
+                            }
               <span className="bannerReputation">Reputation: {this.state.reputation}</span>
               <div className="bannerLeftLinkGroup">
                 <BannerLink path="https://discord.com">Discord</BannerLink>

@@ -9,8 +9,6 @@ const prod = {
 const dev = {
     env: 'development',
     api_host: 'http://localhost:5000', // web server localhost port
-    use_frontend_test_user: false,
-    user: "test@user.com",
     steam_key: 'EA00CF15181206B55D12350EB819F943'
 };
 

@@ -19,19 +19,36 @@
 }
 
 .review-info-bar span {
-  margin-right: 7%;
-}
-
-.review-info-bar span img {
-  width: 20px;
+  margin-right: 4%;
 }
 
 .review-info-bar button {
-  width: 60px;
   padding: 5px;
   margin: 5px;
+  font-size: 12px;
+  min-width: 50px;
 }
 
 .review-vote-num {
   font-family:'Courier New', Courier, monospace;
+}
+
+.collapse-button {
+  display: block;
+  width: 150px;
+  background-color: rgb(138, 138, 138);
+  margin: 5px;
+  padding: 5px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 10px;
+  color: black;
+  font-size: 12px;
+}
+
+.collapsed-content {
+  display: none;
+}
+
+.expanded-content {
+  display: block;
 }

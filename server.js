@@ -30,7 +30,7 @@ const { ObjectID } = require("mongodb");
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
@@ -67,6 +67,9 @@ app.use(require('./routes/reputation'))
 
 app.use(require('./routes/review'))
 app.use(require('./routes/voteRecord'))
+app.use(require('./routes/user'))
+
+app.use(require('./routes/profilePic'))
 
 // Serve the build
 app.use(express.static(path.join(__dirname, "/achievement-tracker/build")));

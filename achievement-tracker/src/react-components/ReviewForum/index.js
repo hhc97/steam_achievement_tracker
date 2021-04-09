@@ -2,25 +2,25 @@ import React from "react";
 import { uid } from "react-uid";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
-import logo from './../../logo.svg'
+import { CurrentHeaderButton, HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import logo from './../../steamIcon2.png'
 import ForumSearchBar from "../ForumSearchBar"
 import Review from "../Review"
 import ReviewSubmit from "../ReviewSubmit"
 import "./styles.css"
 
-import { addReview, getReviews, updateReviewVotes } from '../../actions/review'
+import { addReviewOnForum, getReviewsOnForum, updateReview } from '../../actions/review'
 import { addVoteRecord, getVoteRecords, updateVoteRecord } from '../../actions/voteRecord'
 
 const log = console.log
-const reviewNumLimit = 3;
+const reviewNumLimit = 5;
 
 class ReviewForum extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            currentUser: this.props.app.state.currentUser,
+            currentUser: localStorage.getItem('currentUser'),
             searchContent: "",
             reviews: [],
             reviewsInSection: [],
@@ -37,19 +37,17 @@ class ReviewForum extends React.Component {
     }
 
     componentDidMount() {
-        getReviews(this, reviewNumLimit)
+        getReviewsOnForum(this, reviewNumLimit)
         getVoteRecords(this)
     }
 
     upvoteAction = reviewId => {
         const user = this.state.currentUser
-        log(user)
         if (user === null) {
             alert("You have to login before you vote.")
             return
         }
 
-        log(this.state.voteRecords)
         const voteRecordSearch = this.state.voteRecords.filter(record => {
             return record.username === user && record.reviewId === reviewId
         })
@@ -69,7 +67,6 @@ class ReviewForum extends React.Component {
         } else {
             voteRecord = voteRecordSearch[0]
         }
-        log(voteRecord)
 
         if (voteRecord.vote !== "upvote") {
             const reviewList = this.state.reviews.map(review => {
@@ -101,14 +98,14 @@ class ReviewForum extends React.Component {
         }
 
         // Update review in database
-        updateReviewVotes(this.state.reviews[reviewId])
+        updateReview(this.state.reviews.filter(review => review.id === reviewId)[0])
         // Update user's vote record in database
         updateVoteRecord(voteRecord)
     }
 
     downvoteAction = reviewId => {
         const user = this.state.currentUser
-        if (!user) {
+        if (user === null) {
             alert("You have to login before you vote.")
             return
         }
@@ -124,6 +121,11 @@ class ReviewForum extends React.Component {
                 vote: "none"
             }
             addVoteRecord(voteRecord)
+            const newVoteRecords = this.state.voteRecords
+            newVoteRecords.push(voteRecord)
+            this.setState({
+                voteRecords: newVoteRecords
+            })
         } else {
             voteRecord = voteRecordSearch[0]
         }
@@ -158,14 +160,14 @@ class ReviewForum extends React.Component {
         }
 
         // Update review in database
-        updateReviewVotes(this.state.reviews[reviewId])
+        updateReview(this.state.reviews.filter(review => review.id === reviewId)[0])
         // Update user's vote record in database
         updateVoteRecord(voteRecord)
     }
 
     reportAction = reviewId => {
-        console.log("Report Review")
-
+        log(reviewId)
+        log(this.state.reviews)
         const reviewList = this.state.reviews.map(review => {
             if (review.id === reviewId) {
                 review.reported = true
@@ -176,6 +178,8 @@ class ReviewForum extends React.Component {
         this.setState({
             reviews: reviewList
         })
+
+        updateReview(this.state.reviews.filter(review => review.id === reviewId)[0])
 
         alert("Review reported.")
     }
@@ -188,8 +192,6 @@ class ReviewForum extends React.Component {
     }
 
     searchReview = () => {
-        console.log("Search!")
-
         const currentSectionReviews = this.state.reviews.filter(review => {
             return review.title.includes(this.state.searchContent)
         })
@@ -206,8 +208,6 @@ class ReviewForum extends React.Component {
     }
 
     prevPage = () => {
-        console.log("previous page")
-
         if (this.state.currentPage > 1) {
             const currentPage = this.state.currentPage - 1
             const currentPageReviews = this.state.reviewsInSection.slice(
@@ -222,8 +222,6 @@ class ReviewForum extends React.Component {
     }
 
     nextPage = () => {
-        console.log("next page")
-
         if (this.state.currentPage < this.state.reviewsInSection.length / reviewNumLimit) {
             const currentPage = this.state.currentPage + 1
             const currentPageReviews = this.state.reviewsInSection.slice(
@@ -238,8 +236,6 @@ class ReviewForum extends React.Component {
     }
 
     firstPage = () => {
-        console.log("first page")
-
         const currentPageReviews = this.state.reviewsInSection.slice(
             0,
             reviewNumLimit
@@ -251,8 +247,6 @@ class ReviewForum extends React.Component {
     }
 
     lastPage = () => {
-        console.log("last page")
-
         const currentPage = Math.ceil(this.state.reviewsInSection.length / reviewNumLimit)
         const currentPageReviews = this.state.reviewsInSection.slice(
             (currentPage - 1) * reviewNumLimit,
@@ -278,9 +272,27 @@ class ReviewForum extends React.Component {
         })
     }
 
-    addNewReview = () => {
+    getAvailableId = () => {
+        if (this.state.reviews.length === 0) {
+            return 0
+        }
+
+        const idList = this.state.reviews.map(review => {
+            return review.id
+        })
+        const maxId = Math.max(...idList)
+        for (let i = 0; i < maxId + 100; i++) {
+            if (!(idList.includes(i))) {
+                return i
+            }
+        }
+        log("Error: Cannot find available id")
+        return -1
+    }
+
+    addReview = () => {
         const user = this.state.currentUser
-        log("add review!")
+        const id = this.getAvailableId()
         if (!user) {
             alert("You have to login before you submit your review.")
             return
@@ -290,17 +302,20 @@ class ReviewForum extends React.Component {
         } else if (this.state.reviewSubmitContent === "") {
             alert("Review content cannot be empty")
             return
+        } else if (id === -1) {
+            alert("Error: No available review id")
         }
 
         const reviewList = this.state.reviews
         const newReview = {
-            id: this.state.reviews.length,
+            id: id,
             title: this.state.reviewSubmitTitle,
             content: this.state.reviewSubmitContent,
             upvotes: 0,
             downvotes: 0,
             author: this.state.currentUser,
-            reputation: 1
+            reputation: 1,
+            reported: false
         }
         reviewList.push(newReview)
         this.setState({
@@ -315,7 +330,7 @@ class ReviewForum extends React.Component {
         })
 
         // Update database
-        addReview(newReview)
+        addReviewOnForum(newReview)
     }
 
     refreshForum = () => {
@@ -341,11 +356,11 @@ class ReviewForum extends React.Component {
                                 <HeaderImage to='/' src={logo} />
                         }
                         <div className='group'>
-                            <HeaderButton path='/reviewForum'>Forum</HeaderButton>
+                            <CurrentHeaderButton path='/reviewForum'>Forum</CurrentHeaderButton>
                             {
-                                this.props.app.state.currentUser !== null ?
-                                    <HeaderButton path='/Dashboard'>{this.state.currentUser}</HeaderButton> :
-                                    <HeaderButton path='/Login'>Log In</HeaderButton>
+                                this.state.currentUser !== null ?
+                                <HeaderButton path='/Dashboard'>Dashboard</HeaderButton> :
+                                <HeaderButton path='/Login'>Log In</HeaderButton>
                             }
                         </div>
                     </HeaderNavBar>
@@ -434,7 +449,7 @@ class ReviewForum extends React.Component {
                     reviewSubmitContent={this.state.reviewSubmitContent}
                     handleTitleChange={this.handleSubmitTitleChange}
                     handleContentChange={this.handleSubmitContentChange}
-                    addReview={() => this.addNewReview()}
+                    addReview={() => this.addReview()}
                 />
             </div>
         )

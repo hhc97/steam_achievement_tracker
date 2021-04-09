@@ -5,12 +5,13 @@ import { withRouter } from 'react-router-dom'
 
 
 
-class HeaderButton extends React.Component {
+class CurrentHeaderButton extends React.Component {
 
     redirectTO(){
         if (this.props.children == "Log Out"){
             userKey.logOut()
             this.props.logoutFunc()
+            console.log(localStorage.getItem("user"))
         }
         this.props.history.push(this.props.path)
     }
@@ -18,9 +19,9 @@ class HeaderButton extends React.Component {
     render() {
         //const {logoutFunc} = this.props
         return (
-            <button className ="headerButton" onClick={this.redirectTO.bind(this)}>{this.props.children}</button>
+            <button className ="currentHeaderButton" onClick={this.redirectTO.bind(this)}>{this.props.children}</button>
         )
     }
 }
 
-export default withRouter (HeaderButton);
+export default withRouter (CurrentHeaderButton);

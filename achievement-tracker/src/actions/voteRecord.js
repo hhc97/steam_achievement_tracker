@@ -35,7 +35,6 @@ export const getVoteRecords = (forum) => {
       }
     })
     .then((json) => {
-      log(json.voteRecords)
       forum.setState({
         voteRecords: json.voteRecords
       })
@@ -63,6 +62,54 @@ export const updateVoteRecord = (voteRecord) => {
           log("New vote record saved")
       } else {
           log("Error: Cannot update vote record")
+      }
+  }).catch((error) => {
+      log(error)
+  })
+}
+
+export const deleteVoteRecordByUser = (username) => {
+  const url = `/api/voteRecords/${username}`
+
+  const request = new Request(url, {
+    method: 'delete',
+    body: JSON.stringify({}),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  fetch(request)
+  .then(function (res) {
+      if (res.status === 200) {
+          log(`All vote records of user ${username} deleted`)
+      } else {
+          log("Error: Cannot delete vote records")
+      }
+  }).catch((error) => {
+      log(error)
+  })
+}
+
+export const deleteVoteRecordByReview = (username, reviewId) => {
+  const url = `/api/voteRecords/${username}/${reviewId}`
+
+  const request = new Request(url, {
+    method: 'delete',
+    body: JSON.stringify({}),
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+
+  fetch(request)
+  .then(function (res) {
+      if (res.status === 200) {
+          log(`All vote records of this review deleted`)
+      } else {
+          log("Error: Cannot delete vote records")
       }
   }).catch((error) => {
       log(error)
