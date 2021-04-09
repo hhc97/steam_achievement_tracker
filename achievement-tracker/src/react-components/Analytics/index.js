@@ -38,7 +38,9 @@ class Analytics extends React.Component {
             averageCompletion: 0,
             totalPlaytime: 0,
             averagePlaytime: 0,
+            gamesOwned: 0,
             totalGames: 0,
+            gamesAttempted: 0,
             showLoading: true,
             sortAscending: false,
             joinDate: ''
@@ -165,6 +167,7 @@ class Analytics extends React.Component {
                 numGames++
             }
         }
+        this.setState({ gamesAttempted : numGames })
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
         this.setState({ totalPlaytime: totalPlaytime })
@@ -194,6 +197,7 @@ class Analytics extends React.Component {
                 this.updateBannerStats()
             }
         }
+        this.setState({ totalGames: gameList.length })
         this.setState({ showLoading: false })
         this.calculateReputation()
     }
@@ -213,6 +217,7 @@ class Analytics extends React.Component {
             gameList.push(gameEntry)
             this.setState({ stats: gameList })
         }
+        this.setState({ gamesOwned: gameList.length })
         this.setState({ stats: gameList })
         this.updateAchievements()
     }
@@ -330,6 +335,10 @@ class Analytics extends React.Component {
                             {!(this.state.showLoading) || <div id="loadingIcon2">
                                 <img src={loadingIcon} />
                             </div>}
+                        </div>
+                        <div id="TotalStats">
+                            <span> Total Games Attempted: {this.state.gamesAttempted} </span> <br></br>
+                            <span> Total Games Supporting Achievements: {this.state.totalGames} (from a total of {this.state.gamesOwned} games owned) </span>
                         </div>
                         <table id="StatsTable">
                             <thead >
