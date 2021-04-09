@@ -19,3 +19,32 @@ export const getReputation = (dashComp) => {
             console.log(error);
         });
 }
+
+export const updateReputation = (page, reputation) => {
+    const url = `${API_HOST}/api/user/updatereputation/${page.state.username}`
+    const username = page.state.username
+    const obj = {
+        username: username,
+        reputation: reputation
+    }
+
+    const request = new Request( url, {
+        method: 'PATCH',
+        body: JSON.stringify(obj),
+        headers: {
+            "Accept": "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+    .then(function (res) {
+        if (res.status === 200) {
+            console.log("Reputation updated")
+        } else {
+            console.log("Error: Cannot update reputation")
+        }
+    }).catch((error) => {
+        console.log(error)
+    })
+}
