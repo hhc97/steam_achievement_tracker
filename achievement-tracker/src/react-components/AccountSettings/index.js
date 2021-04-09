@@ -17,6 +17,7 @@ class AccountSettings extends React.Component {
 
         this.state = {
             userName: userName,
+            password: "sdfhgdhkfgjdg",
             steamInput: "PolarisTM",
             ubisoftInput: "Polaris04",
             playstationInput: "Dancin9D0nZ",
@@ -86,7 +87,7 @@ class AccountSettings extends React.Component {
                         <p>Username: <span> {this.state.userName} </span></p>
                     </div>
                     <div className="TextInputButton">
-                        <p> Password: <span> **** </span></p>
+                        <p> Password: <span> {"*".repeat(this.state.password.length)} </span></p>
                     </div>
                 </div>
                 <div id="ExternalLinksSection">
