@@ -91,6 +91,17 @@ body {
     font-style: italic;
 }
 
+#ReputationContainer {
+    width: 150px;
+    height: 45px;
+}
+
+#ReputationContainer img {
+    float: left;
+    height: 50px;
+    width: auto;
+}
+
 .StatsRow{
     margin-top: 20px;
 }
