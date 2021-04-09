@@ -2,12 +2,18 @@
     display: block;
     width: fit-content;
     height: fit-content;
-    color: white;
+    color: #9900cc;
     border: 0;
     font-size: 20px;
     cursor: pointer;
     margin:10px;
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 2px solid #9900cc;
     font-weight: bold;
     background-color: transparent;
+}
+
+.currentHeaderButton:hover {
+    color: #9900cc;
+    border-bottom: 2px solid #9900cc;
 }
