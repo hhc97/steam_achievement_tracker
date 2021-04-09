@@ -7,7 +7,7 @@ const log = console.log
 
 class Review extends React.Component {
   state = {
-    isCollapsed: true
+    isCollapsed: this.props.content.length < 1000 ? false : true
   }
   
   setIsCollapsed = () => {
