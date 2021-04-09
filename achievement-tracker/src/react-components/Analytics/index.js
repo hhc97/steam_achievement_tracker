@@ -10,6 +10,7 @@ import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 import { getUserReviews } from '../../actions/review'
 import { getReputation, updateReputation } from '../../actions/reputation'
+import { getImage } from '../../actions/profilePic'
 
 import "./Analytics.css"
 
@@ -43,7 +44,8 @@ class Analytics extends React.Component {
             gamesAttempted: 0,
             showLoading: true,
             sortAscending: false,
-            joinDate: ''
+            joinDate: '',
+            image: ""
         }
     }
 
@@ -257,6 +259,7 @@ class Analytics extends React.Component {
         await getUserReviews(this, this.state.userName)
             .then(res => { this.getReviewStats(res) })
         getReputation(this)
+        getImage(this.state.userName, this)
     }
 
     render() {
@@ -286,7 +289,10 @@ class Analytics extends React.Component {
                     <div id="StatsSection">
                         <div id="StatsHeader">
                             <div id="StatsUser">
-                                <img id="StatsProfilePic" src={sampleProfilePic}></img>
+                                {this.state.image === ""?
+                                    <img id="StatsProfilePic" src={sampleProfilePic}/> :
+                                    <img id="StatsProfilePic" src={"data:image/png;base64," + this.state.image}/>
+                                }
                                 <div id="StatsUserCaption">
                                     <p> {this.state.userName} </p>
                                     <span> {this.state.joinDate} </span>
