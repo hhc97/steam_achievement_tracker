@@ -8,6 +8,7 @@ import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
+import { getUserReviews } from '../../actions/review'
 
 import "./Analytics.css"
 
@@ -28,6 +29,9 @@ class Analytics extends React.Component {
             username: username,
             stats: stats,
             statsShown: [],
+            userReviews: [],
+            numReviews: 0,
+            reviewScore: 0,
             reputation: 1,
             totalAchievements: 0,
             averageCompletion: 0,
@@ -161,6 +165,20 @@ class Analytics extends React.Component {
         this.updateAchievements()
     }
 
+    getReviewStats(data) {
+        const reviews = data
+        console.log(reviews)
+        let numReviews = reviews.length
+        let score = 0
+        for (let i = 0; i < reviews.length; i++) {
+            score += reviews[i].upvotes
+            score -= reviews[i].downvotes
+        }
+        this.setState({ userReviews: reviews})
+        this.setState({ numReviews: numReviews })
+        this.setState({ reviewScore: score })
+    }
+
     // sets the user membership length to a human readable string
     async setMemberAge() {
         let joined
@@ -175,10 +193,12 @@ class Analytics extends React.Component {
         this.setState({ joinDate: 'Member for ' + ageString.slice(0, stopPoint) })
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setMemberAge()
         getGameStats()
             .then(res => { this.updateStats(res) })
+        await getUserReviews(this, this.state.username)
+        .then(res => { this.getReviewStats(res) })
     }
 
     render() {
@@ -229,7 +249,7 @@ class Analytics extends React.Component {
                             </div>
                             <div className="StatBoxRight">
                                 <p>Reviews Posted</p>
-                                <span> 42 </span>
+                                <span> {this.state.numReviews} </span>
                             </div>
                         </div>
 
@@ -244,7 +264,7 @@ class Analytics extends React.Component {
                             </div>
                             <div className="StatBoxRight">
                                 <p>Review Score</p>
-                                <span> 762 </span>
+                                <span> {this.state.reviewScore} </span>
                             </div>
                         </div>
                     </div>
