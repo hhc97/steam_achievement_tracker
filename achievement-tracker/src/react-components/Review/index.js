@@ -9,7 +9,7 @@ class Review extends React.Component {
   state = {
     isCollapsed: this.props.content.length < 1000 ? false : true
   }
-  
+
   setIsCollapsed = () => {
     this.setState({
       isCollapsed: !this.state.isCollapsed
@@ -37,19 +37,19 @@ class Review extends React.Component {
         <div
           className={this.state.isCollapsed ? "collapsed-content" : "expanded-content"}
         >
-          <p>{content}</p>
+          <p className="review-content">{content}</p>
         </div>
         {
           content.length < 1000 ?
-          <div></div> :
-          <button
-            className="collapse-button"
-            onClick={this.setIsCollapsed}
-          >
-            <strong>
-              {this.state.isCollapsed ? "SHOW" : "HIDE"} CONTENT
+            <div></div> :
+            <button
+              className="collapse-button"
+              onClick={this.setIsCollapsed}
+            >
+              <strong>
+                {this.state.isCollapsed ? "SHOW" : "HIDE"} CONTENT
             </strong>
-          </button>
+            </button>
         }
 
         <div className="review-info-bar">

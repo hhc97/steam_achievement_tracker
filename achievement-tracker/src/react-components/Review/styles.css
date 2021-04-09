@@ -52,3 +52,7 @@
 .expanded-content {
   display: block;
 }
+
+.review-content {
+  white-space: pre-wrap;
+}
