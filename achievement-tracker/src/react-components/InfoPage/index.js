@@ -8,6 +8,8 @@ import method1_3 from './imgs/method1_3.png'
 import method2_1 from './imgs/method2_1.png'
 import method2_2 from './imgs/method2_2.png'
 import method2_3 from './imgs/method2_3.png'
+import addendum_1 from './imgs/addendum_1.png'
+// import addendum_2 from './imgs/addendum_2.png'
 import notes1 from './imgs/notes1.png'
 import notes2 from './imgs/notes2.png'
 
@@ -111,7 +113,7 @@ class SteamInfo extends React.Component {
                                     once you have successfully signed up for an AchievementTracker account. If you wish, you can save your
                                         Custom URL in a different location to easily reapply it later.) </li>
                                     <li> Now that you have cleared the Custom URL, your Steam ID should be revealed in the note below the input field.
-                                        It is a 17-digit number, which for most users starts with the digits "7656" (indicated in the example below): </li>
+                                        It is a 17-digit number, which for most users starts with the 4 digits "7656" (indicated in the example below): </li>
                                     <div className="methodImage">
                                         <img src={method2_3} />
                                     </div>
@@ -120,6 +122,32 @@ class SteamInfo extends React.Component {
                                     <li> Enter your ID in the relevant input field, and fill out the other input fields as required to Sign Up. </li>
                                     <li> Congratulations! You have officially signed up for an AchievementTracker account! We hope you enjoy
                                         the services we have to offer. </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div id="Addendum">
+                            <h2> Method 2: Legacy or Veteran Accounts </h2>
+                            <div className="methodDescription">
+                                <p> This section describes how to set your game details to Public, so that we can access your data and present the
+                                    relevant visualizations for you. </p>
+                            </div>
+                            <div className="methodSteps">
+                                <ol>
+                                    <li> Navigate to your personal Profile page. </li>
+                                    <li> Click the "Edit Profile" button on the right side of your Profile banner (indicated in the example below): </li>
+                                    <div className="methodImage">
+                                        <img src={method2_1} />
+                                    </div>
+                                    <li> Click on the "Privacy Settings" tab on the left side of the page. This should present you with a list of your
+                                        account details, each of which you can customize the privacy level of. </li>
+                                    <div className="methodImage">
+                                        <img src={addendum_1} />
+                                    </div>
+                                    <li> Make sure the "My Profile", "Game Details", "Friends List" elements are all set to "Public", and uncheck the 
+                                        "Always keep my total playtime private" option as well, if applicable. </li>
+                                    <div className="methodImage">
+                                        {/* <img src={addendum_2} /> */}
+                                    </div>
                                 </ol>
                             </div>
                         </div>
