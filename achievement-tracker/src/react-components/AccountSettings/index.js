@@ -1,5 +1,5 @@
 import React from "react"
-import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import { CurrentHeaderButton, HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 
 import sampleProfilePic from "./imgs/sampleProfilePic.jpg"
 import logo from './../../steamIcon2.png'
@@ -91,7 +91,7 @@ class AccountSettings extends React.Component {
                                 <HeaderButton path='/Dashboard'>Dashboard</HeaderButton>
                                 <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
                                 <HeaderButton path='/Analytics'>Analytics</HeaderButton>
-                                <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
+                                <CurrentHeaderButton path='/AccountSettings'>Settings</CurrentHeaderButton>
                                 <HeaderButton path='/' logoutFunc={() => { logout(this.props.app) }}>Log Out</HeaderButton>
                             </div>
                         </HeaderNavBar>

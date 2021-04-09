@@ -137,7 +137,7 @@ class Signup extends React.Component {
           <HeaderNavBar>
             <HeaderImage to='/' src={logo} />
             <div className='group'>
-              <HeaderButton path='/reviewforum'>Forum</HeaderButton>
+              <HeaderButton path='/reviewForum'>Forum</HeaderButton>
               <HeaderButton path='/login'>Login</HeaderButton>
             </div>
           </HeaderNavBar>

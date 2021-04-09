@@ -2,7 +2,7 @@ import React from "react";
 import { uid } from "react-uid";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import { CurrentHeaderButton, HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
 import logo from './../../steamIcon2.png'
 import ForumSearchBar from "../ForumSearchBar"
 import Review from "../Review"
@@ -350,7 +350,7 @@ class ReviewForum extends React.Component {
                                 <HeaderImage to='/' src={logo} />
                         }
                         <div className='group'>
-                            <HeaderButton path='/reviewForum'>Forum</HeaderButton>
+                            <CurrentHeaderButton path='/reviewForum'>Forum</CurrentHeaderButton>
                             {
                                 this.state.currentUser !== null ?
                                 <HeaderButton path='/Dashboard'>{this.state.currentUser}</HeaderButton> :
