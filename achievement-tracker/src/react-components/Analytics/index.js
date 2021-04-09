@@ -3,6 +3,7 @@ import { uid } from "react-uid"
 
 import sampleProfilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import logo from './../../steamIcon2.png'
+import logo from './../../logo.svg'
 import loadingIcon from "./../Dashboard/Static/loadingSign.png"
 
 import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
@@ -97,36 +98,36 @@ class Analytics extends React.Component {
         if (completion > 90) {
             completionComponent = 3
         } else {
-            completionComponent = completion/30
+            completionComponent = completion / 30
         }
 
         if (achievements > 2000) {
             achievementMultiplier = 1
         } else {
-            achievementMultiplier = achievements/2000
+            achievementMultiplier = achievements / 2000
         }
 
         if (playtime > 5000) {
             playtimeComponent = 2
         } else {
-            playtimeComponent = playtime/2500
+            playtimeComponent = playtime / 2500
         }
 
         if (reviewScore > 100) {
             reviewComponent = 3
         } else {
-            reviewComponent = reviewScore/30
+            reviewComponent = reviewScore / 30
         }
 
         if (gamesOwned > 100) {
             gameComponent = 2
         } else {
-            gameComponent = gamesOwned/50
+            gameComponent = gamesOwned / 50
         }
-        const rawReputation = achievementMultiplier*completionComponent
-                            + playtimeComponent
-                            + reviewComponent
-                            + gameComponent
+        const rawReputation = achievementMultiplier * completionComponent
+            + playtimeComponent
+            + reviewComponent
+            + gameComponent
         console.log(rawReputation)
         const reputation = Math.floor(rawReputation)
         this.setState({ reputation: reputation })
@@ -227,15 +228,16 @@ class Analytics extends React.Component {
             score += reviews[i].upvotes
             score -= reviews[i].downvotes
         }
-        this.setState({ userReviews: reviews})
+        this.setState({ userReviews: reviews })
         this.setState({ numReviews: numReviews })
         this.setState({ reviewScore: score })
     }
 
+
     // sets the user membership length to a human readable string
     async setMemberAge() {
         let joined
-        await fetch(`/users/joindate/${this.state.userName}`)
+        await fetch(`/users/joindate/${this.state.username}`)
             .then(res => { return res.json() })
             .then(json => { joined = json.time })
         const now = new Date()
@@ -251,7 +253,7 @@ class Analytics extends React.Component {
         getGameStats()
             .then(res => { this.updateStats(res) })
         await getUserReviews(this, this.state.userName)
-        .then(res => { this.getReviewStats(res) })
+            .then(res => { this.getReviewStats(res) })
         getReputation(this)
     }
 
