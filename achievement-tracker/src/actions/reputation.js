@@ -21,8 +21,8 @@ export const getReputation = (dashComp) => {
 }
 
 export const updateReputation = (page, reputation) => {
-    const url = `${API_HOST}/api/user/updatereputation/${page.state.username}`
-    const username = page.state.username
+    const url = `${API_HOST}/api/user/updatereputation/${page.state.userName}`
+    const username = page.state.userName
     const obj = {
         username: username,
         reputation: reputation

@@ -13,10 +13,10 @@ class AccountSettings extends React.Component {
     constructor(props) {
         super(props)
 
-        const username = this.props.app.state.currentUser
+        const userName = this.props.app.state.currentUser
 
         this.state = {
-            username: username,
+            userName: userName,
             steamInput: "PolarisTM",
             ubisoftInput: "Polaris04",
             playstationInput: "Dancin9D0nZ",
@@ -62,7 +62,7 @@ class AccountSettings extends React.Component {
                 </div>
 
                 <div id="TitleSection">
-                    <h1> Account Settings for {this.state.username} </h1>
+                    <h1> Account Settings for {this.state.userName} </h1>
                 </div>
                 <div id="ProfilePicBlock">
                     <h2> Profile Picture </h2>
@@ -83,7 +83,7 @@ class AccountSettings extends React.Component {
                 <div id="UserDetailsSection">
                     <h2> User Details </h2>
                     <div className="TextInputButton">
-                        <p>Username: <span> {this.state.username} </span></p>
+                        <p>Username: <span> {this.state.userName} </span></p>
                     </div>
                     <div className="TextInputButton">
                         <p> Password: <span> **** </span></p>
