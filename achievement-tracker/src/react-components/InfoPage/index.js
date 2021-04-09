@@ -1,6 +1,5 @@
 import React from "react";
-import { HeaderButton, HeaderNavBar, HeaderImage } from '../HeaderComponent'
-import { HeaderContainer } from '../../Containers'
+import { CurrentHeaderButton, HeaderButton, HeaderNavBar, HeaderImage, HeadContainer } from '../HeaderComponent'
 import './InfoPage.css'
 import logo from './../../steamIcon2.png'
 import method1_1 from './imgs/method1_1.png'
@@ -17,16 +16,15 @@ class SteamInfo extends React.Component {
     render() {
         return (
             <div id="SteamInfo">
-                <HeaderContainer bgId={"dashboard"}>
+                <HeadContainer bgId={"dashboard"}>
                     <HeaderNavBar>
                         <HeaderImage to="/dashboard" src={logo}></HeaderImage>
                         <div className='group'>
-                            <HeaderButton path='/ReviewForum'>Forum</HeaderButton>
-                            <HeaderButton path='/AccountSettings'>Settings</HeaderButton>
-                            <HeaderButton path='/'>Log Out</HeaderButton>
+                            <CurrentHeaderButton path='/SteamInfo'>Info</CurrentHeaderButton>
+                            <HeaderButton path='/'>Home</HeaderButton>
                         </div>
                     </HeaderNavBar>
-                </HeaderContainer>
+                </HeadContainer>
                 <div id="InfoPage">
                     <div id="InfoTitle">
                         <h1> How do I find my Steam ID? </h1>

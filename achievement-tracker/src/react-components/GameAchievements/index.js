@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
+import { CurrentHeaderButton, HeaderButton, HeaderImage, HeadContainer, HeaderNavBar } from '../HeaderComponent'
 import logo from './../../steamIcon2.png'
 import profilePic from "../AccountSettings/imgs/sampleProfilePic.jpg"
 import { logout } from '../../actions/reactAuth'
@@ -95,7 +95,7 @@ class GameAchievements extends React.Component {
             <HeaderImage to='/dashboard' src={logo} />
             <div className='group'>
               {/* {this.state.isAdmin && (<HeaderButton path='/admin'>Admin</HeaderButton>)} */}
-              <HeaderButton path='/dashboard'>Dashboard</HeaderButton>
+              <CurrentHeaderButton path='/Dashboard'>Dashboard</CurrentHeaderButton>
               <HeaderButton path='/reviewForum'>Forum</HeaderButton>
               <HeaderButton path='/Analytics'>Analytics</HeaderButton>
               <HeaderButton path='/AccountSettings'>Settings</HeaderButton>

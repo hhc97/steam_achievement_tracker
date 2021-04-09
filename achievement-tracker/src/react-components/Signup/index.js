@@ -137,7 +137,7 @@ class Signup extends React.Component {
           <HeaderNavBar>
             <HeaderImage to='/' src={logo} />
             <div className='group'>
-              <HeaderButton path='/reviewforum'>Forum</HeaderButton>
+              <HeaderButton path='/reviewForum'>Forum</HeaderButton>
               <HeaderButton path='/login'>Login</HeaderButton>
             </div>
           </HeaderNavBar>
@@ -214,7 +214,7 @@ class Signup extends React.Component {
           </div>}
 
           <Button className="SignUpButton"
-            variant="secondary"
+            variant="primary"
             disabled={!(this.state.valid_username && this.state.valid_steamID &&
               this.state.valid_pw1 && this.state.valid_pw2)}
             onClick={this.handleSignup}>Sign Up

@@ -11,3 +11,8 @@
     font-weight: bold;
     background-color: transparent;
 }
+
+.headerButton:hover {
+    color: #028aa1;
+    border-bottom: 1px solid #028aa1;
+}
