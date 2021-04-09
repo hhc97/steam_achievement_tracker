@@ -12,6 +12,8 @@ import './Login.css';
 
 import { login } from '../../actions/reactAuth'
 
+import ENV from '../../config'
+
 const log = console.log
 
 class Login extends React.Component {
@@ -19,7 +21,7 @@ class Login extends React.Component {
   state = {
     userName: '',
     passWord: '',
-    captcha_solved: false
+    captcha_solved: ENV.env === 'development' ? true : false
   }
 
   handleInputChange = (event) => {
@@ -109,12 +111,7 @@ class Login extends React.Component {
               className='loginCaptcha'
               sitekey="6LckfXMaAAAAAFQXopzO5R-TmD-4VQlwcRIx7YWy"
               onChange={this.handleCaptchaSolve} />
-
-            <Button className='loginCaptcha'
-              variant="warning"
-              onClick={this.handleCaptchaSolve}>Bypass verify (for testing)</Button>
           </div>
-
         </div>
       </div>
     )
