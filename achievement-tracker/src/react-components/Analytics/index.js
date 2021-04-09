@@ -123,11 +123,12 @@ class Analytics extends React.Component {
         } else {
             gameComponent = gamesOwned/50
         }
-        const reputation = Math.floor(achievementMultiplier*completionComponent
+        const rawReputation = achievementMultiplier*completionComponent
                             + playtimeComponent
                             + reviewComponent
-                            + gameComponent)
-        console.log(reputation)
+                            + gameComponent
+        console.log(rawReputation)
+        const reputation = Math.floor(rawReputation)
         this.setState({ reputation: reputation })
         updateReputation(this, reputation)
         return reputation
