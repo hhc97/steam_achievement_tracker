@@ -7,9 +7,10 @@ const { VoteRecord } = require('../models/voteRecord')
 
 // helpers/middlewares
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticated, ensureAuthenticatedAdmin } = require('./helpers/authenticate')
 
 /*** User API routes ****************/
-router.post('/api/voteRecords', mongoChecker, async (req, res) => {
+router.post('/api/voteRecords', mongoChecker, ensureAuthenticated, async (req, res) => {
     const voteRecord = new VoteRecord({
         username: req.body.username,
         reviewId: req.body.reviewId,
@@ -29,7 +30,7 @@ router.post('/api/voteRecords', mongoChecker, async (req, res) => {
     }
 })
 
-router.get('/api/voteRecords', mongoChecker, async (req, res) => {
+router.get('/api/voteRecords', mongoChecker, ensureAuthenticated, async (req, res) => {
     try {
         const voteRecords = await VoteRecord.find()
         res.send({ voteRecords })
@@ -39,7 +40,7 @@ router.get('/api/voteRecords', mongoChecker, async (req, res) => {
     }
 })
 
-router.patch('/api/voteRecords/:username/:reviewId', mongoChecker, async (req, res) => {
+router.patch('/api/voteRecords/:username/:reviewId', mongoChecker, ensureAuthenticated, async (req, res) => {
     const username = req.params.username
     const reviewId = req.params.reviewId
 
@@ -62,7 +63,7 @@ router.patch('/api/voteRecords/:username/:reviewId', mongoChecker, async (req, r
     }
 })
 
-router.delete('/api/voteRecords/:username', mongoChecker, async (req, res) => {
+router.delete('/api/voteRecords/:username', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     const username = req.params.username
 
     try {
@@ -78,7 +79,7 @@ router.delete('/api/voteRecords/:username', mongoChecker, async (req, res) => {
     }
 })
 
-router.delete('/api/voteRecords/:username/:reviewId', mongoChecker, async (req, res) => {
+router.delete('/api/voteRecords/:username/:reviewId', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     const reviewId = req.params.reviewId
 
     try {

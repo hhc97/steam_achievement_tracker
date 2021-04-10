@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models/user')
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticated } = require('./helpers/authenticate')
 
 
-router.get("/api/user/reputation/:userName", mongoChecker, async (req, res) => {
+router.get("/api/user/reputation/:userName", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.params.userName
 
     try {
@@ -20,12 +21,12 @@ router.get("/api/user/reputation/:userName", mongoChecker, async (req, res) => {
     }
 })
 
-router.patch("/api/user/updatereputation/:username", mongoChecker, async (req, res) => {
+router.patch("/api/user/updatereputation/:username", mongoChecker, ensureAuthenticated, async (req, res) => {
     const username = req.body.username
     const newReputation = req.body.reputation
 
     try {
-        const user = await User.findOne({ username: username})
+        const user = await User.findOne({ username: username })
         user.reputation = newReputation
         user.save()
         res.send()

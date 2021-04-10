@@ -5,8 +5,9 @@ const crypto = require("crypto");
 const { User } = require('../models/user')
 const { Chat } = require("../models/chat")
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticated } = require('./helpers/authenticate')
 
-router.get("/api/friends/:userName", mongoChecker, async (req, res) => {
+router.get("/api/friends/:userName", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.params.userName
 
     try {
@@ -24,7 +25,7 @@ router.get("/api/friends/:userName", mongoChecker, async (req, res) => {
     }
 })
 
-router.post("/api/friends/:userName", mongoChecker, async (req, res) => {
+router.post("/api/friends/:userName", mongoChecker, ensureAuthenticated, async (req, res) => {
     const friendName = req.body.friendName
     const userName = req.params.userName
 
@@ -64,7 +65,7 @@ router.post("/api/friends/:userName", mongoChecker, async (req, res) => {
     }
 })
 
-router.delete("/api/friends/delete", mongoChecker, async (req, res) => {
+router.delete("/api/friends/delete", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.body.userName
     const friendName = req.body.friendName
 
@@ -85,7 +86,7 @@ router.delete("/api/friends/delete", mongoChecker, async (req, res) => {
         friendUser.friendList = friendUser.friendList.filter((i) => { return i.name !== userName })
         user.save()
         friendUser.save()
-        res.send({ user: user, friendUser: friendUser, chat:chat })
+        res.send({ user: user, friendUser: friendUser, chat: chat })
     } catch (error) {
         if (isMongoError(error)) {
             res.status(500).send('Internal server error')
@@ -96,7 +97,7 @@ router.delete("/api/friends/delete", mongoChecker, async (req, res) => {
     }
 })
 
-router.patch("/api/friends/accept", mongoChecker, async (req, res) => {
+router.patch("/api/friends/accept", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.body.userName
     const friendName = req.body.friendName
     const id = crypto.randomBytes(16).toString("hex");
@@ -135,7 +136,7 @@ router.patch("/api/friends/accept", mongoChecker, async (req, res) => {
     }
 })
 
-router.patch("/api/friends/decline", mongoChecker, async (req, res) => {
+router.patch("/api/friends/decline", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.body.userName
     const friendName = req.body.friendName
 

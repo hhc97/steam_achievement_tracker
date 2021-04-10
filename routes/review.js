@@ -7,9 +7,10 @@ const { Review } = require('../models/review')
 
 // helpers/middlewares
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticated, ensureAuthenticatedAdmin } = require('./helpers/authenticate')
 
 /*** User API routes ****************/
-router.post('/api/reviews', mongoChecker, async (req, res) => {
+router.post('/api/reviews', mongoChecker, ensureAuthenticated, async (req, res) => {
     const review = new Review({
         username: req.body.username,
         password: req.body.password,
@@ -37,6 +38,7 @@ router.post('/api/reviews', mongoChecker, async (req, res) => {
     }
 })
 
+// get route open to public
 router.get('/api/reviews', mongoChecker, async (req, res) => {
     try {
         const reviews = await Review.find()
@@ -47,7 +49,7 @@ router.get('/api/reviews', mongoChecker, async (req, res) => {
     }
 })
 
-router.patch('/api/reviews/:id', mongoChecker, async (req, res) => {
+router.patch('/api/reviews/:id', mongoChecker, ensureAuthenticated, async (req, res) => {
     const id = req.params.id
 
     try {
@@ -71,7 +73,7 @@ router.patch('/api/reviews/:id', mongoChecker, async (req, res) => {
     }
 })
 
-router.patch('/api/reviews/:author/:reputation', mongoChecker, async (req, res) => {
+router.patch('/api/reviews/:author/:reputation', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     const author = req.params.author
     const reputation = req.params.reputation
     const deleted = req.body.deleted
@@ -98,7 +100,7 @@ router.patch('/api/reviews/:author/:reputation', mongoChecker, async (req, res) 
     }
 })
 
-router.delete('/api/reviews/:id', mongoChecker, async (req, res) => {
+router.delete('/api/reviews/:id', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     const id = req.params.id
 
     try {

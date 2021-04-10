@@ -5,8 +5,9 @@ const router = express.Router();
 const { User } = require('../models/user')
 const { Chat } = require('../models/chat')
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticated } = require('./helpers/authenticate')
 
-router.get("/api/chat/:userName/:friendName", mongoChecker, async (req, res) => {
+router.get("/api/chat/:userName/:friendName", mongoChecker, ensureAuthenticated, async (req, res) => {
     const userName = req.params.userName
     const friendName = req.params.friendName
 
