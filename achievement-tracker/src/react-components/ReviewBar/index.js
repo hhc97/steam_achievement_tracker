@@ -16,7 +16,7 @@ class ReviewBar extends React.Component {
     return (
       <div className="review">
         <h2>{title}</h2>
-        <p>{content}</p>
+        <p className="review-content">{content}</p>
         <div className="review-info-bar">
           <span><strong>Author: </strong>{author}</span>
           <span><strong>Reputation: </strong>{reputation}</span>

@@ -20,8 +20,7 @@ class Login extends React.Component {
   state = {
     userName: '',
     passWord: '',
-    // remember to set to false before final!
-    captcha_solved: true
+    captcha_solved: false
   }
 
   handleInputChange = (event) => {
