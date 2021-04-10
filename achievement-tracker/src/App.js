@@ -19,6 +19,7 @@ import SteamInfo from './react-components/InfoPage'
 class App extends React.Component {
   componentDidMount() {
     checkSession(this); // sees if a user is logged in
+    document.title = 'Steam Achievement Tracker'
   }
 
   // global state passed down which indicates the current logged in user
