@@ -10,14 +10,14 @@
 
 ## Overview of routes
 - chat
-    1. GET: {host}/api/chat/:userName/:friendName, where the userName is the current login user and the friendName is the selected friend name that the user want to chat with. The method willl return a list of messages that the user and the friend has previously chat on.
+    1. `GET: {host}/api/chat/:userName/:friendName`, where the userName is the current login user and the friendName is the selected friend name that the user want to chat with. The method willl return a list of messages that the user and the friend has previously chat on.
     2. For Posting messages we use socket.io, so the message will emit to backend and directly interact with mongo at the backend. No route needed.
 - friend
-    1. GET: {host}/api/friends/:userName, where the userName is the current login user. The method will return an object contain the user's friend list and pending friend list. Friend list is the accepted friends that the user has. Pending friend list is the friend that still yet to be accept or reject by the user.
-    2. POST: {host}/api/friends/:userName, where the userName is the current login user. The method takes in one body argument, which is friendName, the friend's name that the user want to add friend with. The method will push user into friend's pedning friend list await for the friend to either accept or reject. The method will return friend's updated data.
-    3. DELETE: {host}/api/friends/delete. The method takes in two body argument, which consists of the userName, the current login user, and friendName, the friend's name that the user want to delete. This method will both delete each other from their own friend list. This method will also delete all the chat history that the user and friend has. This method will return the updated user, updated friend, updated chat.
-    4. PATCH: {host}/api/friends/accept. The method will take in two argument, which consists of userName, the currecnt login user's username, and friendName, the friend' name that user want to accept as a friend. This method will remove friend from user's pending friend list and add to friend list, and also will add user into friend's friend list. This method will also create a new chat room for them with empty messages. This method will return nothing with status 200.
-    5. PATCH: {host}/api/friends/decline. The method takes in two body argument, which consists of the userName, the current login user, and friendName, the friend's name that the user decline as a friend. This method will remove friend from the user's pending friend list. Ths method will return nothing with status 200. 
+    1. `GET: {host}/api/friends/:userName`, where the userName is the current login user. The method will return an object contain the user's friend list and pending friend list. Friend list is the accepted friends that the user has. Pending friend list is the friend that still yet to be accept or reject by the user.
+    2. `POST: {host}/api/friends/:userName`, where the userName is the current login user. The method takes in one body argument, which is friendName, the friend's name that the user want to add friend with. The method will push user into friend's pedning friend list await for the friend to either accept or reject. The method will return friend's updated data.
+    3. `DELETE: {host}/api/friends/delete`. The method takes in two body argument, which consists of the userName, the current login user, and friendName, the friend's name that the user want to delete. This method will both delete each other from their own friend list. This method will also delete all the chat history that the user and friend has. This method will return the updated user, updated friend, updated chat.
+    4. `PATCH: {host}/api/friends/accept`. The method will take in two argument, which consists of userName, the currecnt login user's username, and friendName, the friend' name that user want to accept as a friend. This method will remove friend from user's pending friend list and add to friend list, and also will add user into friend's friend list. This method will also create a new chat room for them with empty messages. This method will return nothing with status 200.
+    5. `PATCH: {host}/api/friends/decline`. The method takes in two body argument, which consists of the userName, the current login user, and friendName, the friend's name that the user decline as a friend. This method will remove friend from the user's pending friend list. Ths method will return nothing with status 200. 
 - login
     1. `POST {host}/users/changepassword`  
     ```
@@ -69,17 +69,17 @@
     destroys the session and logs you out
     ```
 - profilePic
-    1. GET {host}/api/image/:userName, where the userName is the current login user. This method will retreive the binary image string from user model and return an object of {image: data}.
-    2. PATCH {host}/api/uploadImage/:userName, where the userName is the current login user. This method also takes in one body argument, image, which is a binary base64 string converted from an image. This method will update the profilePic from user model. This method will return the updated user object. 
+    1. `GET {host}/api/image/:userName`, where the userName is the current login user. This method will retreive the binary image string from user model and return an object of {image: data}.
+    2. `PATCH {host}/api/uploadImage/:userName`, where the userName is the current login user. This method also takes in one body argument, image, which is a binary base64 string converted from an image. This method will update the profilePic from user model. This method will return the updated user object. 
 - reputation
-    1. GET {host}/api/user/reputation/:userName, where the userName is the current login user. The method will retreive the reputation from user model that store on the database and return an object of {reputation: data}.
-    2. PATCH {host}/api/user/updatereputation/:username, where the userName is the current login user. This method takes in two body argument, which are userName, same as the :userName, and reputation, a Number represent the updated reputation score. The method will update the user on the database and return nothing with a status 200.
+    1. `GET {host}/api/user/reputation/:userName`, where the userName is the current login user. The method will retreive the reputation from user model that store on the database and return an object of {reputation: data}.
+    2. `PATCH {host}/api/user/updatereputation/:username`, where the userName is the current login user. This method takes in two body argument, which are userName, same as the :userName, and reputation, a Number represent the updated reputation score. The method will update the user on the database and return nothing with a status 200.
 - review
-    1. post('/api/reviews') is used for adding a new review document into the database. It will get all the needed information to create a new review object and return it.
-    2. get('/api/reviews') is used for getting all the reviews in the database. No params will be passed in and it is expected to return a list of review object.
-    3. patch('/api/reviews/:id') is used for modifying the upvotes, the downvotes, and reported attribute of a specific review in the database. It will get a review json and will return the modified review.
-    4. patch('/api/reviews/:author/:reputation') is used for modifying the username and the reputation on a specific review in the database. It will get author name and reputation from params and an attribute 'deleted' from req.body, and will return the modified review.
-    5. delete('/api/reviews/:id') is used for deleting a review by its id. It will get a review id from params and return the review object.
+    1. `post('/api/reviews')` is used for adding a new review document into the database. It will get all the needed information to create a new review object and return it.
+    2. `g`et('/api/reviews')` is used for getting all the reviews in the database. No params will be passed in and it is expected to return a list of review object.
+    3. `patch('/api/reviews/:id')` is used for modifying the upvotes, the downvotes, and reported attribute of a specific review in the database. It will get a review json and will return the modified review.
+    4. `patch('/api/reviews/:author/:reputation')` is used for modifying the username and the reputation on a specific review in the database. It will get author name and reputation from params and an attribute 'deleted' from req.body, and will return the modified review.
+    5. `delete('/api/reviews/:id')` is used for deleting a review by its id. It will get a review id from params and return the review object.
 - steam
     1. `GET {host}/steamapi/userinfo`
     ```
@@ -116,14 +116,14 @@
     returns neutral game information about achievements for a specific game
     ```
 - user
-    1. get('/api/users') is used for getting all the users in the database. No params or json will be passed in and it is expected to return a list of user object.
-    2. delete('/api/users/:username', ...) is used for deleting the user with the username. It will get a username from params and return the user.
+    1. `get('/api/users')` is used for getting all the users in the database. No params or json will be passed in and it is expected to return a list of user object.
+    2. `delete('/api/users/:username', ...)` is used for deleting the user with the username. It will get a username from params and return the user.
 - voteRecord
-    1. post('/api/voteRecords') is used for adding a new vote record for a user on a specific review. It will get a voteRecord json and send the voteRecord document to the database.
-    2. get('/api/voteRecords') is used for getting all the vote records in the database. No params or json will be passed in and it will return a json of all the vote records.
-    3. patch('/api/voteRecords/:username/:reviewId') is used for updating the vote of a user on a specific review. It will get a username and a reviewId from params and return the new vote record.
-    4. delete('/api/voteRecords/:username') is used for deleting all the vote records of a specific user. It will get the username from params and return the vote record.
-    5. delete('/api/voteRecords/:username/:erviewId') is used for deleting all the vote records of a specific review. It will get the reviewId from params and return the vote record.
+    1. `post('/api/voteRecords')` is used for adding a new vote record for a user on a specific review. It will get a voteRecord json and send the voteRecord document to the database.
+    2. `get('/api/voteRecords')` is used for getting all the vote records in the database. No params or json will be passed in and it will return a json of all the vote records.
+    3. `patch('/api/voteRecords/:username/:reviewId')` is used for updating the vote of a user on a specific review. It will get a username and a reviewId from params and return the new vote record.
+    4. `delete('/api/voteRecords/:username')` is used for deleting all the vote records of a specific user. It will get the username from params and return the vote record.
+    5. `delete('/api/voteRecords/:username/:erviewId')` is used for deleting all the vote records of a specific review. It will get the reviewId from params and return the vote record.
 
 ## Quick navigation - phase 1
 - [Launching the website](#starting-the-app)
