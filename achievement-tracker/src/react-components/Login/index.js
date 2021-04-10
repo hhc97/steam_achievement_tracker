@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button'
 
 import { Redirect } from 'react-router-dom'
 
-import { HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
+import { CurrentHeaderButton, HeaderButton, HeadContainer, HeaderNavBar, HeaderImage } from '../HeaderComponent'
 import logo from './../../steamIcon2.png'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -71,6 +71,9 @@ class Login extends React.Component {
             <HeaderImage to='/' src={logo} />
             <div className='group'>
               <HeaderButton path='/reviewforum'>Forum</HeaderButton>
+              <CurrentHeaderButton>Login</CurrentHeaderButton>
+              <span className="slash">/</span>
+              <HeaderButton path="/Signup">Sign Up</HeaderButton>
             </div>
           </HeaderNavBar>
         </HeadContainer>
