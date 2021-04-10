@@ -10,6 +10,7 @@ import { logout } from '../../actions/reactAuth'
 import { getGameStats, getAchievementStats } from '../../actions/steamHelpers'
 import { getUserReviews } from '../../actions/review'
 import { getReputation, updateReputation } from '../../actions/reputation'
+import { updateUsernameReputation } from '../../actions/review'
 import { getImage } from '../../actions/profilePic'
 
 import "./Analytics.css"
@@ -134,6 +135,7 @@ class Analytics extends React.Component {
         const reputation = Math.floor(rawReputation)
         this.setState({ reputation: reputation })
         updateReputation(this, reputation)
+        updateUsernameReputation(this.state.userName, reputation, false)
         return reputation
     }
 
