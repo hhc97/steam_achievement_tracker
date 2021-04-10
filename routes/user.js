@@ -7,9 +7,10 @@ const { User } = require('../models/user')
 
 // helpers/middlewares
 const { mongoChecker, isMongoError } = require("./helpers/mongo_helpers");
+const { ensureAuthenticatedAdmin } = require('./helpers/authenticate')
 
 /*** User API routes ****************/
-router.get('/api/users', mongoChecker, async (req, res) => {
+router.get('/api/users', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     try {
         const users = await User.find()
         res.send({ users })
@@ -19,7 +20,7 @@ router.get('/api/users', mongoChecker, async (req, res) => {
     }
 })
 
-router.delete('/api/users/:username', mongoChecker, async (req, res) => {
+router.delete('/api/users/:username', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
     const username = req.params.username
 
     try {
