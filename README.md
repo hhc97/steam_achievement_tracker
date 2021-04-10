@@ -76,7 +76,7 @@
     2. `PATCH {host}/api/user/updatereputation/:username`, where the userName is the current login user. This method takes in two body argument, which are userName, same as the :userName, and reputation, a Number represent the updated reputation score. The method will update the user on the database and return nothing with a status 200.
 - review
     1. `post('/api/reviews')` is used for adding a new review document into the database. It will get all the needed information to create a new review object and return it.
-    2. `g`et('/api/reviews')` is used for getting all the reviews in the database. No params will be passed in and it is expected to return a list of review object.
+    2. `get('/api/reviews')` is used for getting all the reviews in the database. No params will be passed in and it is expected to return a list of review object.
     3. `patch('/api/reviews/:id')` is used for modifying the upvotes, the downvotes, and reported attribute of a specific review in the database. It will get a review json and will return the modified review.
     4. `patch('/api/reviews/:author/:reputation')` is used for modifying the username and the reputation on a specific review in the database. It will get author name and reputation from params and an attribute 'deleted' from req.body, and will return the modified review.
     5. `delete('/api/reviews/:id')` is used for deleting a review by its id. It will get a review id from params and return the review object.
