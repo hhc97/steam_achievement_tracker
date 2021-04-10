@@ -85,7 +85,7 @@ router.delete("/api/friends/delete", mongoChecker, async (req, res) => {
         friendUser.friendList = friendUser.friendList.filter((i) => { return i.name !== userName })
         user.save()
         friendUser.save()
-        res.send({ user: user, friendUser: friendUser, chat })
+        res.send({ user: user, friendUser: friendUser, chat:chat })
     } catch (error) {
         if (isMongoError(error)) {
             res.status(500).send('Internal server error')
