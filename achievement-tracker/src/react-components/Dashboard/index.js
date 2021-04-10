@@ -321,7 +321,7 @@ class DashBoard extends React.Component {
                                 <form className="addFriendForm" onSubmit={e => this.onSubmitFriendRequest(e)}>
                                     <input
                                         className="addFriendInput"
-                                        placeholder="Add Friend Name"
+                                        placeholder="Enter Friend Name"
                                         value={this.state.addFriendName}
                                         onChange={e => this.onChangeFriendUID(e)}
                                     />

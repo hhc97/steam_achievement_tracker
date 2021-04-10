@@ -127,7 +127,7 @@ class GameAchievements extends React.Component {
             <form className="searchGame" onSubmit={e => this.onSubmitGameSearch(e)}>
               <input
                 className="searchGameInput"
-                placeholder="Enter Specific Achievement"
+                placeholder="Search for an Achievement..."
                 value={this.state.searchGameName}
                 onChange={e => this.onChangeGameSearch(e)}
               />
