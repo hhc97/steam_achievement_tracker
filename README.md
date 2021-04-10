@@ -125,16 +125,16 @@
     4. `delete('/api/voteRecords/:username')` is used for deleting all the vote records of a specific user. It will get the username from params and return the vote record.
     5. `delete('/api/voteRecords/:username/:erviewId')` is used for deleting all the vote records of a specific review. It will get the reviewId from params and return the vote record.
 
-## Quick navigation - phase 1
+## Quick Navigation - Phase 2
 - [Launching the website](#starting-the-app)
-- [App walkthrough](#app-walkthrough)
+- [App Walkthrough](#app-walkthrough)
 - [Logging in](#login-and-sign-up-pages)
 - [Finding your Steam ID](#steam-info-page)
 - [Viewing the Dashboard](#dashboard)
 - [Viewing the Review Forum](#forum)
 - [Game Achievements](#game-achievements)
-- [Game Analytics page](#game-analytics)
-- [Account Settings page](#account-settings)
+- [Game Analytics](#game-analytics)
+- [Account Settings](#account-settings)
 - [Administrator page](#admin-page)
 
 ## Starting the app
