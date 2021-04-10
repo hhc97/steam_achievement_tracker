@@ -114,11 +114,11 @@ class DashBoard extends React.Component {
     componentDidMount() {
         getFriend(this)
         getReputation(this)
+        getImage(this.state.userName, this)
         getGameStats()
             .then(res => {
                 this.updateGames(res)
             })
-        getImage(this.state.userName, this)
     }
 
     showChatBox(e) {

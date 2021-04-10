@@ -110,9 +110,9 @@ class GameAchievements extends React.Component {
                 <div id="bannerUserName">User Name: {this.state.userName}</div>
               </div>
               {this.state.image === "" ?
-                                <PersonalPic src={profilePic} /> :
-                                <PersonalPic src={"data:image/png;base64," + this.state.image} />
-                            }
+                <PersonalPic src={profilePic} /> :
+                <PersonalPic src={"data:image/png;base64," + this.state.image} />
+              }
               <span className="bannerReputation">Reputation: {this.state.reputation}</span>
               <div className="bannerLeftLinkGroup">
                 <BannerLink path="https://discord.com">Discord</BannerLink>
