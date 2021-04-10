@@ -129,12 +129,13 @@
 - [Launching the website](#starting-the-app)
 - [App walkthrough](#app-walkthrough)
 - [Logging in](#login-and-sign-up-pages)
-- [Viewing the dashboard](#dashboard)
-- [Viewing the forum](#forum)
-- [Game acheivements](#game-achievements)
-- [Account settings](#account-settings)
+- [Finding your Steam ID](#steam-info-page)
+- [Viewing the Dashboard](#dashboard)
+- [Viewing the Review Forum](#forum)
+- [Game Achievements](#game-achievements)
+- [Game Analytics page](#game-analytics)
+- [Account Settings page](#account-settings)
 - [Administrator page](#admin-page)
-- [Game analytics page](#game-analytics)
 
 ## Starting the app
 1. Clone the app: `git clone git@github.com:csc309-winter-2021/team29.git` or  
@@ -145,80 +146,90 @@
 3. The webpage should open in a browser window. We have tested the webpage in Google Chrome.
 
 
-## App walkthrough
-1. When the app opens at `localhost:3000`, you should see this welcome screen:  
+## App Walkthrough
+1. When the app opens at `localhost:5000` or at the deployed Heroku link above, you should see this welcome screen:  
 ![](readme_images/welcome_page.PNG)
 
-2. From here, you can click on either [Forum](#forum), [Login](#login-and-sign-up-pages), or [Dashboard](#dashboard) to view the different pages.
+2. From here, you can click on either [Forum](#forum) to view the Review Forum as a guest (you won't be able to publish new reviews or vote on existing reviews), or proceed to the [Login](#login-and-sign-up-pages) or [Sign Up](#login-and-sign-up-pages) screens.
 
 
-### Login and Sign up pages
+### Login and Sign Up pages
 1. The login page should look like this:  
 ![](readme_images/login_page.PNG)
 
-2. Here, you can log in as either an `admin` or `user` (or view parts of the website as a guest without logging in). We have hardcoded the password to be the same as the usernames. So for example, to log in as a user,
-you would enter `user` as the username and `user` as the password. We also have a captcha feature to prevent too many requests to the server in phase 2. The login button will be enabled once the captcha has been solved.
-If the captcha is not working you can also click the temporary "Bypass verify" button, which we have added for convenience during testing (this button was left in on purpose, so it will be easier for you to navigate around our website).
+2. Here, you can log in as either an `admin` or `user` (or view limited parts of the website such as the Review Forum as a guest, without logging in). We also have a captcha feature to prevent too many requests to the server. The login button will be enabled once the captcha has been solved.
 
-3. You can also access the sign up page from here, by clicking on the `Sign Up` button, and it should look like this:  
+3. If you don't already have an account, or would like to make a new one, you can also access the sign up page from here, by clicking on the `Sign Up` button. It should look like this:  
 ![](readme_images/signup_page.PNG)
 
-4. For phase 1, this signup page is not functional, since we would need support from the backend to check if a username is unique to create an account. Therefore, right now we have implemented a check to make sure each field is filled in
-and that the passwords match. Once those conditions are fulfilled, clicking the `Sign Up` button will display an alert indicating that sign up was successful, but no actual account gets created yet.
+4. We have implemented checks to make sure each field is filled in properly and that the passwords match. Usernames and passwords must be at least 4 characters long, and you must enter a valid Steam ID to proceed (we have preliminary checks to verify the validity of the Steam ID too). Once those conditions are fulfilled, clicking the `Sign Up` button will display an alert indicating that sign up was successful, and you will be directed to the `Login` page to proceed with your new account.
 
-5. Once the user is sign in the page, the icon on the navbar will be redirect to dashboard only. Before sign in, the icon will be directed to home.
+5. If you don't know how to find your Steam ID, you can click the help icon which will take you to the [Steam Info](#steam-info-page) page. Follow the instructions here to find your profile's unique Steam ID, or you can use one of ours for testing purposes :). Here is a sample Steam ID for you to try out: 76561198072072686
+
+### Steam Info Page
+1. The Info page should look like this:
+![](readme_images/info_page.PNG)
+
+2. This is an instructional guide meant to assist you in setting up your Steam profile and gathering relevant information (most notably your unique Steam ID), so that you can seamlessly complete the Signup and Login processes for our website, and we can provide you with a populated profile with the relevant data visualizations.
+
+3. Please follow all the instructions on this page if you are not sure how to find the unique Steam ID of your profile, and/or have signed up for an account but see an empty/unpopulated profile.
 
 ### Dashboard
 1. This is the dashboard page:  
 ![](readme_images/dashboard_page.PNG)
 
-2. Here, you have your user profile on the left with links to various apps that gamers might use. In the middle of the page, you have a progress bar for each game that is on your profile. When you hover on each game, you can select the game and go to [Game acheivements](#game-achievements) and look at the overview of all achievements inside the game. On top of the game, you can also use the search game bar to search the specific game instead of scrolling through. Note that the search bar is updated automatically once you inserted text.
+2. Here, you have your user profile on the left-side panel with links to various apps that gamers might use. In the middle panel of the page, you have a list of all games on your Steam account, with a progress bar for each game on your profile that supports achievements. Please note that depending on how many games you own, it may take a few minutes to pull all the relevant game data, indicated by the presence of the white loading icon at the bottom of the page. You can also use the game search bar to search for a specific game instead of scrolling through. Note that the search results are updated automatically once you insert any text.
 
-3. You can also click on someone in your friends list to chat with them, note that for phase 1 you can only send chat messages, but not receive any since there is no backend:  
+3. After your games list has loaded, you can click on each game in the list and go to its corresponding [Game Achievements](#game-achievements) page to look at an overview of all achievements in the game.
+
+4. On the right-side panel, you have your friends list. This is where you can see all incoming friend requests (that you can choose to accept or decline), as well as your current friends list. You may remove a friend by clicking on the delete icon next to their name, and you can also click on a friend to start a chat with them. Chat history will persist across different sessions and is unique to each pair of users.
 ![](readme_images/dashboard_friend_chat.PNG)
 
-4. Clicking the [Settings](#account-settings) button on the top right hand corner will bring you to the account settings page.
+5. Clicking the [Settings](#account-settings) button on the top right hand corner will bring you to the Account Settings page.
 
-5. You may also click on the [Analytics](#game-analytics) button to view the overall game analytics of your profile.
+6. You may also click on the [Analytics](#game-analytics) button to view the overall game analytics of your profile.
 
-6. Also note that only admins will have an "Admin" button show up in the navbar that leads to the admin page.
+### Review Forum
+1. The forum is a place where you can leave reviews for games; it starts with the most recent reviews posted on the site:
+![](readme_images/review_forum.PNG)
+![](readme_images/submit_review.PNG)
+
+2. Here you can add a review if you are logged in, and upvote or downvote a review. You will also see some of the review author's details, such as their name and reputation, and you may report an inappropriate review as well.
+
+3. Published reviews can be viewed by clicking on the `next` button to see the next page. You may also use the `first` and `last` buttons to skip to the relevant pages of reviews.
+
+4. You may also notice some reviews have a 'Show Content' button in place of the review content. This is an automatic check we do upon rendering the page to avoid long reviews taking up too much space on the page. You can choose to expand such reviews if you wish to read their content.
 
 
-### Forum
-1. The forum is a place where you can leave reviews for games, it shows the most recent reviews on the games that are on the site:
-![](readme_images/forum_page_top.PNG)
-![](readme_images/forum_page_bottom.PNG)
-
-2. Here you can add a review if you are logged in, and upvote or downvote a review. Added reviews can be viewed by clicking on the `next` button to see the next page.
-
-
-### Game achievements
-1. The game achievements page will look like this:  
+### Game Achievements
+1. The game achievements page for a specific will look something like this:  
 ![](readme_images/game_achievements_page.PNG)
 
-2. Here, the achievement that are less visible will be the lock achievements, and the one that is visible will be the unlock achievement that the user have.
+2. You will be presented with a list of all achievements the selected game currently supports. Coloured achievement bars correspond to achievements you have unlocked, and you will also see the date and time you unlocked said achievement on the bottom right of the bar, while greyed-out achievement bars correspond to achievements you have not unlocked yet.
 
-3. You can also use the search bar to search for specific achievement that the game have.
+3. You can also use the search bar to search for specific achievements that the game may have.
 
-4. To redirect back to dashboard, simply click on the icon in the navbar.
-
-
-### Account settings
+### Account Settings
 1. The account settings page looks like this:  
 ![](readme_images/settings_page.PNG)
 
-2. From here, you can edit the specifics of your profile, like uploading a new profile picture (though saving it to your profile is currently not functional as we need the backend for that), or changing some of your gaming social media handles using the edit buttons for the relevant fields.
+2. From here, you can edit the specifics of your profile, like uploading a new profile picture or updating your password, using the relevant edit buttons.
 
+### Game Analytics
+1. The game analytics page looks like this:  
+![](readme_images/analytics_page1.PNG)
 
-### Admin page
+2. From here, you can view useful and interesting statistics about your gaming lifetime such as your overall reputation score, total achievements unlocked, completion percentage, and total playtime in the banner at the top of the page. You can also view a breakdown of your statistics by each individual game the Lifetime Statistics table at the bottom of the page. You can also sort the table in ascending or descending order by each column using the arrow buttons on each column's header. The example below is sorted in decreasing order of playtime for games:
+![](readme_images/analytics_page2.PNG)
+
+3. Please note that just like on the Dashboard, it may take a few minutes to pull all the relevant game data depending on how many games you own, indicated by the presence of the white loading icon at the bottom of the page.
+
+4. After your Lifetime Stats table has been fully populated, your Reputation score will be updated again, as it is a function of your completion statistics and total review score. If it changes, it will persist across all pages.
+
+### Admin Page
 1. The admin page looks like this:  
 ![](readme_images/admin_page.PNG)
 
 2. From this page, you can do things like delete or edit reviews, and also delete or ban users. You also must be logged in as an admin to access this page.
 
-
-### Game Analytics
-1. The game analytics page looks like this:  
-![](readme_images/game_analytics_page.PNG)
-
-2. From here, you can view useful and interesting statistics about your game play such as your overall repuation score, total achievements unlocked, completion percentage, and total playtime in the banner at the top of the page. You can also view a breakdown of your statistics by each individual game the Lifetime Statistics table at the bottom of the page. You can also sort the table in ascending or descending order by each column using the arrow buttons on each column's header.
+3. Also note that we have separated admins from regular users, which means this page's functionality is mutually exclusive to regular user functionality. Admins cannot access regular user functionality like custom profiles, game achievement analytics, or reviews, and vice versa.

@@ -137,41 +137,6 @@ class AccountSettings extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div id="ExternalLinksSection">
-                    <h2> External Links </h2>
-
-                    <div className="TextInputButton">
-                        <p>Steam: <span>{this.state.steamInput}</span></p>
-                        <input className="hide" type="text" id="steamInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("steamInput") }}>
-                            Edit
-                        </button>
-                    </div>
-
-                    <div className="TextInputButton">
-                        <p>Ubisoft: <span>{this.state.ubisoftInput}</span></p>
-                        <input className="hide" type="text" id="ubisoftInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("ubisoftInput") }}>
-                            Edit
-                        </button>
-                    </div>
-
-                    <div className="TextInputButton">
-                        <p>PlayStation: <span>{this.state.playstationInput}</span></p>
-                        <input className="hide" type="text" id="playstationInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("playstationInput") }}>
-                            Edit
-                        </button>
-                    </div>
-
-                    <div className="TextInputButton">
-                        <p>Xbox: <span>{this.state.xboxInput}</span></p>
-                        <input className="hide" type="text" id="xboxInput"></input>
-                        <button type="button" className="btn btn-secondary" onClick={() => { this.editAction("xboxInput") }}>
-                            Edit
-                        </button>
-                    </div>
-                </div>
             </div>
         )
     }
