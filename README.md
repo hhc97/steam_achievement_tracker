@@ -158,7 +158,9 @@
 2. Here, you can log in as either an `admin` or `user` (or view limited parts of the website such as the Review Forum as a guest, without logging in). We also have a captcha feature to prevent too many requests to the server. The login button will be enabled once the captcha has been solved.
 
 3. For testing purposes, you can use the following 4 user accounts and 1 admin account to try out the functionality on our web app:
+
 User Accounts -
+
 Username: `user`
 Password: `user`
 
