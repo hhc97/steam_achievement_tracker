@@ -156,7 +156,7 @@ Further instructions can be found below.
 
 2. Here, you can log in as either an `admin` or `user` (or view limited parts of the website such as the Review Forum as a guest, without logging in). We also have a captcha feature to prevent too many requests to the server. The login button will be enabled once the captcha has been solved.
 
-3. For testing purposes, you can use the following 4 user accounts and 1 admin account to try out the functionality on our web app:
+3. For testing purposes, you can use the following 4 user accounts (note that they all use the same Steam ID, but you are welcome to create some new accounts with the sample Steam IDs provided below in Step 6) and 1 admin account to try out the functionality on our web app:
 
 User Accounts -
 
@@ -184,7 +184,7 @@ Password: `admin`
 
 6. If you don't know how to find your Steam ID, you can click the help icon which will take you to the [Steam Info](#steam-info-page) page. Follow the instructions here to find your profile's unique Steam ID, or you can use one of ours for testing purposes :)
 
-Here are some sample Steam IDs for you to try out if you want: `76561198072072686`; `76561198882892406`; `76561198059305613`
+Here are some sample Steam IDs for you to try out if you want: `76561198072072686`; `76561198882892406`; `76561198059305613`; `76561198158301094`
 
 ### Steam Info Page
 1. The Info page should look like this:
