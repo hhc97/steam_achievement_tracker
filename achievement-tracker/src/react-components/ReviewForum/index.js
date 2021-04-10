@@ -11,6 +11,7 @@ import "./styles.css"
 
 import { addReviewOnForum, getReviewsOnForum, updateReview } from '../../actions/review'
 import { addVoteRecord, getVoteRecords, updateVoteRecord } from '../../actions/voteRecord'
+import { getReputation } from '../../actions/reputation'
 
 const log = console.log
 const reviewNumLimit = 5;
@@ -20,7 +21,7 @@ class ReviewForum extends React.Component {
         super(props)
 
         this.state = {
-            currentUser: localStorage.getItem('currentUser'),
+            userName: localStorage.getItem('currentUser'),
             searchContent: "",
             reviews: [],
             reviewsInSection: [],
@@ -28,7 +29,8 @@ class ReviewForum extends React.Component {
             currentPage: 1,
             reviewSubmitTitle: "",
             reviewSubmitContent: "",
-            voteRecords: []
+            voteRecords: [],
+            reputation: 1
         }
 
         this.upvoteAction = this.upvoteAction.bind(this)
@@ -39,10 +41,11 @@ class ReviewForum extends React.Component {
     componentDidMount() {
         getReviewsOnForum(this, reviewNumLimit)
         getVoteRecords(this)
+        getReputation(this)
     }
 
     upvoteAction = reviewId => {
-        const user = this.state.currentUser
+        const user = this.state.userName
         if (user === null) {
             alert("You have to login before you vote.")
             return
@@ -104,7 +107,7 @@ class ReviewForum extends React.Component {
     }
 
     downvoteAction = reviewId => {
-        const user = this.state.currentUser
+        const user = this.state.userName
         if (user === null) {
             alert("You have to login before you vote.")
             return
@@ -291,7 +294,7 @@ class ReviewForum extends React.Component {
     }
 
     addReview = () => {
-        const user = this.state.currentUser
+        const user = this.state.userName
         const id = this.getAvailableId()
         if (!user) {
             alert("You have to login before you submit your review.")
@@ -313,8 +316,8 @@ class ReviewForum extends React.Component {
             content: this.state.reviewSubmitContent,
             upvotes: 0,
             downvotes: 0,
-            author: this.state.currentUser,
-            reputation: 1,
+            author: this.state.userName,
+            reputation: this.state.reputation,
             reported: false
         }
         reviewList.push(newReview)
@@ -351,14 +354,14 @@ class ReviewForum extends React.Component {
                 <HeadContainer bgId={"dashboard"}>
                     <HeaderNavBar>
                         {
-                            this.state.currentUser !== null ?
+                            this.state.userName !== null ?
                                 <HeaderImage to='/dashboard' src={logo} /> :
                                 <HeaderImage to='/' src={logo} />
                         }
                         <div className='group'>
                             <CurrentHeaderButton path='/reviewForum'>Forum</CurrentHeaderButton>
                             {
-                                this.state.currentUser !== null ?
+                                this.state.userName !== null ?
                                 <HeaderButton path='/Dashboard'>Dashboard</HeaderButton> :
                                 <HeaderButton path='/Login'>Log In</HeaderButton>
                             }
