@@ -171,7 +171,7 @@ Further instructions can be found below.
 
 3. For testing purposes, you can use the following 4 user accounts (note that they all use the same Steam ID, but you are welcome to create some new accounts with the sample Steam IDs provided below in Step 6) and 1 admin account to try out the functionality on our web app:
 
-User Accounts -
+User Accounts - more can be created through our web sign up interface
 
 Username: `user` 
 Password: `user`
@@ -185,7 +185,7 @@ Password: `user2`
 Username: `user3`
 Password: `user3`
 
-Admin Account -
+Admin Account - this is the only account available, but you can create more admins using the API route. An admin in our system is any user with a username starting with the characters `admin`.
 
 Username: `admin`
 Password: `admin`
