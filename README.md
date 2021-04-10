@@ -28,7 +28,20 @@ Further instructions can be found below.
     4. `PATCH: {host}/api/friends/accept`. The method will take in two argument, which consists of userName, the currecnt login user's username, and friendName, the friend' name that user want to accept as a friend. This method will remove friend from user's pending friend list and add to friend list, and also will add user into friend's friend list. This method will also create a new chat room for them with empty messages. This method will return nothing with status 200.
     5. `PATCH: {host}/api/friends/decline`. The method takes in two body argument, which consists of the userName, the current login user, and friendName, the friend's name that the user decline as a friend. This method will remove friend from the user's pending friend list. Ths method will return nothing with status 200. 
 - login
-    1. `POST {host}/users/changepassword`  
+    1. `POST {host}/users`  
+    ```
+    Expects:
+    body:
+    {
+        username: string of new user
+        password: password of new user at least 4 characters long
+        steamName: the steam ID of this new user
+    }
+
+    Does:
+    Creates a new user (saves to database) and returns the created user in the response.
+    ```
+    2. `POST {host}/users/changepassword`  
     ```
     Expects:
     Body: {newPassword: string of at least 4 characters}
@@ -37,7 +50,7 @@ Further instructions can be found below.
     Does:
     Changes the password of the current user to the new password
     ```
-    2. `GET {host}/users/joindate/:username`
+    3. `GET {host}/users/joindate/:username`
     ```
     Expects:
     nothing
@@ -45,7 +58,7 @@ Further instructions can be found below.
     Does:
     returns the users join date if the user exists, 404 otherwise
     ```
-    3. `GET {host}/usernames/:username`
+    4. `GET {host}/usernames/:username`
     ```
     Expects:
     nothing
@@ -53,7 +66,7 @@ Further instructions can be found below.
     Does:
     returns 200 if the user exists, 404 otherwise
     ```
-    4. `POST {host}/users/login`
+    5. `POST {host}/users/login`
     ```
     Expects:
     body: {username: string, password: string}
@@ -61,7 +74,7 @@ Further instructions can be found below.
     Does:
     sets the session parameters and logs you in if the username and password are correct
     ```
-    5. `GET {host}/users/current`
+    6. `GET {host}/users/current`
     ```
     Expects:
     a logged in user
@@ -69,7 +82,7 @@ Further instructions can be found below.
     Does:
     returns the current users ID and username
     ```
-    6. `GET {host}/users/logout`
+    7. `GET {host}/users/logout`
     ```
     Expects:
     nothing
