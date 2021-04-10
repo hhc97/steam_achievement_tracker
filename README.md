@@ -1,14 +1,14 @@
 # Steam Achievement Tracker - Team29
 
 
-## Quick navigation - phase 2
+## Quick Navigation - Phase 2
 - [In depth tutorial of our web app](#using-our-web-application)
 - [Overview of routes](#overview-of-routes)
 
 ## Using our web application
 1. Our web application can be accessed at -> [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/)  
 
-## Overview of routes
+## Overview of Routes
 - chat
     1. `GET: {host}/api/chat/:userName/:friendName`, where the userName is the current login user and the friendName is the selected friend name that the user want to chat with. The method willl return a list of messages that the user and the friend has previously chat on.
     2. For Posting messages we use socket.io, so the message will emit to backend and directly interact with mongo at the backend. No route needed.
@@ -125,16 +125,16 @@
     4. `delete('/api/voteRecords/:username')` is used for deleting all the vote records of a specific user. It will get the username from params and return the vote record.
     5. `delete('/api/voteRecords/:username/:erviewId')` is used for deleting all the vote records of a specific review. It will get the reviewId from params and return the vote record.
 
-## Quick navigation - phase 1
+## Quick Navigation - Phase 2
 - [Launching the website](#starting-the-app)
-- [App walkthrough](#app-walkthrough)
+- [App Walkthrough](#app-walkthrough)
 - [Logging in](#login-and-sign-up-pages)
 - [Finding your Steam ID](#steam-info-page)
 - [Viewing the Dashboard](#dashboard)
 - [Viewing the Review Forum](#forum)
 - [Game Achievements](#game-achievements)
-- [Game Analytics page](#game-analytics)
-- [Account Settings page](#account-settings)
+- [Game Analytics](#game-analytics)
+- [Account Settings](#account-settings)
 - [Administrator page](#admin-page)
 
 ## Starting the app
