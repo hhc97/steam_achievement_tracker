@@ -152,7 +152,7 @@ export const deleteReviewOnAdmin = (review) => {
 
 export const updateUsernameReputation = (username, reputation, deleted) => {
   const url = `/api/reviews/${username}/${reputation}`
-  
+
   const request = new Request(url, {
     method: 'PATCH',
     body: JSON.stringify({deleted: deleted}),

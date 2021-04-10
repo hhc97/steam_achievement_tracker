@@ -73,7 +73,7 @@ router.patch('/api/reviews/:id', mongoChecker, ensureAuthenticated, async (req, 
     }
 })
 
-router.patch('/api/reviews/:author/:reputation', mongoChecker, ensureAuthenticatedAdmin, async (req, res) => {
+router.patch('/api/reviews/:author/:reputation', mongoChecker, ensureAuthenticated, async (req, res) => {
     const author = req.params.author
     const reputation = req.params.reputation
     const deleted = req.body.deleted
