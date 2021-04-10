@@ -4,8 +4,8 @@ const API_HOST = ENV.api_host
 export const storeImage = async (Comp) => {
     const url = `${API_HOST}/api/uploadImage/${Comp.state.userName}`
     const binaryFile = Comp.state.uploadImage
-    const imageObject = {image: binaryFile}
-    
+    const imageObject = { image: binaryFile }
+
     const request = new Request(url, {
         method: 'PATCH',
         body: JSON.stringify(imageObject),
@@ -16,9 +16,9 @@ export const storeImage = async (Comp) => {
     })
     await fetch(request)
         .then(res => {
-            if (res.status === 200){
-                Comp.setState({image: binaryFile, uploadImage: ""})
-            }else{
+            if (res.status === 200) {
+                Comp.setState({ image: binaryFile, uploadImage: "" })
+            } else {
                 alert("Could not update profile picture")
             }
         })
@@ -30,14 +30,14 @@ export const getImage = async (userName, Comp) => {
 
     await fetch(url)
         .then(res => {
-            if (res.status === 200){
+            if (res.status === 200) {
                 return res.json()
-            }else{
+            } else {
                 alert("Cannot get Profile Images")
             }
         })
         .then(json => {
-            Comp.setState({image: json.image})
+            Comp.setState({ image: json.image })
         })
         .catch(error => {
             console.log(error);

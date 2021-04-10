@@ -38,13 +38,13 @@ export const deleteUserOnAdmin = (user) => {
   })
 
   fetch(request)
-  .then(function (res) {
+    .then(function (res) {
       if (res.status === 200) {
-          log("User deleted")
+        log("User deleted")
       } else {
-          log("Error: Cannot delete user")
+        log("Error: Cannot delete user")
       }
-  }).catch((error) => {
+    }).catch((error) => {
       log(error)
-  })
+    })
 }

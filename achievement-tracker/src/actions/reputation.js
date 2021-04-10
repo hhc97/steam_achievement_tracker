@@ -28,7 +28,7 @@ export const updateReputation = (page, reputation) => {
         reputation: reputation
     }
 
-    const request = new Request( url, {
+    const request = new Request(url, {
         method: 'PATCH',
         body: JSON.stringify(obj),
         headers: {
@@ -38,13 +38,13 @@ export const updateReputation = (page, reputation) => {
     })
 
     fetch(request)
-    .then(function (res) {
-        if (res.status === 200) {
-            console.log("Reputation updated")
-        } else {
-            console.log("Error: Cannot update reputation")
-        }
-    }).catch((error) => {
-        console.log(error)
-    })
+        .then(function (res) {
+            if (res.status === 200) {
+                console.log("Reputation updated")
+            } else {
+                console.log("Error: Cannot update reputation")
+            }
+        }).catch((error) => {
+            console.log(error)
+        })
 }
