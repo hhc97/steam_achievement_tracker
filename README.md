@@ -1,8 +1,10 @@
 # Steam Achievement Tracker - Team29
 
+Our web application is deployed at -> [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/).
+
+Further instructions can be found below.
 
 ## Quick Navigation - Phase 2
-- [In depth tutorial of our web app](#using-our-web-application)
 - [Overview of routes](#overview-of-routes)
 - [Launching the website](#starting-the-app)
 - [App Walkthrough](#app-walkthrough)
@@ -14,9 +16,6 @@
 - [Game Analytics](#game-analytics)
 - [Account Settings](#account-settings)
 - [Administrator page](#admin-page)
-
-## Using our web application
-1. Our web application can be accessed at -> [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/)  
 
 ## Overview of Routes
 - chat
@@ -141,7 +140,7 @@
 
 2. From the root directory(`team29`), simply run `bash start.sh`. This will cd into the directory and run `npm install` and `npm start`.
 
-3. The webpage should open in a browser window. We have tested the webpage on a fully-maximized browser window in Google Chrome.
+3. You should be able to open the webpage in a browser window by entering `localhost:5000` in the URL bar. We have tested the webpage on a fully-maximized browser window in Google Chrome.
 
 
 ## App Walkthrough
@@ -161,7 +160,7 @@
 
 User Accounts -
 
-Username: `user`
+Username: `user` 
 Password: `user`
 
 Username: `user1`
@@ -205,7 +204,7 @@ Here are some sample Steam IDs for you to try out if you want: `7656119807207268
 
 4. After your games list has loaded, you can click on each game in the list and go to its corresponding [Game Achievements](#game-achievements) page to look at an overview of all achievements in the game.
 
-5. On the right-side panel, you have your friends list. This is where you can see all incoming friend requests (that you can choose to accept or decline), as well as your current friends list. You may send a friend request to a user if you know their username using the 'Add friend' input field and 'Add' button. You may remove a friend by clicking on the delete icon next to their name, and you can also click on a friend to start a chat with them. The timestamps for messages are accurate, chat history will persist across different sessions and is unique to each pair of users.
+5. On the right-side panel, you have your friends list. This is where you can see all incoming friend requests (that you can choose to accept or decline), as well as your current friends list. You may send a friend request to a user if you know their username using the 'Enter Friend Name' input field and 'Add' button. You may remove a friend by clicking on the delete icon next to their name, and you can also click on a friend to start a chat with them. The timestamps for messages are accurate, chat history will persist across different sessions and is unique to each pair of users.
 ![](readme_images/dashboard_friend_chat.PNG)
 
 6. Clicking the [Settings](#account-settings) button on the top right hand corner will bring you to the Account Settings page.
@@ -229,7 +228,7 @@ Here are some sample Steam IDs for you to try out if you want: `7656119807207268
 
 3. Please note that just like on the Dashboard, it may take a few minutes to pull all the relevant game data depending on how many games you own, indicated by the presence of the white loading icon at the bottom of the page. Similar to the game list on the Dashboard, you may observe some games being deleted from the Lifetime Stats table; don't be alarmed, this just means the removed games likely don't support Steam achievements.
 
-4. After your Lifetime Stats table has been fully populated, your Reputation score will be updated again, as it is a function of your completion statistics and total review score. If it changes, it will persist across all pages.
+4. After your Lifetime Stats table has been fully populated, your Reputation score will be updated again, as it is a function of your completion statistics and total review score. If it changes, it will persist across all pages (such as the Dashboard and Review Forum).
 
 ### Account Settings
 1. The account settings page looks like this:  
@@ -244,7 +243,7 @@ Here are some sample Steam IDs for you to try out if you want: `7656119807207268
 
 2. Here you can add a review if you are logged in, and upvote or downvote a review. You will also see some of the review author's details, such as their name and reputation, and you may report an inappropriate review as well.
 
-3. Published reviews can be viewed by clicking on the `next` button to see the next page. You may also use the `first` and `last` buttons to skip to the relevant pages of reviews.
+3. More published reviews (if there exist any) can be viewed by clicking on the `next` button to see the next page. You may also use the `first` and `last` buttons to skip to the relevant pages of reviews.
 
 4. You may also notice some reviews have a 'Show Content' button in place of the review content. This is an automatic check we do upon rendering the page to avoid long reviews taking up too much space on the page. You can choose to expand such reviews if you wish to read their content.
 
