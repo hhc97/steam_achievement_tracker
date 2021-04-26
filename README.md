@@ -1,6 +1,6 @@
 # Steam Achievement Tracker - Team29
 
-Our web application is deployed at -> [https://csc309-team29.herokuapp.com/](https://csc309-team29.herokuapp.com/).
+Our web application is deployed at -> [https://steam-achievement-tracker.herokuapp.com/](https://steam-achievement-tracker.herokuapp.com/).
 
 Further instructions can be found below.
 
