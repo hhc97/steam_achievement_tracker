@@ -1,0 +1,36 @@
+name: heroku_deploy_prod
+
+on:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Configure Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Add Heroku remote
+        run: |
+          heroku --version
+          heroku git:remote -a $HEROKU_PROD
+        env:
+          HEROKU_PROD: ${{ secrets.HEROKU_PROD }}
+      - name: Push to Heroku
+        run: git push heroku main
