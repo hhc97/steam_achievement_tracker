@@ -5,13 +5,12 @@ const log = console.log
 const express = require('express');
 const router = express.Router(); // Express Router
 const request = require('request')
-const KEY = process.env.STEAM_API_KEY
+const KEY = process.env.STEAM_API_KEY || 'EA00CF15181206B55D12350EB819F943'
 
 
 /*** User API routes ****************/
 // route to get user info from steam's API
 router.get('/steamapi/userinfo', async (req, res) => {
-    const key = req.query.key
     const userid = req.query.steamids
 
     const options = {
@@ -24,7 +23,6 @@ router.get('/steamapi/userinfo', async (req, res) => {
 
 // route to get user games info from steam's API
 router.get('/steamapi/usergames', async (req, res) => {
-    const key = req.query.key
     const userid = req.session.steamID
 
     const options = {
@@ -38,7 +36,6 @@ router.get('/steamapi/usergames', async (req, res) => {
 
 // route to get a specific game's stats
 router.get('/steamapi/games/', async (req, res) => {
-    const key = req.query.key
     const appid = req.query.appid
     const userid = req.session.steamID
 
@@ -53,7 +50,6 @@ router.get('/steamapi/games/', async (req, res) => {
 
 // route to get a specific game's neutral achievement info
 router.get('/steamapi/game/', async (req, res) => {
-    const key = req.query.key
     const appid = req.query.appid
 
     const options = {
