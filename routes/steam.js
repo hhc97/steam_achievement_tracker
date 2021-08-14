@@ -63,5 +63,10 @@ router.get('/steamapi/game/', async (req, res) => {
     request(options, function (err, steam_res) { res.send(steam_res.body) })
 })
 
+// route that returns the steam API key
+router.get('/steamapi/apikey/', async (req, res) => {
+    res.send(process.env.STEAM_API_KEY || 'EA00CF15181206B55D12350EB819F943')
+})
+
 // export the router
 module.exports = router
