@@ -21,12 +21,12 @@ async function getKey() {
 const prod = {
     env: 'production',
     api_host: API_HOST, // an empty string to signify a relative path. can also put a deployment URL.
-    steam_key: await getKey()
+    steam_key: getKey()
 };
 const dev = {
     env: 'development',
     api_host: API_HOST, // web server localhost port
-    steam_key: await getKey()
+    steam_key: getKey()
 };
 
 // export the appropriate environment
