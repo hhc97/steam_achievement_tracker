@@ -6,7 +6,7 @@ const API_HOST = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:
 
 async function getKey() {
     const url = `${API_HOST}/steamapi/apikey/`;
-    return fetch(url)
+    return await fetch(url)
         .then(res => {
             return res.text();
         })
