@@ -4,12 +4,12 @@
 const prod = {
     env: 'production',
     api_host: '', // an empty string to signify a relative path. can also put a deployment URL.
-    steam_key: 'EA00CF15181206B55D12350EB819F943'
+    steam_key: process.env.STEAM_API_KEY || 'EA00CF15181206B55D12350EB819F943'
 };
 const dev = {
     env: 'development',
     api_host: 'http://localhost:5000', // web server localhost port
-    steam_key: 'EA00CF15181206B55D12350EB819F943'
+    steam_key: process.env.STEAM_API_KEY || 'EA00CF15181206B55D12350EB819F943'
 };
 
 // export the appropriate environment
