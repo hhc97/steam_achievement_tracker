@@ -8,23 +8,24 @@ services:
       - "5000:5000"
     environment:
       ENV: prod
-      DATABASE_URL: mysql+pymysql://root:password@db:3306/ssdb
-    # depends_on:
-    #   - db
+      MONGODB_URI: mongodb://root:rootpassword@db:27017/
+      STEAM_API_KEY: 5D14DF2749D4352D6FB01E1D123F05FF
+    depends_on:
+      - db
     restart: unless-stopped
 
-#   db:
-#     container_name: ss-db
-#     cap_add:
-#       - SYS_NICE
-#     image: mysql:8.0.26
-#     restart: always
-#     environment:
-#       MYSQL_DATABASE: "ssdb"
-#       MYSQL_ROOT_PASSWORD: "password"
-#     expose:
-#       - "3306"
-#     volumes:
-#       - ssdb-volume:/var/lib/mysql
-# volumes:
-#   ssdb-volume:
+  db:
+    container_name: steam-tracker-db
+    cap_add:
+      - SYS_NICE
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    expose:
+      - "27017"
+    volumes:
+      - steam-tracker-volume:/data/db
+volumes:
+  steam-tracker-volume:
