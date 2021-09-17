@@ -1,0 +1,31 @@
+services:
+  app:
+    container_name: steam-tracker-app
+    build:
+      context: .
+      dockerfile: ./achievement-tracker/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://root:rootpassword@db:27017/
+      STEAM_API_KEY: 5D14DF2749D4352D6FB01E1D123F05FF
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    container_name: steam-tracker-db
+    cap_add:
+      - SYS_NICE
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    expose:
+      - "27017"
+    volumes:
+      - steam-tracker-volume:/data/db
+volumes:
+  steam-tracker-volume:
