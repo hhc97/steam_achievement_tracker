@@ -15,7 +15,9 @@ const socket = require("socket.io")
 
 // enable CORS if in development, for React local development server to connect to the web server.
 const cors = require('cors')
-if (env !== 'production') { app.use(cors()) }
+if (env !== 'production') {
+    app.use(cors())
+}
 
 // mongoose and mongo connection
 const { mongoose } = require("./db/mongoose");
@@ -30,7 +32,7 @@ const { ObjectID } = require("mongodb");
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require('body-parser')
-app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.json({ limit: '50mb' }))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
@@ -86,7 +88,6 @@ const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
     log(`Listening on port ${port}...`);
 });
-
 
 
 const io = socket(server)
