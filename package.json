@@ -27,7 +27,7 @@
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "mongoose": "^6.0.6",
+    "mongoose": "^5.13.9",
     "react-icons": "^4.2.0",
     "request": "^2.88.2",
     "socket.io": "^4.2.0",
