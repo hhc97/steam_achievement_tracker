@@ -171,7 +171,7 @@ class Analytics extends React.Component {
                 numGames++
             }
         }
-        this.setState({ gamesAttempted : numGames })
+        this.setState({ gamesAttempted: numGames })
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
         this.setState({ totalPlaytime: totalPlaytime })
@@ -181,27 +181,25 @@ class Analytics extends React.Component {
     async updateAchievements() {
         let gameList = this.state.stats
         this.setState({ statsShown: gameList.slice() })
+        let gamesWithAchievement = 0
         for (let i = 0; i < gameList.length; i++) {
             const game = gameList[i];
             let gameStats = -1
             await getAchievementStats(game.id)
                 .then(res => { gameStats = this.extractStats(res) })
             if (gameStats === -1) {
-                gameList.splice(i, 1)
-                i--
-                let shownStats = this.state.statsShown
-                const removeIndex = shownStats.indexOf(game);
-                if (removeIndex > -1) {
-                    shownStats.splice(removeIndex, 1);
-                }
+                game.unlocked = '-'
+                game.total = '-'
+                game.completion = '-'
             } else {
                 game.unlocked = gameStats[0]
                 game.total = gameStats[1]
                 game.completion = gameStats[2]
                 this.updateBannerStats()
+                gamesWithAchievement++
+                this.setState({ totalGames: gamesWithAchievement })
             }
         }
-        this.setState({ totalGames: gameList.length })
         this.setState({ showLoading: false })
         this.calculateReputation()
     }
@@ -291,9 +289,9 @@ class Analytics extends React.Component {
                     <div id="StatsSection">
                         <div id="StatsHeader">
                             <div id="StatsUser">
-                                {this.state.image === ""?
-                                    <img id="StatsProfilePic" src={sampleProfilePic}/> :
-                                    <img id="StatsProfilePic" src={"data:image/png;base64," + this.state.image}/>
+                                {this.state.image === "" ?
+                                    <img id="StatsProfilePic" src={sampleProfilePic} /> :
+                                    <img id="StatsProfilePic" src={"data:image/png;base64," + this.state.image} />
                                 }
                                 <div id="StatsUserCaption">
                                     <p> {this.state.userName} </p>
@@ -304,7 +302,7 @@ class Analytics extends React.Component {
                                 <p>Reputation Level:</p>
                                 <div id="ReputationContainer">
                                     {!(this.state.showLoading) || <div id="loadingIcon1">
-                                    <img src={loadingIcon} />
+                                        <img src={loadingIcon} />
                                     </div>}
                                     <span> {this.state.reputation} </span>
                                 </div>
@@ -400,7 +398,8 @@ class Analytics extends React.Component {
                                         <tr key={uid(row)}>
                                             <td className="tableCell">{row.id}</td>
                                             <td className="tableCell">{row.title}</td>
-                                            <td className="tableCell">{(Math.round(row.completion * 100) / 100).toFixed(2)} </td>
+                                            <td className="tableCell">{typeof row.completion == 'string' ? row.completion :
+                                                (Math.round(row.completion * 100) / 100).toFixed(2)} </td>
                                             <td className="tableCell">{row.unlocked}</td>
                                             <td className="tableCell">{row.total}</td>
                                             <td className="tableCell">{(row.playtime).toFixed(2)} h </td>
