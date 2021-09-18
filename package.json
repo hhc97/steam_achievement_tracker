@@ -1,36 +1,36 @@
 {
-  "name": "team29",
+  "name": "steam_achievement_tracker",
   "version": "1.0.0",
-  "description": "## Quick navigation - [Launching the website](#starting-the-app) - [App walkthrough](#app-walkthrough) - [Logging in](#login-and-sign-up-pages) - [Viewing the dashboard](#dashboard) - [Viewing the forum](#forum) - [Game acheivements](#game-achievements) - [Account settings](#account-settings) - [Administrator page](#admin-page) - [Game analytics page](#game-analytics)",
+  "description": "An achievement tracker for steam games",
   "main": "server.js",
   "scripts": {
     "setup": "npm install && cd client && npm install && cd ..",
     "build-run": "cd achievement-tracker && npm run build && cd .. && node server.js",
-    "start": "node server.js",
     "heroku-postbuild": "cd achievement-tracker && npm install && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/csc309-winter-2021/team29.git"
+    "url": "git+https://github.com/hhc97/steam_achievement_tracker.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/csc309-winter-2021/team29/issues"
+    "url": "https://github.com/hhc97/steam_achievement_tracker/issues"
   },
-  "homepage": "https://github.com/csc309-winter-2021/team29#readme",
+  "homepage": "https://github.com/hhc97/steam_achievement_tracker#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "connect-mongo": "^4.4.1",
+    "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "mongoose": "^5.12.2",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.0.6",
     "react-icons": "^4.2.0",
     "request": "^2.88.2",
-    "socket.io": "^4.0.0",
-    "validator": "^13.5.2"
+    "socket.io": "^4.2.0",
+    "validator": "^13.6.0"
   }
 }
