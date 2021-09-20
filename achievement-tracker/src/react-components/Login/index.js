@@ -23,6 +23,11 @@ class Login extends React.Component {
     captcha_solved: false
   }
 
+  componentDidMount() {
+    // enter key tries to sign in
+    window.onkeydown = e => { if (this.state.captcha_solved && e.code === 'Enter') { this.handleLogin() } }
+  }
+
   handleInputChange = (event) => {
     const target = event.target
     const value = target.value
