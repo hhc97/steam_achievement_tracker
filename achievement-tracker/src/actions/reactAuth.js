@@ -44,10 +44,10 @@ export const login = (loginParams, app) => {
             }
         })
         .then(json => {
-            if (json.currentUser !== undefined) {
+            if (json && json.currentUser !== undefined) {
                 app.setState({ currentUser: json.currentUser });
+                localStorage.setItem('currentUser', json.currentUser)
             }
-            localStorage.setItem('currentUser', json.currentUser)
         })
         .catch(error => {
             console.log(error);
