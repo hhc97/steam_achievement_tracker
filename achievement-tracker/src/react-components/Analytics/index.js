@@ -175,7 +175,7 @@ class Analytics extends React.Component {
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
         this.setState({ totalPlaytime: totalPlaytime })
-        this.setState({ averagePlaytime: (totalPlaytime / tableStats.length) })
+        this.setState({ averagePlaytime: (totalPlaytime / tableStats.filter(game => game.playtime > 0.1).length) })
     }
 
     async updateAchievements() {
