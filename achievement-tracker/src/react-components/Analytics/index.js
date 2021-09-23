@@ -167,15 +167,15 @@ class Analytics extends React.Component {
             if (game.completion > 0) {
                 totalAchievements += game.unlocked
                 totalCompletion += game.completion
-                totalPlaytime += game.playtime
                 numGames++
             }
+            totalPlaytime += game.playtime
         }
         this.setState({ gamesAttempted: numGames })
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
         this.setState({ totalPlaytime: totalPlaytime })
-        this.setState({ averagePlaytime: (totalPlaytime / numGames) })
+        this.setState({ averagePlaytime: (totalPlaytime / tableStats.length) })
     }
 
     async updateAchievements() {
