@@ -183,25 +183,27 @@ class Analytics extends React.Component {
         this.setState({ averagePlaytime: (totalPlaytime / tableStats.filter(game => game.playtime > 0.1).length) })
     }
 
+    async updateAsync(game) {
+        let gameStats = -1
+        await getAchievementStats(game.id)
+            .then(res => { gameStats = this.extractStats(res) })
+        if (gameStats === -1) {
+            game.unlocked = '-'
+            game.total = '-'
+            game.completion = '-'
+        } else {
+            game.unlocked = gameStats[0]
+            game.total = gameStats[1]
+            game.completion = gameStats[2]
+            this.updateBannerStats()
+        }
+    }
+
     async updateAchievements() {
         let gameList = this.state.stats
         this.setState({ statsShown: gameList.slice() })
-        for (let i = 0; i < gameList.length; i++) {
-            const game = gameList[i];
-            let gameStats = -1
-            await getAchievementStats(game.id)
-                .then(res => { gameStats = this.extractStats(res) })
-            if (gameStats === -1) {
-                game.unlocked = '-'
-                game.total = '-'
-                game.completion = '-'
-            } else {
-                game.unlocked = gameStats[0]
-                game.total = gameStats[1]
-                game.completion = gameStats[2]
-                this.updateBannerStats()
-            }
-        }
+        await Promise.all(gameList.map(game => this.updateAsync(game)))
+        this.updateBannerStats()
         this.setState({ showLoading: false })
         this.calculateReputation()
     }
