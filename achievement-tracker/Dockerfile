@@ -14,8 +14,8 @@ RUN npm install
 COPY /db /db
 COPY /models /models
 COPY /routes /routes
-COPY --from=builder /achievement-tracker/build /achievement-tracker/build
 COPY server.js ./
+COPY --from=builder /achievement-tracker/build /achievement-tracker/build
 
 
 CMD ["node", "server.js"]
