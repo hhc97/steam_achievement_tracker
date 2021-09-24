@@ -162,6 +162,7 @@ class Analytics extends React.Component {
         let totalPlaytime = 0
         let totalCompletion = 0
         let numGames = 0
+        let gamesWithAchievement = 0
         for (let i = 0; i < tableStats.length; i++) {
             const game = tableStats[i];
             if (game.completion > 0) {
@@ -169,8 +170,12 @@ class Analytics extends React.Component {
                 totalCompletion += game.completion
                 numGames++
             }
+            if (typeof (game.completion) !== 'string') {
+                gamesWithAchievement++
+            }
             totalPlaytime += game.playtime
         }
+        this.setState({ totalGames: gamesWithAchievement })
         this.setState({ gamesAttempted: numGames })
         this.setState({ totalAchievements: totalAchievements })
         this.setState({ averageCompletion: (totalCompletion / numGames) })
@@ -181,7 +186,6 @@ class Analytics extends React.Component {
     async updateAchievements() {
         let gameList = this.state.stats
         this.setState({ statsShown: gameList.slice() })
-        let gamesWithAchievement = 0
         for (let i = 0; i < gameList.length; i++) {
             const game = gameList[i];
             let gameStats = -1
@@ -196,8 +200,6 @@ class Analytics extends React.Component {
                 game.total = gameStats[1]
                 game.completion = gameStats[2]
                 this.updateBannerStats()
-                gamesWithAchievement++
-                this.setState({ totalGames: gamesWithAchievement })
             }
         }
         this.setState({ showLoading: false })
