@@ -208,8 +208,11 @@ class Analytics extends React.Component {
     async updateAchievements() {
         let gameList = this.state.stats
         this.setState({ statsShown: gameList.slice() })
-        this.updateBannerStats()
-        await Promise.all(gameList.map(game => this.updateAsync(game)))
+        const step = 6
+        for (let i = 0; i < gameList.length; i += step) {
+            this.updateBannerStats()
+            await Promise.all(gameList.slice(i, i + step).map(game => this.updateAsync(game)))
+        }
         this.updateBannerStats()
         this.setState({ showLoading: false })
         this.calculateReputation()
