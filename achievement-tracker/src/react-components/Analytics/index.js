@@ -43,6 +43,7 @@ class Analytics extends React.Component {
             gamesOwned: 0,
             totalGames: 0,
             gamesAttempted: 0,
+            gamesProcessed: 0,
             showLoading: true,
             sortAscending: false,
             joinDate: '',
@@ -203,6 +204,7 @@ class Analytics extends React.Component {
                 this.setState({ gamesAttempted: this.state.gamesAttempted + 1 })
             }
         }
+        this.setState({ gamesProcessed: this.state.gamesProcessed + 1 })
     }
 
     async updateAchievements() {
@@ -364,6 +366,7 @@ class Analytics extends React.Component {
                         <div id="TotalStats">
                             <p> Total Games Attempted: {this.state.gamesAttempted} </p>
                             <p> Total Games Supporting Achievements: {this.state.totalGames} (from a total of {this.state.gamesOwned} games owned) </p>
+                            {!(this.state.showLoading) || <p> Progress: processed {this.state.gamesProcessed} games out of {this.state.gamesOwned} </p>}
                         </div>
                         <table id="StatsTable">
                             <thead >
