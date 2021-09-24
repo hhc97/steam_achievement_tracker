@@ -195,7 +195,6 @@ class Analytics extends React.Component {
             game.unlocked = gameStats[0]
             game.total = gameStats[1]
             game.completion = gameStats[2]
-            this.updateBannerStats()
         }
     }
 
