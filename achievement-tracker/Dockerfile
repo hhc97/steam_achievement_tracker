@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:alpine as builder
+FROM node:16-alpine as builder
 
 COPY /achievement-tracker /achievement-tracker
 RUN npm install react-scripts@latest -g
