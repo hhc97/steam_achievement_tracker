@@ -16,6 +16,7 @@ COPY /models /models
 COPY /routes /routes
 COPY server.js ./
 COPY --from=builder /achievement-tracker/build /achievement-tracker/build
+RUN apk --no-cache add curl
 
 
 CMD ["node", "server.js"]
