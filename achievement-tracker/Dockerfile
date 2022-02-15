@@ -6,7 +6,7 @@ RUN npm install react-scripts@latest -g
 RUN cd achievement-tracker && npm install && npm run build
 
 
-FROM node:alpine
+FROM node:16-alpine
 
 COPY package.json ./
 COPY package-lock.json ./
