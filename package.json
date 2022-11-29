@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "An achievement tracker for steam games",
   "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "setup": "npm install && cd client && npm install && cd ..",
     "build-run": "cd achievement-tracker && npm run build && cd .. && node server.js",
