@@ -34,6 +34,7 @@
     "react-icons": "^4.2.0",
     "request": "^2.88.2",
     "socket.io": "^4.0.0",
+    "throng": "^5.0.0",
     "validator": "^13.5.2"
   }
 }
